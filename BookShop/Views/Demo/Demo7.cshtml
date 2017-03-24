@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo7</title>
+</head>
+<body>
+    <div>
+        <a href="/books/detail/4943">/books/detail/4943</a>
+        <a href="/mybooks/4943.html">/mybooks/4943.html</a>
+        <a href="@Url.Action("detail","books",new{id=4939})">
+            Url.Action("detail","books",new{id=4939})
+        </a>
+        <br />
+        @Html.ActionLink("4939", "detail", "books", new { id = 4939 },
+        new {@class="aa",onclick="alert('abc')" }
+        )
+    </div>
+</body>
+</html>

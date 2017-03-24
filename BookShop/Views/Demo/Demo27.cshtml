@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo27</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script>
+        //json 就是js的简单对象
+        var citys = [
+            { "id": 1, "name": "上海" },
+            { "id": 2, "name": "北京" },
+            { "id": 3, "name": "南京" }
+        ];  //定义json数组
+
+        var areas = [
+           { "id": 1, "name": "上海1","cid":1},
+          { "id": 2, "name": "上海2", "cid": 1 },
+          { "id": 3, "name": "北京1", "cid": 2 },
+          { "id": 4, "name": "北京2", "cid": 2 },
+          { "id": 5, "name": "南京1", "cid": 3 },
+          { "id": 6, "name": "南京2", "cid": 3 },
+          { "id": 7, "name": "南京3", "cid": 3 }
+        ];  //定义json数组
+
+        function loadArea(cid) {
+            //循环遍历数组
+            $("#ddlArea option:gt(0)").remove();
+            $.each(areas, function (index, obj) {
+                if(obj.cid==cid){
+                    var html = "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                //append方法？
+                    $("#ddlArea").append(html);
+               }
+            });
+        }
+
+        function loadCity() {
+            //循环遍历数组
+            $.each(citys, function (index, obj) {
+                var html = "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                //append方法？
+                $("#ddlCity").append(html);
+            });
+        }
+
+        function loadCity2() {
+            //循环遍历数组
+            // <tr><td>1</td><td>aaa</td><td><input type='button' onclick='deleterow(this)' /></td></tr>
+            $.each(citys, function (index, obj) {
+                var html = "<tr>";
+                html += "<td>" + obj.id + "</td>";
+                html += "<td>" + obj.name + "</td>";
+                html += "<td><input type='button' onclick='deleterow(this)' value='删除' /></td>";
+                html += "</tr>";
+                //append方法？
+                $("#tb").append(html);
+            });
+        }
+
+        function deleterow(obj) {
+            if (confirm('真的要删除么?')) {
+                $(obj).parent().parent().remove();
+            }
+        }
+
+
+        $(function () {
+            var student = {
+                "id": 1001,
+                "name": "小王",
+                "score": 89,
+                "address": { "city": "上海", "area": "浦东新区", "street": "东方路" },
+                "say": function (word) {
+                    //this代表当前对象
+                    alert(this.name + "说:" + word);
+                }
+            };//定义json对象
+            //alert(student.address.area);
+           // student.say("json好神奇");
+            //alert(student.name);
+            loadCity();//加载城市
+            loadCity2();
+            $("#ddlCity").change(function () {
+                var id = $(this).val();
+                loadArea(id);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <select id="ddlCity">
+            <option value="-1">--请选择城市--</option>
+        </select>
+        <select id="ddlArea">
+            <option value="-1">--请选择区--</option>
+        </select>
+        <table id="tb">
+            <tr>
+                <td>编号</td><td>城市名称</td><td>操作</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <ul id="left">
+        </ul>
+        <input type="button" value=">>" />
+        <input type="button" value=">" />
+        <input type="button" value="上" />
+        <input type="button" value="下" />
+        <ul id="right"></ul>
+    </div>
+
+
+</body>
+</html>

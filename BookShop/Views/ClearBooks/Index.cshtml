@@ -1,0 +1,241 @@
+﻿
+@using BookShop.Areas.Admin.Models
+@model IEnumerable<Books>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+    //获取全部类别
+    List<Categories> categoriesList = ViewBag.CategoriesList;
+    //传递该类别下有多少本书
+    List<int> countsList = ViewBag.Counts;
+    //查看有多少本书处于清仓状态
+    int count = ViewBag.Count;
+    
+    
+    //获得页索引
+    int pageindex=1;
+    if(string.IsNullOrEmpty(Request.QueryString["pageindex"])==false)
+    {
+        pageindex = Convert.ToInt32(Request.QueryString["pageindex"]);
+    }
+
+    //获取每一页多少条记录
+    int pagesize = ViewBag.PageSize;
+
+    //总页数
+    int pagecount=1;
+    if(count>pagesize)
+    {       
+        pagecount = count % pagesize != 0 ? (count / pagesize) + 1 : count / pagesize;
+    }
+
+    //下一页 
+    int nextpage = pageindex + 1 > pagecount ? pagecount : pageindex + 1;
+
+    //上一页
+    int prevpage = pageindex - 1 < 1 ? pageindex : pageindex - 1;
+
+    //获得排序条件
+    string sort = "0";//默认
+    if (string.IsNullOrEmpty(Request.QueryString["sort"]) == false)
+    {
+        sort = Convert.ToString(Request.QueryString["sort"]);
+    }
+    
+    
+}
+
+
+@section script{
+    <link href="/CSS/channel.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/global.js"></script>
+    <script src="~/help/jquery-1.8.2.min.js"></script>
+    <script>
+        //obj代表的是一个下拉列表，注意是select元素的包装集对象
+        //value 代表的是值
+       //这个函数的功能是
+        function findByValue(obj,value){
+            //降下拉列表select元素转换成jquery的包装集对象
+            $(obj).find("option[value=" + value + "]").prop("selected", "selected");
+        }
+
+        $(function () {
+            findByValue($("#ddlsort"), '@sort');
+
+            $function(function () {
+                $("#ddlsort").change(function () {
+                    var sort = $("#ddlsort").val();
+                    var url = '/ClearBooks/index?pageindex=1&sort=' + sort;
+                });
+            });
+        })
+
+
+        function buy(bookid,price) {
+            var url = "/Order/SpecialOrder?bookid=" + bookid + "&price=" + price + "&qty=1&flag=2";
+            window.location.href = url;
+        }
+
+
+        
+    </script>
+    }
+
+
+<div id="a_b_04"><img src="/Images/a_b_04.jpg" alt="" /></div>
+
+<div id="breadcrumb">您现在的位置： 首页  >  
+     <a href="/ClearBooks/index" class="red">清仓货物</a></div>
+
+<div id="container">
+   
+	<!--left content-->
+	<div id="intro">
+
+        <div id="carinfor">
+       @{
+           Html.RenderPartial("showcar");
+            }
+    </div>
+
+    	 <div class="child_menu">
+         	<h2 class="white">浏览下级分类</h2>
+            <ul>
+                @for (int i = 0; i < categoriesList.Count;i++ )
+                {
+                  
+                    <li>
+                        <a href="/Books/Index?id=@categoriesList[i].Id">
+                            @(categoriesList[i].Name + "(" + countsList[i] + ")")
+                        </a>
+                    </li>
+                
+                }
+                <li><a href="/ClearBooks/index">清仓货物</a></li>
+            </ul>
+         </div>  
+         
+         <div class="history">
+         	<h2>最近的浏览记录</h2>
+            <ul>
+              
+            </ul>
+         </div>     
+    </div>
+    
+    <div class="main">
+    	<div class="list_asc">
+        	<!--choice order type-->
+            <div class="type_choice f_left">
+            	排序方式
+                <select name="list_type" id="ddlsort">
+                    <option value="0">默认升序</option>
+                    <option value="1">默认降序</option>
+                    <option value="2">价格升序</option>
+                    <option value="3">价格降序</option>
+                    <option value="4">出版日期升序</option>
+                    <option value="5">出版日期降序</option>
+                </select>
+            </div>
+            <!--page no-->
+            <div class="turn_area f_right">
+            	<a href="@string.Format("/ClearBooks/Index?pageindex=1&sort={0}",sort)">!<< </a>
+                <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",prevpage,sort)"><< </a>
+                <span id="turn_page">第 @pageindex 页 共 @pagecount 页 记录总数:@count</span>
+                <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",nextpage,sort)">>> </a>
+                <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",pagecount,sort)">>>! </a>
+            </div>
+            
+        </div>
+        
+
+        @foreach (Books b in Model)
+        {
+            <dl class="list_area">
+        	    <dt>
+                    <a href="@string.Format("/Books/BookDetail?id={0}", b.Id)">
+                        <img src="/Images/BookCovers/@(b.ISBN).jpg" width="100" height="100" alt="@b.Title" />
+                    </a>
+        	    </dt>
+                <dd>
+            	    <h2 class="b_title">
+                        <a href="@string.Format("/Books/BookDetail?id={0}", b.Id)">
+                            @b.Title
+                        </a>
+            	    </h2>
+                    <!--将书籍的id 写入span-->
+                    <div class="b_score">
+                        顾客评分：
+                        <span id="@b.Id">0</span>
+                    </div>
+                    <div class="b_property">
+                        作者：@b.Author 编著<br />出版社：@b.Publishers.Name<br />出版时间：@b.PublishDate
+                    </div>
+                    <h4 class="b_intro">
+                        @(b.ContentDescription.Length > 100 ? b.ContentDescription.Substring(0, 100) : b.ContentDescription)
+                    </h4>
+                    <div class="b_buy">
+                	    <span class="gray del">
+                            ￥@string.Format("{0:c}", b.UnitPrice)
+                	    </span>　
+                        <span class="red">
+                            ￥@string.Format("{0:c}", b.ClearPrice)
+                        </span>
+                        　折扣：@(Math.Round(Convert.ToDecimal(b.UnitPrice / b.MarketPrice * 100), 0))折　节省：￥@string.Format("{0:c}", b.UnitPrice - b.ClearPrice)
+                        <a href="javascript:void(0)" onclick="buy(@b.Id,@b.ClearPrice)" >
+                        <img 
+                            src="/Images/btn_goumai.gif" 
+                            onmouseover="this.src='/Images/btn_goumai_click.gif'" 
+                            alt=""
+                            onmouseout="this.src='/Images/btn_goumai.gif'"
+                             />
+                            </a>
+                         <a href="/Car/Index">
+                        <img 
+                            src="/Images/btn_zancun.gif" 
+                            onmouseover="this.src='/Images/btn_zancun_click.gif'" 
+                            alt=""
+                            onmouseout="this.src='/Images/btn_zancun.gif'"
+                             />
+                            </a>
+                    </div>
+                 </dd>
+              </dl>
+           
+           
+        }               
+              
+        
+        <div class="pages">
+        	<a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",prevpage,sort)" title="前一页" class="first"><<</a>
+
+            @if(pagecount>10)
+            {
+                <a href="@string.Format("/ClearBooks/Index?pageindex=1&sort={0}",sort)" title="" class="current">1</a>
+                for (int i = 2; i <= 5; i++)
+                {               
+                    <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",i,sort)" title="">@i</a>              
+                }
+                <a href="javascript:void(0)" class="more">...</a>
+                for (int i = 4; i >= 0;i-- )
+                {
+                    <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",pagecount-i,sort)" title="">@(pagecount-i)</a>
+                }
+            }
+            else
+            {
+                <a href="@string.Format("/ClearBooks/Index?pageindex=1&sort={0}",sort)" title="" class="current">1</a>
+                for (int i = 2; i <= pagecount; i++)
+                {
+                    <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",i,sort)" title="">@i</a>
+                }
+            }
+
+            <a href="@string.Format("/ClearBooks/Index?pageindex={0}&sort={1}",nextpage,sort)" title="后一页" class="end">>></a>
+        </div>
+        	
+ 	</div>
+    
+</div>
+
+

@@ -1,0 +1,183 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo28</title>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/ajax.js"></script>
+    <script>
+        function getSeconds() {
+            var date = new Date();
+            return "" + date.getSeconds() + date.getMilliseconds();
+        }
+        function changeImg(img) {
+            //一般浏览器有缓存机制，默认情况下，当第二次访问的网址，之前
+            //已经访问过的话，则会从缓存里取，而不会真的去服务端
+            var url = "/tools/createimg?key=" + getSeconds();
+            img.src = url;
+        }
+        var xmlhttp;
+        $(function () {
+
+
+            xmlhttp = createXmlHttpRequest();//创建xmlhttprequest对象
+
+            loadCategory();//加载图书类别
+
+            $("#txtName").blur(function () {
+                //用户名失去焦点时触发
+                var name = $(this).val();
+                if (name != "") {
+                    //开始检测
+                    var url = "/demo/demo28_1?name=" + name;
+                    //指定请求url，打开请求，false表示异步，true表示同步
+                    xmlhttp.open("get", url, false);
+                    //设置回调函数，当ajax请求状态发生改变时，会调用
+                    xmlhttp.onreadystatechange = callback;
+                    xmlhttp.send(null);//发送请求，null表示get请求的
+                }
+            });
+
+            $("#txtCode").blur(function () {
+                //用户名失去焦点时触发
+                var code = $(this).val();
+                if (code != "") {
+                    //开始检测
+                    var url = "/demo/demo28_2?code="+code;
+                    //指定请求url，打开请求，false表示异步，true表示同步
+                    xmlhttp.open("get", url, false);
+                    //设置回调函数，当ajax请求状态发生改变时，会调用
+                    xmlhttp.onreadystatechange = callback2;
+                    xmlhttp.send(null);//发送请求，null表示get请求的
+                }
+            });
+        });
+
+        function callback() {
+            //假定服务器返回的字符串如 {"success":0} 0代表不存在，1代表存在
+            //状态是4代表ajax请求完毕
+            if (xmlhttp.readyState == 4) {
+                //200代表，ok，请求正常 404 页面不存在 500 代码错
+                if (xmlhttp.status == 200) {
+                    //服务端可以返回的格式 json,html,xml,文本等
+                    var text = xmlhttp.responseText;//得到服务端返回的文本
+                   
+                    var obj = stringToJSON(text);//将这个字符串转换成json对象
+                   
+                    if (obj.success == 0) {
+                        $("#tip1").html("恭喜你，可以注册").css("color", "green");
+                    }
+                    else {
+                        $("#tip1").html("对不起，该帐号已存在，不可以注册").css("color", "red");
+                    }
+                }
+            }
+        }
+
+        function callback2() {
+            //假定服务器返回的字符串如 {"success":0} 0代表不存在，1代表存在
+            //状态是4代表ajax请求完毕
+            if (xmlhttp.readyState == 4) {
+                //200代表，ok，请求正常 404 页面不存在 500 代码错
+                if (xmlhttp.status == 200) {
+                    //服务端可以返回的格式 json,html,xml,文本等
+                    var text = xmlhttp.responseText;//得到服务端返回的文本
+
+                    var obj = stringToJSON(text);//将这个字符串转换成json对象
+
+                    if (obj.success == 0) {
+                        $("#tip2").html("验证码正确").css("color", "green");
+                    }
+                    else {
+                        $("#tip2").html("验证码错误").css("color", "red");
+                    }
+
+                }
+            }
+        }
+
+        function callback3() {
+            //假定服务器返回的字符串如 {"success":0} 0代表不存在，1代表存在
+            //状态是4代表ajax请求完毕
+            if (xmlhttp.readyState == 4) {
+                //200代表，ok，请求正常 404 页面不存在 500 代码错
+                if (xmlhttp.status == 200) {
+                    //服务端可以返回的格式 json,html,xml,文本等
+                    var text = xmlhttp.responseText;//得到服务端返回的文本
+
+                    var objects = stringToJSON(text);//将这个字符串转换成json对象
+                    //[{"Id":1,"Name":"c++"},{}]
+                    $.each(objects, function (index, obj) {
+                        var html = "<option value='" + obj.Id + "'>" + obj.Name + "</option>";
+                        //append方法？
+                        $("#ddlCategory").append(html);
+                    });
+                   
+
+                }
+            }
+        }
+        //加载图书类别
+        function loadCategory() {
+            var url = "/demo/demo28_3";
+            xmlhttp.open("get", url, false);
+            //设置回调函数，当ajax请求状态发生改变时，会调用
+            xmlhttp.onreadystatechange = callback3;
+            xmlhttp.send(null);//发送请求，null表示get请求的
+        }
+    </script>
+</head>
+<body>
+    <div>
+        ajax原理：新瓶装旧酒，这不是新技术。 这是老的，现在谈到web前端，
+        离不开ajax技术。异步的javascript和XML技术。实现无刷新的页面提交
+        ,局部提交。 即异步客户端发送一个请求，服务端接收好请求后，把结果
+        回传给客户端，客户端使用js技术，进行页面响应处理。
+        核心对象： xmlHttprequest对象
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>请输入用户名</td>
+                <td><input type="text" id="txtName" name="txtName" /></td>
+                <td><span id="tip1"></span></td>
+            </tr>
+            <tr>
+                <td>请选择图书类别</td>
+                <td>
+                    <select id="ddlCategory">
+                        <option value="-1">请选择图书类别</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+             <tr>
+                <td>请选择出版社</td>
+                <td>
+                    <select id="ddlPublisher">
+                        <option value="-1">请选择出版社</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>请输入验证码</td>
+                <td><input type="text" id="txtCode" name="txtCode" />
+                     <img id="imgCode"
+                      onclick="changeImg(this)"
+                      src="/tools/createimg" />
+
+                </td>
+                <td><span id="tip2"></span></td>
+            </tr>
+            
+
+        </table>
+    </div>
+</body>
+</html>

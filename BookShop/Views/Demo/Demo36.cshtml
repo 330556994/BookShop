@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo36</title>
+          <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/js/Common.js"></script>
+    <script src="~/js/form-validate1.1.js"></script>
+     <script>
+       $(function () {
+           //先禁用浏览器缓存
+           $.ajaxSetup({
+               cache: false
+           });
+       })
+      
+	    function submitForm() {
+	        $('#ff').form('submit', {
+	            onSubmit: function () {
+	                return $(this).form('enableValidation').form('validate');
+	            },
+	            success:function(data){    
+	                var json = eval('(' + data + ')');//将json格式字符串转换成JSON对象
+	                alert(json.name);
+
+	        }    
+
+	        });
+	    }
+       function clearForm() {
+           $('#ff').form('clear');
+       }
+	
+       </script>
+</head>
+<body>
+    <div>
+        validType:这是验证规则校验器，email,url
+        可以自定义验证规则
+    </div>
+
+    	<div class="easyui-panel" 
+            title="会员注册" 
+            style="width:100%;max-width:400px;padding:30px 60px;">
+		<form id="ff" 
+            class="easyui-form" 
+            action="/demo/demo36_1"
+            
+            method="post" data-options="novalidate:true">
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" 
+                    name="name" style="width:100%" 
+                    data-options="label:'请输入姓名:',
+                    required:true,
+                    validType:'length[5,10]',
+                   invalidMessage:'姓名必须介于5-10个字符',
+                    missingMessage:'姓名必须输入'
+                    ">
+			</div>
+
+            	<div style="margin-bottom:20px">
+				<input 
+                    style="width:100%" 
+                    class="easyui-passwordbox" 
+                    id="pwd"
+                    name="password"
+                    prompt="Password"
+                    data-options="label:'请输入密码:',
+                    required:true,                  
+                    missingMessage:'密码必须输入'
+                    ">
+			</div>
+                 	<div style="margin-bottom:20px">
+				<input 
+                    name="password2" style="width:100%" 
+                    class="easyui-passwordbox" 
+                    prompt="重复密码"
+                    label='重复密码:'
+                    invalidMessage='重复密码错误'
+                    validType="compare['pwd','=','string']"
+                    >
+			</div>
+            <div style="margin-bottom:20px">
+                <input type="text"
+                    name="score"
+                    style="width:100%"
+                     class="easyui-textbox" 
+                     validType="dataTypeCheck['number']"      
+                      invalidMessage='成绩必须是数字'               
+                     data-options="                       
+                    label:'请输入成绩:',
+                    required:true,                  
+                    missingMessage:'成绩必须输入'
+                    "></input>  
+				
+			</div>
+                 <div style="margin-bottom:20px">
+                <input type="text"
+                    style="width:100%"
+                     class="easyui-textbox" 
+                    validType="expression['(\\d{3,4}-)?\\d{7,8}']"    
+                      invalidMessage='电话号码格式不正确,应该021-88888888'               
+                     data-options="                       
+                    label:'电话号码:',
+                    required:true,                  
+                    missingMessage:'电话号码必须输入'
+                    "></input>  
+				
+			</div>
+        <div style="margin-bottom:20px">
+                <input type="text"
+                    style="width:100%"
+                    class="easyui-datebox" 
+                        data-options="                       
+                    label:'出生年月:',
+                    required:true,                  
+                    missingMessage:'出生年月必须输入'
+                    "></input>  
+				
+			</div>
+
+
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="email" 
+                    style="width:100%"
+                     data-options="label:'电子邮件:'
+                    ,required:true,
+                    missingMessage:'电子邮件必须输入',
+                    validType:'email'
+                    ">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="subject"
+                     style="width:100%" 
+                    data-options="label:'标题:',
+                    required:true,
+                     missingMessage:'标题必须输入'
+                    ">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" 
+                    name="message" 
+                    style="width:100%;height:60px" 
+                    data-options="label:'自我介绍:',multiline:true">
+			</div>
+			<div style="margin-bottom:20px">
+                <span>请选择语言</span>
+				<select 
+                    class="easyui-validatebox"
+                     name="language" 
+                    style="width:100%"
+                    validType="requiredSelect['-1']"
+                    invalidMessage="必须选择语言"
+                 >
+                    <option value="-1">--请选择语言--</option>
+                    <option value="ar">Arabic</option>
+                    <option value="uk">Ukrainian</option>
+                    <option value="vi">Vietnamese</option>
+
+				</select>
+			</div>
+		</form>
+		<div style="text-align:center;padding:5px 0">
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+		</div>
+	</div>
+	
+</body>
+</html>

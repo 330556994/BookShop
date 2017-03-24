@@ -1,0 +1,32 @@
+﻿    .nicetable
+        {
+            font-size:12px;
+            color:#2a2222;
+            border-collapse:collapse;/*单边线*/
+        }
+            .nicetable .title
+            {
+                font-weight:bold;
+                 text-align:center;
+            }
+            .nicetable td
+            {
+                border:1px solid #312a2a;                
+            }
+            .nicetable .one
+            {
+                background-color:#eae2e2;
+            }
+            .nicetable .two
+            {
+                background-color:#c6c0c0;
+            }
+            .nicetable .select
+            {
+                background-color:#de1b4b;
+            }
+            .nicetable .highlight
+            {
+                 background-color:blue;
+                 cursor:pointer; /*鼠标变成手型*/
+            }

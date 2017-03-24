@@ -1,0 +1,69 @@
+﻿@using Accp.Tools
+@using BookShop.Models.Entities
+@{
+    Layout = null;
+    //定义一个下拉列表用到的数据源
+    List<Publisher> list = new List<Publisher>
+    {
+        new Publisher{ Id=-1,Name="--请选择--"},
+        new Publisher{ Id=1,Name="aaaaa"},
+        new Publisher{ Id=2,Name="bbbbb"},
+        new Publisher{ Id=3,Name="ccccc"}
+    };
+    //最后一个参数是默认让哪个对象选中
+    SelectList selectList = new SelectList(list, "Id", "Name");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo15</title>
+      <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div>
+        @Html.Submit("btnok","注册")
+        @Html.Submit("btnok2","注册2",new{ onclick="alert('干嘛')" })
+    </div>
+    @Html.CheckBoxList("chkl",new{@class="t1"},selectList)
+    @Html.EasyUiActionLink("返回列表","a","b","book",null)
+    <hr />
+    <ul>
+        <li><input type="checkbox" value="1" />C++</li>
+        <li><input type="checkbox" value="1" />C++</li>
+        <li><input type="checkbox" value="1" />C++</li>
+    </ul>
+    <table>
+        <tr>
+            <td><input type="checkbox" value="1" />C++</td>
+            <td><input type="checkbox" value="1" />C++</td>
+            <td><input type="checkbox" value="1" />C++</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value="1" />C++</td>
+            <td><input type="checkbox" value="1" />C++</td>
+            <td><input type="checkbox" value="1" />C++</td>
+        </tr>
+    </table>
+    <ul id="book" class="ul">
+        <li>
+            <a href="/book/detail?id=1">C++</a>
+        </li>
+              <li>
+            <a href="/book/detail?id=2">JAVA</a>
+        </li>
+              <li>
+            <a href="/book/detail?id=3">数据库</a>
+        </li>
+    </ul>
+
+</body>
+</html>

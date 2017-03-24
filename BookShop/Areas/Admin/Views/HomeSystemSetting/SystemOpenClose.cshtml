@@ -1,0 +1,31 @@
+﻿
+    @{
+        int defaultValue = ViewBag.DefaultValue;
+    }
+    
+
+<div>
+
+    <p>当前系统状态为:
+        @if(defaultValue==0)
+        {
+            <span>开启</span>
+        }else{
+            <span>关闭</span>
+        }
+    </p>
+    <p>
+        @if (defaultValue == 0)
+        {
+            <input type="button" value="开启" onclick="btnOpenClose(0)" disabled="disabled" />
+            <input type="button" value="关闭" onclick="btnOpenClose(1)" />
+        }
+        else
+        {
+            <input type="button" value="开启" onclick="btnOpenClose(0)" />
+            <input type="button" value="关闭" onclick="btnOpenClose(1)" disabled="disabled" />
+        }
+        
+    </p>
+
+</div>

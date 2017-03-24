@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Publishers>
+@{
+    
+    var pagecount = ViewBag.PageCount;
+    var recordcount = ViewBag.RecordCount;
+    //获得页索引
+    int pageindex = 1;
+    if (string.IsNullOrEmpty(Request.QueryString["pageindex"]) == false)
+    {
+        pageindex = Convert.ToInt32(Request.QueryString["pageindex"]);
+    }   
+    }
+ <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+<script>
+    var pageindex = @pageindex;   //当前页
+    var pagecount= @pagecount; //总页数
+
+    function goNext() {
+        if(pageindex+1>pagecount){
+            pageindex = pagecount;
+        }
+        else{
+            pageindex = pageindex + 1;
+        }
+        loadPub(pageindex);        
+    }
+</script>
+<table>
+    <tr>
+         <th>
+            编号
+        </th>
+        <th>
+            出版社名称
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Id
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <a href="javascript:void(0)"                  class="easyui-linkbutton"                                 data-options="iconCls:'icon-remove'"                tag="@item.Id"                 onclick="deleterow(this)"             >删除</a>
+             <a href="javascript:void(0)"                  class="easyui-linkbutton"                                 data-options="iconCls:'icon-edit'"                 onclick="update(this)"                 tag="@item.Id"             >更新</a>
+        </td>
+    </tr>
+}
+
+</table>
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0)" onclick="goFirst();" >第一页</a>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goPrev();" >上一页</a>
+        </td>
+        <td>
+            <span>第@(pageindex)页,共@(pagecount)页
+                 记录总数:@(recordcount)条</span>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goNext();" >下一页</a>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goLast();" >最后一页</a>
+        </td>
+        <td>
+            跳转到第
+          
+             <a href="javascript:void(0)" onclick="goPage();" >Go</a>
+        </td>
+
+    </tr>
+</table>

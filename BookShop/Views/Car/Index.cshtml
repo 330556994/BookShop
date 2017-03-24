@@ -1,0 +1,146 @@
+﻿@using BookShop.Models.Entities
+@model List<Item>
+@{
+    ViewBag.Title = "Index";
+    decimal totalm =Model.Sum(p=>p.TotalMarketPrice) ;
+    decimal totalu = Model.Sum(p=>p.TotalUnitPrice);
+    /*foreach(Item item in Model){
+        totalm =totalm+ item.TotalMarketPrice;//市场总价累加
+        totalu += item.TotalUnitPrice;//会员总价累加
+    }*/
+}
+@section script{
+    <link href="/CSS/member.css" rel="stylesheet" type="text/css" />    <script src="~/Scripts/jquery-1.8.2.min.js"></script>    <script>
+        //完成更新
+        function update(obj, id) {
+            //获得要更新的数量
+            //将传入的obj对象，obj就是那个a标签，是dom元素
+            //下面的代码是将dom元素转换成jquery的包装集对象
+            //进行节点导航，parent()定位到父节点，prev()是上一个兄弟节点
+            //find是在该节点内查找元素，参数input是选择器，表示，查找
+            //内部的input标签，val()方法是获得该input标签的.value值
+            var qty = $(obj).parent().prev().find("input").val();
+            var url = "/car/update?id=" + id + "&qty=" + qty;//封装请求url
+            location.href = url;//页面跳转
+        }
+    </script>
+    }
+<div id="container">
+	<!--left content-->
+	<div id="intro">
+    	<div id="basket">
+            <a href="#">目前您的购物篮是空的</a></div>
+
+        <div id="alltype">
+        	<h1 class="all_type black"><a href="#">查看所有分类>></a></h1>
+            <div id="subnav">
+                <ul class="black">
+                    <li><a href="#">VIP中心</a></li>
+                    <li><a href="#">新品上架</a></li>
+                    <li><a href="#">新书热卖</a></li>
+                    <li><a href="#">畅销排行</a></li>
+                    <li><a href="#">商务英语</a></li>
+                    <li><a href="#">英语口译</a></li>
+                    <li><a href="#">日语考试</a></li>
+                    <li><a href="#">实用日语</a></li>
+                    <li><a href="#">英语考试</a></li>
+                    <li><a href="#">实用英语</a></li>
+                    <li><a href="#">出国留学</a></li>
+                    <li><a href="#">英文原版</a></li>
+                    <li><a href="#">考研图书</a></li>
+                    <li><a href="#">所有图书</a></li>
+                    <li><a href="#">在线读书</a></li>
+                    <li><a href="#">电子词典</a></li>
+                    <li><a href="#">计算机类</a></li>
+                    <li><a href="#">科普读物</a></li>
+                    <li><a href="#">建筑门类</a></li>
+                </ul>
+            </div>
+            <!--subnav end-->
+        </div>
+        <!--link start-->
+        <div id="choice_pub">
+        	<select name="publishs" id="publishs" class="n_select">
+            	<option>>>根据出版社选择图书</option>
+                <option>北京师范大学出版社</option>
+                <option>电子工业出版社</option>
+            </select>
+
+        	<select name="publishs" id="special" class="n_select">
+            	<option>>>根据专题选择图书</option>
+                <option>国庆出游专题</option>
+                <option>新年计划专题</option>
+            </select>
+        </div>
+        
+        <div id="s_b_03">
+            <a href="#">赖世雄美语从头学</a><br />
+            <a href="#">沪江团购 ，价格更优惠</a></div>
+        <!--link start-->
+    </div>
+    
+    <div id="action_area">
+    	<h2 class="action_type backet">
+        	<p class="imp_link">全场运费一律2元  
+                <a href="#"><strong>简易计算器</strong></a><br />
+            <p class="mark">确认商品价格与交易条件</p>
+        </h2>
+        <table width="96%" border="0" cellspacing="3" cellpadding="0" align="center" class="data_table">
+        <thead>
+        <tr>
+        	<th scope="col">商品名</th>  
+            <th scope="col" width="10%">原价</th>
+            <th scope="col" width="10%">优惠价</th>
+            <th scope="col" width="10%">打折</th>
+            <th scope="col" width="10%">数量</th>
+            <th scope="col" width="10%">操作</th>
+           </tr>
+        </thead>
+        <tbody id="basket_data" >
+            @foreach(Item item in Model){
+          <form action="/car/update">
+          <tr>
+            <td class="name">
+              <a href="@string.Format("/books/detail?id={0}",item.Id)">
+                  @item.Title
+              </a>
+            </td>
+            <td>@string.Format("{0:c}",item.MarketPrice)</td>
+            <td>@string.Format("{0:c}",item.UnitPrice)</td>
+            <td>@(Math.Round(
+                     item.UnitPrice/item.MarketPrice*100,0)) 折</td>
+            <td>
+                <input type="hidden" value="@item.Id" name="id" />
+                <input type="text" name="qty" value="@item.Qty" /> 
+
+            </td>
+            <td>
+                <a 
+                     onclick="return confirm('真的要删除么?');"
+                    
+                     href="@string.Format("/car/delete?id={0}",item.Id)">删除</a>
+                <input type="submit" value="更新"  />
+
+                <a href="javascript:void(0)" 
+                    onclick="update(this,@item.Id)">更新</a>
+            </td>
+          </tr>
+            </form>     
+            }
+        </tbody>
+        <tfoot><tr><td colspan="6">
+        继续挑选商品  市场总价 @string.Format("{0:c}",totalm) 元，
+            会员总价 @string.Format("{0:c}",totalu) 
+            您共节省 @string.Format("{0:c}",totalm- totalu)  元</td>
+        </tr></tfoot></table>
+        
+		   
+         <p class="form_sub basker_ok_link">
+             <a href="#">继续购物</a><a href="#">清空购物车</a> 
+             <input type="submit" value="" class="basker_ok" onclick="location.href = '/IntegralGoods/index'" />
+         </p>
+        
+    </div>
+    
+</div>
+

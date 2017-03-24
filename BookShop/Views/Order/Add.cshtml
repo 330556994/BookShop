@@ -1,0 +1,244 @@
+﻿@using BookShop.Models.Entities
+@using BookShop.Areas.Admin.Models;
+@{
+    Layout = null;
+    //获得购物车
+    List<Item> itemList = HttpContext.Current.Session["car"] as List<Item>;
+    
+    //获得收货地址
+    OrderAddress orderAddress = ViewBag.OrderAddress;
+
+    decimal totalu = 0;
+    foreach (Item item in itemList)
+    {
+        totalu = totalu + item.TotalUnitPrice;
+    }
+    //获取web.config总appSettings节点key=cash的value值
+    string val = System.Configuration.ConfigurationManager.AppSettings["cash"];
+    string[] parts = val.Split(':');//分割
+    //求出快递费
+    decimal sendCash = totalu > Convert.ToDecimal(parts[0]) ? Convert.ToDecimal(parts[1]) : Convert.ToDecimal(parts[2]);
+
+    //获得get请求参数
+    int integoodsId=-1;
+    if(string.IsNullOrEmpty(Convert.ToString(Request.QueryString["goodsId"]))==false)
+    {
+        integoodsId = Convert.ToInt32(Request.QueryString["goodsId"]);
+    }
+    IntegralGoods good=null;
+    if(integoodsId!=-1){
+        good=ViewBag.Good;
+    }
+    
+    
+    
+    
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="Robots" content="index,follow" />
+<title>"第三波书店"-网上书店</title>
+<link href="/CSS/global.css" rel="stylesheet" type="text/css" />
+<link href="/CSS/member.css" rel="stylesheet" type="text/css" />
+
+      <script src="~/help/jquery-1.8.2.js"></script>
+    <script>
+
+        function getSeconds() {
+            var date = new Date();
+            return "" + date.getSeconds + date.getMilliseconds();
+        }
+
+        function changeImg(img) {
+            //一般浏览器有缓存机制，默认情况下，当第二次访问的网址
+            //之前已经访问过的话，则会从缓存里取，而不会真的去服务端
+            var url = "/tools/createImg?key=" + getSeconds();
+            img.src = url;
+        }
+        $(function () {
+            $("#imgCode").mouseover(function () {
+                $(this).addClass("focus");
+            }).mouseout(function () {
+                $(this).removeClass("focus");
+            })
+        })
+    </script>
+
+    <style type="text/css">
+        .focus
+        {
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+<div id="top">
+    @if(Session["name"]==null)
+    {
+	    <div class="status">您好，欢迎来到第三波书店^_^ 
+              <span>
+                  @Html.ActionLink("[登陆]","Login","User")
+                  @Html.ActionLink("[免费注册]","Register","User")
+                   @Html.ActionLink("[购物车]","Index","Car")
+              </span>
+	    </div>
+    }
+    else
+    {
+        <div class="status">@Session["name"] 您好，欢迎来到第三波书店^_^ 
+              <span>
+                  @Html.ActionLink("[会员中心]","Index","User")
+                  @Html.ActionLink("[购物车]","Index","Car")
+                  @Html.ActionLink("[退出]","Exit","User")
+              </span>
+	    </div>
+    }
+
+    <div class="member">
+    	<ul>
+        	<li><a href="#"><img src="/Images/payVIP.gif" height="18" alt="开通VIP" /></a></li>
+            <li><a href="#"><img src="/Images/payCoin.gif" height="18" alt="学币中心" /></a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="header">
+	<div id="logo"><img src="/Images/logo.gif" alt="第三波书店" /></div>
+    <div id="nav">
+    	<div class="order_p_head"><img src="/Images/order_p_h.gif" alt="请认真核对订单信息" /></div>
+    </div>
+</div>
+
+<div id="container">
+    @using(Html.BeginForm()){
+	<h3 class="order_p_title">填写核对订单信息</h3>
+        <!--这个隐藏域的作用是将快递费用，通过表单提交给后台-->
+        <input type="hidden" value="@sendCash" name="sendCash" />
+        <!--这个隐藏域的作用是将订单总价，通过表单提交给后台-->
+        <input type="hidden" value="@totalu" name="totalu" />
+        if(integoodsId!=-1){
+            <!--这个隐藏域的作用是将积分货物编号，通过表单提交给后台-->
+            <input type="hidden" value="@good.Id" name="integralGoodId" />
+        }  
+    <div class="order_p_main">
+    	<dl>
+        	<dt>收货人信息   </dt>
+            <dd>收货人姓名：<input type="text" value="@orderAddress.Name" name="Name" /><br />
+            	
+                地址：<input type="text" value="@orderAddress.Address" name="Address"/><br />
+
+                手机：<input  type="text" value="@orderAddress.Phone" name="Phone" /><br />
+              
+            </dd>
+        </dl>      
+        
+        <dl>
+        	<dt>订单备注</dt>
+            <dd>
+                <textarea name="remark" rows="5" cols="100">
+                    暂无
+                </textarea>
+            </dd>
+        </dl>
+        
+        <dl class="nopadding">
+        	<dt>商品清单   <a href="#">返回修改购物车</a></dt>
+            <dd>
+            <table width="96%" align="center" border="0" cellspacing="0" cellpadding="0" class="order_table">
+            <thead>
+              <tr>
+                <th scope="col">商品名称</th>
+                <th scope="col" width="10%">原价</th>
+                <th scope="col" width="10%">优惠价</th>
+                <th scope="col" width="10%">折扣</th>
+                <th scope="col" width="10%">商品数量</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach(Item item in itemList )
+                {
+                  <tr>
+                    <td class="name"><a href="@string.Format("/Books/BookDetail?id={0}",item.Id)">@item.Title</a></td>
+                    <td>@string.Format("{0:c}", item.MarketPrice)</td>
+                    <td>@string.Format("{0:c}", item.UnitPrice)</td>
+                    <td>@Math.Round(item.UnitPrice / item.MarketPrice * 100, 0))折</td>
+                    <td>@item.Qty</td>
+                  </tr>
+                }
+                @if(integoodsId!=-1){
+                <tr>
+                    <td class="name">@good.Books.Title</td>
+                    <td colspan="3" style="text-align:center;">需 @good.PaymentIntegral 积分</td>                 
+                    <td>1</td>
+                  </tr>
+                }
+             </tbody>
+            </table>
+
+            </dd>
+        </dl>
+        
+        <dl class="nopadding enddl">
+        	<dt>结算信息</dt>
+            <dd>
+            <table width="96%" align="center" border="0" cellspacing="0" cellpadding="0" class="count_table">
+            <thead><tr>
+                <th scope="col" align="left" colspan="2">商品金额 @string.Format("{0:c}", totalu) 元 + 运费： @sendCash 元</th>
+            </tr></thead>
+            <tbody><tr>
+                <td class="order_count" width="21%">应付总额:
+                    <span class="red">@string.Format("{0:c}",totalu+sendCash)</span> 元
+                @if (integoodsId != -1)
+                {
+                    <span>+ @good.PaymentIntegral 点积分 </span>
+                }
+                </td>
+                
+            </tr></tbody>
+            </table>
+                <dt>
+                    <dd>
+                        <p><label>验证码</label>
+                            <input name="code" type="text" class="opt_input" /> 
+                            <img id="imgCode" onclick="changeImg(this)" src="/tools/createImg" /></p>
+                    </dd>
+                </dt>
+            </dd>
+        </dl>
+        
+        <div class="order_p_btn"><input type="submit" class="order_p_sub" value="" /></div>
+    </div>
+    }
+</div>
+
+
+
+
+<div id="footer">
+	<!--contac us-->
+	<div class="telephone">
+        <strong>热线</strong> 021-61508168　<strong>传真</strong> 021-61508168-8020　 <br />
+        <strong>Q Q</strong>375013071  13483528    562655482  1143735195（技术)<br />
+        <strong>MSN</strong> hjservice@hotmail.com   <strong>信箱</strong> shop@hjenglish.com<br />
+        <strong>帮助</strong> <a href="/help/help.aspx" target="_blank">银行汇款帐户</a> <a href="/help/help.aspx#help_post" target="_blank">邮局汇款地址</a> 	<a href="/help/help.aspx#help_ship" target="_blank">送货方式及费用</a> <a href="http://www.hjenglish.com/down/faq_2.htm" target="_blank">如何进行下载</a>
+    </div>
+    <!---->
+  <div class="imp_link">
+    	<img src="/Images/alipay.gif" alt="支付宝支付" /><img src="/Images/online_pay.gif" alt="在线支付" /><br />
+        <a href="http://www.hjenglish.com/about/aboutus.htm" target="_blank">网站介绍</a>　<a href="http://www.hjenglish.com/about/partner.htm" target="_blank">合作伙伴</a>　<a href="#" target="_blank">网站地图</a>　<a href="#" target="_blank">联系我们</a><br />
+    <a href="#" target="_blank">增值电信业务经营许可证沪B2-20040503</a> </div>
+</div>
+
+<div id="child_site">
+	<strong>分站</strong>　 <a href="#" target="_blank">沪江网</a>  <a href="#" target="_blank">听说</a>  <a href="#" target="_blank">口译</a>  <a href="#" target="_blank">CET</a>  <a href="#" target="_blank">考研</a>  <a href="#" target="_blank">雅思</a>  <a href="#" target="_blank">托福</a>  <a href="#" target="_blank">日语</a>  <a href="#" target="_blank">法语</a>  <a href="#" target="_blank">下载</a>  <a href="#" target="_blank">文库</a>  <a href="#" target="_blank">部落</a>  <a href="#" target="_blank">博客</a>  <a href="#" target="_blank">词典</a>  <a href="#" target="_blank">IT新闻</a>  <a href="#" target="_blank">博客园</a>  <a title="新世界日语" href="#" target="_blank">新世界日语</a>  <a title="2010考研书籍推荐专题" href="#" target="_blank">2010考研书籍</a>
+</div>
+
+
+</body>
+</html>

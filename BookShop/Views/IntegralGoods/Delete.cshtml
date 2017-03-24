@@ -1,0 +1,48 @@
+﻿@model BookShop.Areas.Admin.Models.IntegralGoods
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <fieldset>
+        <legend>IntegralGoods</legend>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.PaymentIntegral)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.PaymentIntegral)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.IntegralSection.Name)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.IntegralSection.Name)
+        </div>
+    </fieldset>
+    @using (Html.BeginForm()) {
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+
+</body>
+</html>

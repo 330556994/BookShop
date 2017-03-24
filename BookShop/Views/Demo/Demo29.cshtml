@@ -1,0 +1,95 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo29</title>
+      <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script>
+        $(function () {
+
+            //先禁用浏览器缓存
+            $.ajaxSetup({
+                cache:false
+            });
+            loadCategory();//加载图书类别
+
+            $("#ddlCategory").change(function () {
+                var id = $(this).val();
+                loadBook(id);//加载图书
+            });
+        });
+        //加载图书类别
+        function loadCategory() {
+            var url = "/demo/demo29_1";
+            //get方法，4个参数，第一个请求网址，2.传递参数，3.回调函数
+            //4.服务端返回数据类型 json,xml,text,html 
+            $.get(url, function (json) {
+                $.each(json, function (index, obj) {
+                    var html = "<option value='" + obj.Id + "'>" + obj.Name + "</option>";
+                    //append方法？
+                    $("#ddlCategory").append(html);
+                });
+            }, "json");
+        }
+        //根据图书类别编号，加载图书
+        function loadBook(cid) {
+            $("#tb tr:gt(0)").remove();//清楚原有行
+            var url = "/demo/demo29_2";
+            var data = { "cid": cid };//封装传递到服务端的参数
+            $.getJSON(url, data, function (json) {
+                //[{"Id":1,"Title":"c++","Cname":"计算机","UnitPrice":18},{},{}]
+                $.each(json, function (index, obj) {
+                    var html = "<tr>";
+                    html += "<td>" + obj.Id + "</td>";
+                    html += "<td>" + obj.Title + "</td>";
+                    html+="<td>"+obj.Cname+"</td>";
+                    html += "<td>" + obj.UnitPrice + "</td>";
+                    html += "<td><input value='删除' type='button' onclick='deleterow(this)' /> "
+                    html += "</tr>";
+                    $("#tb").append(html);
+                });
+            });
+        }
+        function deleterow(obj) {
+            var bookid = $(obj).parent().parent().find("td:eq(0)").html();
+           // alert(bookid);
+            if (confirm('真的要删除么?')) {
+                var url = "/demo/demo29_3";
+                var data = { "bookid": bookid };
+                $.getJSON(url, data, function (json) {
+                    //json {"success":0 } 0代表成功，1代表失败
+                    if (json.success == 0) {
+                        $(obj).parent().parent().remove();
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                });
+
+                
+
+
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <select id="ddlCategory">
+            <option value="-1">--请选择图书类别--</option>
+        </select>
+        <table id="tb">
+            <tr>
+                <td>编号</td><td>书名</td><td>图书类别</td><td>单价</td><td>操作</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

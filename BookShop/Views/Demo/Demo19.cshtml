@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo19</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("demo19", "demo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <table>
+                <tr>
+                    <td>
+                        <input type="file" name="files" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="file" name="files" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <input type="file" name="files" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交" /> </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

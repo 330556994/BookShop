@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+    SelectList categories = ViewBag.Categoies;
+    AjaxOptions ajax = new AjaxOptions();//实例化ajax对象
+    ajax.Confirm = "真的要查询么?";
+    ajax.HttpMethod = "post";//设置post请求
+    ajax.OnBegin = "onbegin";//设置请求之前触发时的回调js函数
+    ajax.OnComplete = "oncomplete";//设置请求完成后的回调函数
+    ajax.OnSuccess = "onsuccess";//设置请求成功后的回调函数
+    ajax.OnFailure = "onfailure";//设置ajax请求失败后回调函数
+    ajax.UpdateTargetId = "tbShow";//设置当服务端返回html脚本时，由哪个html元素内部显示
+    //服务端返回的文本，是如何显示在界面上的。替换
+    ajax.InsertionMode = InsertionMode.Replace;
+    //ajax.Url 如果在写beginform时，指定了控制器和action，则不需要
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo32</title>
+     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(function () {
+            //先禁用浏览器缓存
+            $.ajaxSetup({
+                cache: false
+            });
+        });
+
+        function onbegin() {
+            $("#tipSearch").html("正在拼命查询中...")
+                .css("color", "green").fadeIn();
+        }
+        function oncomplete() {
+            $("#tipSearch").html("正在拼命查询中...")
+            .css("color", "green").fadeOut(2000);//2秒隐藏
+
+        }
+        function onfailure(err) {
+            alert(err);
+        }
+        function onsuccess(html) {
+           alert(html);
+        }
+
+  </script>
+</head>
+<body>
+    <div>
+            <fieldset>
+            <legend>查询区</legend>
+                @using (Ajax.BeginForm("Demo32_1", "demo", ajax))
+                {
+            <table>
+                <tr>
+                    <td>请选择图书类别</td>
+                    <td>
+                     @Html.DropDownList("cid",categories)
+                    </td>
+                    <td>请输入图书名称</td>
+                    <td>
+                        @Html.TextBox("title")
+                    </td>
+                    <td>
+                          <input type="submit" value="查询" />
+                        <span id="tipSearch"></span>
+
+                    </td>
+                </tr>
+            </table>
+                }
+            <div id="tbShow"></div>
+        </fieldset>
+   
+    </div>
+</body>
+</html>

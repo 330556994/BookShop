@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="Robots" content="index,follow" />
+<title>"第三波书店"-网上书店</title>
+<link href="/CSS/global.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="js/init.css" type="text/css"/>
+<script src="~/Js/dd/myjavascript.js" type="text/javascript"></script>
+
+
+    @RenderSection("script",false)
+</head>
+<body>
+    <div id="top">
+        @if(Session["name"]==null){
+	<div class="status">您好，欢迎来到第三波书店^_^  
+         <span>
+             @Html.ActionLink("【登录】","login","User")
+             
+             @Html.ActionLink("【免费注册】","Register","User")
+             @Html.ActionLink("【购物车】","Index","Car")
+         </span> 
+
+	</div>
+        }
+        else{
+        <div class="status">@Session["name"] 您好，欢迎来到第三波书店^_^  
+         <span>
+             @Html.ActionLink("【会员中心】","Index","User")
+             @Html.ActionLink("【购物车】","Index","Car")
+             @Html.ActionLink("【退出】","Exit","User")
+       </span> 
+
+	</div>
+        }
+    <div class="member">
+    	<ul>
+        	<li><a href="#"><img src="/Images/payVIP.gif" height="18" alt="开通VIP" /></a></li>
+            <li><a href="#"><img src="/Images/payCoin.gif" height="18" alt="学币中心" /></a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="header">
+	<div id="logo"><img src="/Images/logo.gif" alt="第三波书店" /></div>
+    <div id="nav">
+    	<div id="a_b_01"><img src="/Images/a_b_01.gif" />[<img src="/Images/taobao.gif" /> <a href="#">分站</a>]</div>
+        <ul id="mainnav">
+        	<li class="current"><a href="/">首页</a></li>
+            <li><a href="login.html">登录</a></li>
+            <li><a href="register.html">注册</a></li>
+            <li><a href="#">购物流程</a></li>
+            <li><a href="#">在线客服</a></li>
+            <li><a href="/ExchangeIntegral/Index">兑换积分</a></li>
+            <li><a>@Html.ActionLink("商城活动","GetSecKill","Seckill")</a></li>
+            <li class="gerenzhongxin"><a href="/user/" class="hrefcenter">个人中心</a></li>
+        </ul>
+    </div>
+</div>
+
+    @RenderBody()
+
+    <div id="footer">
+	<!--contac us-->
+	<div class="telephone">
+        <strong>热线</strong> 021-61508168　<strong>传真</strong> 021-61508168-8020　 <br />
+        <strong>Q Q</strong>375013071  13483528    562655482  1143735195（技术)<br />
+        <strong>MSN</strong> hjservice@hotmail.com   <strong>信箱</strong> shop@hjenglish.com<br />
+        <strong>帮助</strong> <a href="/help/help.aspx" target="_blank">银行汇款帐户</a> <a href="/help/help.aspx#help_post" target="_blank">邮局汇款地址</a> 	<a href="/help/help.aspx#help_ship" target="_blank">送货方式及费用</a> <a href="http://www.hjenglish.com/down/faq_2.htm" target="_blank">如何进行下载</a>
+    </div>
+    <!---->
+  <div class="imp_link">
+    	<img src="/Images/alipay.gif" alt="支付宝支付" /><img src="/Images/online_pay.gif" alt="在线支付" /><br />
+        <a href="http://www.hjenglish.com/about/aboutus.htm" target="_blank">网站介绍</a>　<a href="http://www.hjenglish.com/about/partner.htm" target="_blank">合作伙伴</a>　<a href="#" target="_blank">网站地图</a>　<a href="#" target="_blank">联系我们</a><br />
+    <a href="#" target="_blank">增值电信业务经营许可证沪B2-20040503</a> </div>
+</div>
+
+<div id="child_site">
+    <span>您是第 @HttpContext.Current.Application["total"] 个访客</span>
+    '<span>当前在线：@HttpContext.Current.Application["online"] </span>
+	<strong>分站</strong>　 <a href="#" target="_blank">沪江网</a>  <a href="#" target="_blank">听说</a>  <a href="#" target="_blank">口译</a>  <a href="#" target="_blank">CET</a>  <a href="#" target="_blank">考研</a>  <a href="#" target="_blank">雅思</a>  <a href="#" target="_blank">托福</a>  <a href="#" target="_blank">日语</a>  <a href="#" target="_blank">法语</a>  <a href="#" target="_blank">下载</a>  <a href="#" target="_blank">文库</a>  <a href="#" target="_blank">部落</a>  <a href="#" target="_blank">博客</a>  <a href="#" target="_blank">词典</a>  <a href="#" target="_blank">IT新闻</a>  <a href="#" target="_blank">博客园</a>  <a title="新世界日语" href="#" target="_blank">新世界日语</a>  <a title="2010考研书籍推荐专题" href="#" target="_blank">2010考研书籍</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿@model BookShop.Models.Entities.Student2
+
+@{
+    Layout = null;
+  
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo10</title>
+    <!--
+        这三个js脚本是，创建视图时，选择了引用脚本库
+        ASP.MVC 验证框架是基于jquery的，验证插件
+        -->
+     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/My97DatePicker/WdatePicker.js"></script>
+    <link href="~/My97DatePicker/skin/whyGreen/datepicker.css" rel="stylesheet" />
+    <script src="~/kindeditor-4.1.10/lang/zh_CN.js"></script>
+    <script src="~/kindeditor-4.1.10/kindeditor-min.js"></script>
+    <link href="~/kindeditor-4.1.10/themes/default/default.css" rel="stylesheet" />
+    <script>
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#Description', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+		</script>
+      <script>
+        function getSeconds() {
+            var date = new Date();
+            return "" + date.getSeconds() + date.getMilliseconds();
+        }
+        function changeImg(img) {
+            //一般浏览器有缓存机制，默认情况下，当第二次访问的网址，之前
+            //已经访问过的话，则会从缓存里取，而不会真的去服务端
+            var url = "/tools/createimg?key=" + getSeconds();
+            img.src = url;
+        }
+        $(function () {
+            $("#imgCode").mouseover(function () {
+                $(this).addClass("focus");
+            }).mouseout(function () {
+                $(this).removeClass("focus");
+            });
+        });
+
+        </script>
+   
+</head>
+<body>
+   
+    
+    @using (Html.BeginForm("demo10","demo",FormMethod.Post,new{enctype="multipart/form-data"}))    { 
+        
+      
+        @Html.ValidationSummary(true) <!---->
+    
+        <fieldset>
+            <legend>Student</legend>
+    
+            <div class="editor-label">
+                <!--<label for="name">学生姓名</label>-->
+                <!--labelfor方法，参数是拉姆达表达式，显示displayName特性设置的值-->
+                @Html.LabelFor(model => model.Name)
+            </div>
+            <div class="editor-field">
+                <!--自动根据实体属性配置的datatype特性，生成对应的html标签，启用验证框架-->
+                @Html.EditorFor(model => model.Name)
+                <!--处理验证失败后的提示信息-->
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Pwd)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Pwd)
+                @Html.ValidationMessageFor(model => model.Pwd)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PwdAgain)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PwdAgain)
+                @Html.ValidationMessageFor(model => model.PwdAgain)
+            </div>
+
+              <div class="editor-label">
+                @Html.LabelFor(model => model.ImgFile)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="file" />
+                @Html.ValidationMessageFor(model => model.ImgFile)
+            </div>
+
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Score)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Score)
+                @Html.ValidationMessageFor(model => model.Score)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Birthday)
+            </div>
+            <div class="editor-field">
+                            @Html.TextBoxFor(m=>m.Birthday)
+                <img src="~/My97DatePicker/skin/datePicker.gif" 
+                    onclick="WdatePicker({el:'Birthday'})"
+                    />
+                
+                
+                @Html.ValidationMessageFor(model => model.Birthday)
+
+
+            </div>
+           <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+
+                <div class="editor-label">
+                @Html.LabelFor(model => model.ClassId)
+            </div>
+            <div class="editor-field">
+                <select name="classid">
+                    <option value="-1">--请选择班级--</option>
+                    <option value="1">T101</option>
+                    <option value="2">T201</option>
+                    <option value="3">T301</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.ClassId)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Code)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Code)
+                <img id="imgCode"
+                      onclick="changeImg(this)"
+                      src="/tools/createimg" />
+                @Html.ValidationMessageFor(model => model.Code)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+         <a href="#" class="easyui-linkbutton"              >回到列表页</a>
+    </div>
+</body>
+</html>

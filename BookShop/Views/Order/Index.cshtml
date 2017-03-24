@@ -1,0 +1,65 @@
+﻿@using BookShop.Models.Entities
+@using BookShop.Models.Tools
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Category> cList = ViewBag.Categories;
+    List<Publisher> pList = ViewBag.Publishers;
+    List<Order> orderList = ViewBag.OrderList;
+}
+
+
+
+    <div>
+       
+            <table>
+                <tr>
+                    <td>订单编号</td>
+                    <td>订单总价</td>
+                    <td>快递费用</td>
+                    <td>收件人</td>
+                    <td>收件人地址</td>
+                    <td>电话</td>
+                    <td>下订单日期</td>
+                    <td>订单状态</td>
+                    <td>操作</td>
+                </tr>
+                @foreach(Order order in orderList)
+                {
+                <tr>
+                    <td>
+                       <a href="@string.Format("/Order/Detail?id={0}",order.Id)">@order.Id</a>
+                    </td>
+                    <td>
+                        @order.TotalPrice
+                    </td>
+                    <td>
+                       @order.SendCash
+                    </td>
+                    <td>
+                       @order.PersonName
+                    </td>
+                    <td>
+                      @order.Address
+                    </td>
+                    <td>
+                        @order.Phone
+                    </td>
+                    <td>
+                        @order.OrderDate
+                    </td>
+                    <td>
+                        @( Enum.Parse(typeof(OrderFlag), order.Flag.ToString()).ToString() )
+                    </td>
+                    <td>
+                       @if(order.Flag==1)
+                       {
+                           @Html.ActionLink("取消订单", "", "");
+                       }
+                        <a href="@string.Format("/Order/Index?id={0}",order.Id)">完成订单</a>
+                    </td>
+                </tr>
+                }
+            </table>
+       
+    </div>

@@ -1,0 +1,207 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo33</title>
+        <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script>
+     
+        //加载出版社
+        function loadPub(pageindex){
+         //   alert(name.length);
+            var url = "/demo/demo33_1";
+            var name = $("#name").val();
+            var data = {"name": name,"pageindex":pageindex };
+            $.ajax({
+                url: url,//请求哪个网址
+                data: data,//传递什么数据到服务端
+                dataType: "html",//期望服务端返回的数据类型 json,text,html...
+                cache: false,//异步加载
+                beforeSend: function (XMLHttpRequest) {
+                    // this; // 调用本次AJAX请求时传递的options参数
+                    //发送请求之前触发
+                    $("#tip").html("正在拼命查询中...").css("color", "green").fadeIn();//淡入
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    //this; // 调用本次AJAX请求时传递的options参数
+                    // 请求状态4触发，ajax请求完毕
+                    $("#tip").html("正在拼命查询中...").css("color", "green").fadeOut(2000);//淡出，2秒
+                },
+                success: function (data, textStatus) {
+                    // data 可能是 xmlDoc, jsonObj, html, text, 等等...
+                    //this; // 调用本次AJAX请求时传递的options参数
+                    //status=200,请求成功触发
+                    $("#tbShow").html(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    // 通常 textStatus 和 errorThrown 之中
+                    // 只有一个会包含信息
+                    //this; // 调用本次AJAX请求时传递的options参数
+                    //请求失败，如404，500错误
+                    $.messager.alert('错误提示', '请求发送了错误' + textStatus, 'error');
+                }
+                });
+        }
+
+        $(function () {
+            //先禁用浏览器缓存
+                $.ajaxSetup({
+                    cache: false
+                });
+                $("#btnSearch").click(function () {                   
+                    loadPub(1);               
+                });
+                $("#btnAdd").click(function () {
+                    $('#w').window('open');
+                });
+        });
+
+        function add() {
+            var url = "/demo/demo33_2";
+            var data = { "name": $("#name2").val() };
+            $.post(url, data, function (json) {
+                if (json.success == 0) {
+                    $.messager.alert("请注意", "添加成功", "info");
+                    $("#name2").val("");
+                    $("#w").window('close');
+                    loadPub(1);
+                }
+                else {
+                    $.messager.alert("请注意", "添加失败", "error");
+                }
+            }, "json");
+
+        }
+        //更新保存
+        function saveUpdate() {
+            var url = "/demo/demo33_4";
+            var data = { "id": $("#pubId").html(), "name": $("#name3").val() };
+            $.post(url, data, function (json) {
+                if (json.success == 0) {
+                    $.messager.alert("请注意", "更新成功", "info");
+                    //$("#name3").val("");
+                    $("#w2").window('close');
+                    loadPub(1);
+                }
+                else {
+                    $.messager.alert("请注意", "更新失败", "error");
+                }
+            }, "json");
+
+        }
+        
+        function update(obj) {
+            //获得待修改图书出版社编号
+            var id = $(obj).parent().parent().find("td:eq(0)").html();
+            alert(id);
+            var url = "/demo/demo33_3";
+            var data = { "id": id };
+            $.getJSON(url, data, function (json) {
+                //获得那个出版社
+                $("#pubId").html(id);
+                $("#name3").val(json.Name);
+                $("#w2").window('open');
+            });
+           
+
+        }
+      
+
+       
+ </script>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend>查询区</legend>
+            <table>
+                <tr>
+                    <td>请输入出版社名称:</td>
+                    <td><input  type="text" id="name" /></td>
+                    <td>
+                          <a href="javascript:void(0)"                              data-options="iconCls:'icon-search'"                               class="easyui-linkbutton" id="btnSearch"             >查询</a><span id="tip"></span>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+          <a href="javascript:void(0)"                              data-options="iconCls:'icon-add'"                               class="easyui-linkbutton" id="btnAdd"             >新增</a>
+        <div id="tbShow">
+
+        </div>
+    </div>
+
+    <div id="w" class="easyui-window" 
+        title="新增出版社" 
+        data-options="modal:true,closed:true,iconCls:'icon-save'" 
+        style="width:500px;height:200px;padding:5px;">
+		<div class="easyui-layout" data-options="fit:true">
+		
+			<div data-options="region:'center'" style="padding:10px;">
+				<table>
+                    <tr>
+                        <td>出版社名称:</td>
+                        <td>
+                            <input type="text" id="name2" />
+                        </td>
+                    </tr>
+				</table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                    onclick="add()" style="width:80px">添加</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#w').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+    <div id="w2" class="easyui-window" 
+        title="编辑出版社" 
+        data-options="modal:true,closed:true,iconCls:'icon-save'" 
+        style="width:500px;height:200px;padding:5px;">
+		<div class="easyui-layout" data-options="fit:true">
+		
+			<div data-options="region:'center'" style="padding:10px;">
+				<table>
+                    <tr>
+                        <td>出版社编号:</td>
+                        <td>
+                           <span id="pubId"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>出版社名称:</td>
+                        <td>
+                            <input type="text" id="name3" />
+                        </td>
+                    </tr>
+				</table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                    onclick="saveUpdate()" style="width:80px">修改</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#w2').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

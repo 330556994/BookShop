@@ -1,0 +1,54 @@
+﻿@using BookShop.Models.Entities
+@model Book
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo12</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm()) { 
+            <table>
+                <tr>
+                    <td>
+                        书名:
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(p=>p.Title)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        书名:
+                    </td>
+                    <td>
+                        @Html.EditorFor(p=>p.UnitPrice)
+                    </td>
+                </tr>
+                         <tr>
+                    <td>
+                        类别名称:
+                    </td>
+                    <td>
+                        @Html.EditorFor(p=>p.Category.Name)
+                        @Html.TextBoxFor(p=>p.Category.Name)
+                        @Html.TextBox("Category.Name")
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交" />
+                    </td>
+                </tr>
+            </table>
+        
+        }
+    </div>
+</body>
+</html>

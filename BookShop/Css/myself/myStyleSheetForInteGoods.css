@@ -1,0 +1,44 @@
+﻿
+
+
+/*
+    //作者:李天页
+    
+    
+    */
+
+
+/*积分换购的样式*/
+#left
+{
+    width: 200px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+#btn
+{
+    float: right;
+    font-size: 20px;
+}
+
+#center
+{
+    padding: 5px;
+    background: #eee;
+}
+
+
+
+/*下面开始是分布式图IntegralSection_ajax的样式*/
+
+#booktitle
+{
+    width: 550px;
+}
+
+#needscore
+{
+    width: 100px;
+}

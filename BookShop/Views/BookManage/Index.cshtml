@@ -1,0 +1,63 @@
+﻿@using BookShop.Models.Entities 
+@{
+    Layout = null;
+    List<Book> Books = ViewBag.Books;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        .book
+        {
+            border:1px solid #808080;
+            border-collapse:collapse; /*这是单边线*/
+        }
+            .book .title
+            {
+                 border:1px solid #808080;
+                 font-weight:bold;
+                 text-align:center;
+            }
+            .book td
+            {
+                border:1px solid #808080;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <table class="book">
+            <tr class="title">
+                <td>编号</td><td>书名</td><td>单价</td>
+                <td>类别名称</td><td>出版社</td><td>出版日期</td>
+                <td>操作</td>
+            </tr>
+            @foreach(Book book in Books){
+            <tr>
+                <td>
+                    <a 
+                        href="@string.Format("/bookmanage/detail?id={0}",book.Id)"
+                        >@book.Id</a></td>
+                <td> 
+                    @(book.Title.Length>20?book.Title.Substring(0,20)+"...":book.Title)
+                    </td>
+                <td>@string.Format("{0:c}",book.UnitPrice)</td>
+                <td>@book.Category.Name</td>
+                <td>@(book.Publisher.Name)</td>
+                <td>@string.Format("{0:d}",book.PublishDate)</td>
+                <td>
+                    <a href="@string.Format("/bookmanage/edit?id={0}",book.Id)">
+                        编辑</a>|
+                    <a href="@string.Format("/bookmanage/delete?id={0}",book.Id)">
+                        删除</a>
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

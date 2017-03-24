@@ -1,0 +1,51 @@
+﻿@model BookShop.Areas.Admin.Models.Categories
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>新增图书类别</legend>
+
+
+            <table>
+                <tr>
+                    <td> 类别名称</td>
+                    <td>  @Html.EditorFor(model => model.Name)</td>
+                    <td>  @Html.ValidationMessageFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td>排序字段</td>
+                    <td>@Html.EditorFor(model => model.SortNum)</td>
+                    <td>@Html.ValidationMessageFor(model => model.SortNum)</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" value="新增" />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("返回列表", "Index")
+    </div>
+</body>
+</html>

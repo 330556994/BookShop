@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //可用积分
+    int score = ViewBag.Score;
+    //兑换积分比例， ：后的数字
+    int propInte = ViewBag.PropInte;
+    
+}
+
+@section script{   
+    <script src="/help/jquery-1.8.2.min.js"></script>
+    <script src="/js/dd/myJavaScriptForScoreIndex.js"></script>
+    <link href="~/Css/myself/myStyleSheetForScore.css" rel="stylesheet" />
+    }
+
+<div id="buyInte">
+
+    <table>
+        <tr>
+            <td>您的可用积分为：</td>
+            <td><span>@score</span></td>
+        </tr>            
+        <tr>
+            <td>当前的积分兑换比例为:</td>
+            <td>1元可兑换<span>@propInte</span>积分</td>
+        </tr>
+        <tr>
+            <td>请输入要兑换多少积分(整数):</td>
+            <td><input type="number" id="num" oninput="changeNum()" onpropertychange="changeNum()" />  </td>
+        </tr>
+        <tr>
+            <td>您输入的积分需要充值 <span id="money"></span> 元</td>
+            <td><input type="button" value="确认充值" onclick="btnBuyIntegral()" /></td>
+        </tr>
+    </table>
+
+
+</div>

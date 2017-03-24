@@ -1,0 +1,14 @@
+﻿@using BookShop.Models.Entities @{
+    //得到购物车集合
+    List<Item> items = Session["car"] as List<Item>;
+    int qty=0;//总数
+    decimal totalprice = 0;//总价    foreach(Item item in items){
+        qty += item.Qty;//数量累积
+        totalprice += item.TotalUnitPrice;//小计累加    }     } <div id="basket">     @if(items.Count==0){     <a href="#">目前您的购物篮是空的</a>
+     }
+     else{
+     <a href="/car">
+         共购买@(qty)本书，应付 @string.Format("{0:c}",totalprice) 元
+     </a>
+     }
+ </div>

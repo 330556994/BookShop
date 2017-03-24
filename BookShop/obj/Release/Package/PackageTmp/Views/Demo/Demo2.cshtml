@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo2</title>
+</head>
+<body>
+    <div>
+        request中有三个键值对,querystring，form
+        <p>如果给的值含有特殊符号，该怎么办？使用编码方式
+            Server.UrlEncode()
+        </p>
+        <a href="/demo/demo2_1?id=1&name=@Server.UrlEncode("a? & bc")">Demo2_1</a>
+        <p>请求分为post和get区别，post是封装在HTTP头，看不到的
+            get地址栏提交的，明文的，有长度限制在255
+            本质区别：语义不同，get是取，得到，一般用在查询,delete
+            post是送，一般对数据表做操作时，INSERT,UPDAT
+        </p>
+        <form action="/demo/demo2_2" method="post">
+            <table>
+                <tr>
+                    <td>姓名</td><td><input type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td>密码</td><td><input type="text" name="pwd" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <h1>获取request里封装的环境遍历,客户端的</h1>
+        <ul>
+            @foreach (string key in Request.ServerVariables.AllKeys) { 
+            <li>
+                <span>@key=@Request.ServerVariables[key]</span>
+            </li>
+            }
+        </ul>
+        <p>重要的环境变量 
+           当前访问的页面 SCRIPT_NAME, @Request.ServerVariables["SCRIPT_NAME"]
+            <br />
+            客户端IP地址： LOCAL_ADDR  @Request.ServerVariables["LOCAL_ADDR"]
+            <br />
+            HTTP_USER_AGENT 获得浏览器 @Request.ServerVariables["HTTP_USER_AGENT"]
+        </p>
+    </div>
+</body>
+</html>

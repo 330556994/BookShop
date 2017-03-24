@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="006d75f443dc4a40a6eb737b12aa9bd6" Name="关系图1">
+        <EntityTypeShape EntityType="BookShopPlusModel.BookRatings" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Books" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Categories" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Collections" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Config" Width="1.5" PointX="2.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.IntegralGoods" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.IntegralSection" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.OrderBook" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.OrderIntegral" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Orders" Width="1.5" PointX="8.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Publishers" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.ReaderComments" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.RecomBooks" Width="1.5" PointX="8.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Registration" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.ScoreHistory" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.SearchKeywords" Width="1.5" PointX="10.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Seckill" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.sysman" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.TemporaryCart" Width="1.5" PointX="10.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.test1" Width="1.5" PointX="12.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.UserRoles" Width="1.5" PointX="12.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.Users" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.UserStates" Width="1.5" PointX="12.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopPlusModel.visitBook" Width="1.5" PointX="5.25" PointY="29.625" IsExpanded="true" />
+        <AssociationConnector Association="BookShopPlusModel.FK_Book_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_BookIdCollect" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_BookIdSeckill" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_Books_Publishers" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_IntegralGoods_BookId" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_OrderBook_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_ReaderComment_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_visitBook_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_UserIdCollect" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_IntegralGoodsID" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_IntegralSectionId" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_OrderBook_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_OrderIntegral_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_comments_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_UserIdComment" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_UserIdRegist" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopPlusModel.FK_SysmanId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,163 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Seckill>
+
+@{Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>"第三波书店"-秒杀专场</title>
+    <link href="~/Css/global.css" rel="stylesheet" />
+    <link href="~/Css/Index.css" rel="stylesheet" />
+    <link href="~/Css/layout.css" rel="stylesheet" />
+    <script src="~/Js/dd/jquery-1.8.3.js"></script>
+    <script src="~/Js/dd/myjavascriptforseckill.js"></script>   <!--核心脚本文件位置-->
+    <script src="~/Js/snow/snowfall.jquery.js"></script>
+    <style type="text/css">
+        body, ul, li, ol, p, dl, dd, h1, h2, h3, h4, h5, h6, img, iframe, form, div {margin: 0;padding: 0;list-style-type: none;border: 0;font-family:Arial;}
+        body { background: #303030 }
+        a{color:#1a66b3;text-decoration:none;}
+        a:hover{text-decoration:underline;}
+        tr
+        {
+            line-height:30px;
+        }
+        .timepict {
+            width:860px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .timepict h1 {
+            font-size:30px;
+            color:red;
+            margin-top:50px;
+            font-weight:bolder;
+            width:300px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #content {
+            width:500px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:10px;
+        }
+        .times {
+            color:white;
+            margin-top:15px;
+            width:280px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .btnMiaoShaDiv {
+            height:60px;
+            width:70px;
+        }
+        .content {
+            width:1220px;
+            margin-left:auto;
+            margin-right:auto;
+            
+        }
+        .contentdiv {
+            float:left;
+            width:590px;
+            height:322px;
+            border: 10px solid #303030;
+        }
+        .currentimage {
+            height:380px;
+            width:1330px;
+        }
+        .scroll_mid {
+            width:1330px;
+            height:380px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .bookimage {
+            width:160px;
+            height:240px;
+            margin:10px;
+            border: 5px solid white;
+        }
+        #t_day,#t_hour,#t_minute,#t_second{
+            border: none;
+            background: none;
+            font-family: 微软雅黑;
+            font-size: 24px;
+            color: #ffcc00;
+        }
+        #end {
+            color:#f26767;
+            font-size:17px; 
+        }
+    </style>
+</head>
+<body class="darkBg">
+     <!--秒杀-->
+    <div id="content">
+        <div id="contentforimage">
+            <div class="scroll_mid" >
+                <ul id="scroll_img">
+                    <li> <img src="~/Images/highbuy.jpg" class="currentimage"/></li>
+                    <li> <img src="~/Images/headforseckill.jpg" class="currentimage" /></li>
+                    @*<li> <img src="~/Images/miaosha2.jpg" class="currentimage" /></li>
+                    <li> <img src="~/Images/miaosha3.jpg" class="currentimage" /></li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+            <!--本场倒计时-->
+            <div id="timecon" style="clear:both;margin-top:20px;"></div> 
+            <div class="timepict" style="clear:both;">
+              <a href="#" > 
+                <h1>本场时间12:00~15:00</h1>                 
+              </a>                
+            </div>
+            <!--本场所属时间段--> 
+            <div class="times">  
+                <span id="end">距离本场结束： </span>  
+                <span id="t_day"></span> 天
+                <span id="t_hour"></span> 时 
+                <span id="t_minute"></span> 分  
+                <span id="t_second"></span> 秒  
+            </div>  
+            <div class="content">
+                @foreach (var secKill in Model) {   
+                    <div class="contentdiv">
+                        <table>
+                            <tr>
+                                <td rowspan="5">
+                                    <a href=@string.Format("/books/detail?id={0}",@secKill.BookId)>
+                                        <img class="bookimage" src="@string.Format("/images/BookCovers/{0}.jpg",secKill.Books.ISBN)"/>
+                                    </a> 
+                                </td>
+                                <td style="font-size:24px;">
+                                    <a class="booktitle" href=@string.Format("/books/detail?id={0}",@secKill.BookId)> @secKill.Books.Title </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>作者：@secKill.Books.Author</td>
+                            </tr>
+                            <tr>
+                                <td><del>原价：@string.Format("{0:c}",secKill.Books.MarketPrice)</del>&nbsp;&nbsp;<span style="font-size:15px;">秒杀价：<span style="font-size:20px;color:red">@string.Format("{0:c}",secKill.SeckillPrice)</span></span></td>
+                            </tr>
+                            <tr>                     
+                                <td colspan="2">库存:100 &nbsp;&nbsp;&nbsp;  秒杀数量:1</td>             
+                            </tr>
+                            <tr>                      
+                                <td>
+                                    <div class="btnMiaoShaDiv" onmouseover="mouserOver(this)" onmouseout="mouseOut(this)">
+                                        <a href="javascript:void(0)" onclick="add(@secKill.BookId,@secKill.SeckillPrice);" >
+                                            <img src="~/Images/seckillbtn.png" style="width:70px;height:60px;"/>
+                                        </a>
+                                    </div>
+                                </td>                      
+                            </tr>
+                        </table>
+                    </div>
+                }
+          </div>
+    </div>
+</body>
+</html>

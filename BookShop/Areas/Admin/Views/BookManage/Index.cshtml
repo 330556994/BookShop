@@ -1,0 +1,187 @@
+﻿@using BookShop.Models.Entities
+@model List<Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_adminLayout.cshtml";
+    SelectList categories=ViewBag.Categories;//得到图书类别下拉列表数据源
+    //获得页索引
+    int pageindex = 1;
+    if (string.IsNullOrEmpty(Request.QueryString["pageindex"]) == false)
+    {
+        pageindex = Convert.ToInt32(Request.QueryString["pageindex"]);
+    }
+
+    int recordcount = 100; //ViewBag.RecordCount;//总记录数
+    int pagecount = 8; //ViewBag.PageCount;//总页数
+
+}
+@section script{
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script>
+        var pageindex = @pageindex ;//当前页索引
+        var pagecount = @pagecount ;//总页数
+
+        //下一页
+        function goNext() {
+            if (pageindex + 1 > pagecount)
+                pageindex = pagecount;
+            else
+                pageindex++;
+            var url = "/admin/bookmanage/index?pageindex=" + pageindex;
+            url += "&title=" + $("#title").val();//取出表单元素的value值
+            url += "&categoryid=" + $("#categoryid").val();
+            location.href = url;//完成页面跳转
+        }
+        //上一页
+        function goPrev() {
+            if (pageindex - 1 <1)
+                pageindex =1;
+            else
+                pageindex--;
+            var url = "/admin/bookmanage/index?pageindex=" + pageindex;
+            url += "&title=" + $("#title").val();//取出表单元素的value值
+            url += "&categoryid=" + $("#categoryid").val();
+            location.href = url;//完成页面跳转
+        }
+        //第一页
+        function goFirst() {
+            pageindex=1;
+            var url = "/admin/bookmanage/index?pageindex=" + pageindex;
+            url += "&title=" + $("#title").val();//取出表单元素的value值
+            url += "&categoryid=" + $("#categoryid").val();
+            location.href = url;//完成页面跳转
+        }
+        //最后一页
+        function goLast() {
+                pageindex=pagecount;
+            var url = "/admin/bookmanage/index?pageindex=" + pageindex;
+            url += "&title=" + $("#title").val();//取出表单元素的value值
+            url += "&categoryid=" + $("#categoryid").val();
+            location.href = url;//完成页面跳转
+        }
+    </script>
+
+    <style type="text/css">
+       .nicetable{
+        font-size:12px;
+        font-weight:normal;
+        line-height:18px;
+        border:1px #000 solid;
+    }
+        .nicetable tr
+        {
+            border:1px #c0c0c0 solid;/*边线*/
+        }
+        .nicetable td
+        {
+            border:1px #c0c0c0 solid;/*边线*/
+            border-collapse:collapse;/*显示单边线*/
+            
+        }
+        .nicetable .title
+        {
+            font-weight:bold;
+            text-align:center;
+        }
+        </style>
+    }
+<div id="breadcrumb" class="black">您现在的位置：  <a href="#">第三波</a>  >    <a href="#">管理员后台</a>  >    <a href="#">图书分类管理</a>  >    <a href="#">为书籍分类</a> </div>
+ <form action="/admin/bookmanage/index" method="post"> 
+<table>
+    
+     <tr>
+    
+         <td>
+             请输入书名
+         </td>
+         <td>
+            @Html.TextBox("title","")
+         </td>
+    
+         <td>
+             请选中图书类别
+         </td>
+         <td>
+           @Html.DropDownList("categoryid",categories)
+         </td>
+        
+     </tr>
+     <tr>
+         <td>作者：</td>
+         <td>
+             <input type="text" />
+         </td>
+         <td>选择出版社</td>
+         <td>
+             <select>
+                 <option>--请选择--</option>
+                 <option>北京大学出版社</option>
+                 <option>北京大学出版社</option>
+                 <option>北京大学出版社</option>
+             </select>
+         </td>
+     </tr>
+    <tr>
+        <td colspan="4">
+              <input type="submit" value="查询" />
+        </td>
+    </tr>
+     
+ </table>
+       </form>
+<table class="nicetable">
+     <tr class="title">
+    <td>   
+      <input type="checkbox" name="checkbox" id="checkbox" />
+      全选</td>
+    <td>书名</td>
+    <td>作者</td>
+    <td>类别</td>
+  </tr>
+
+    @foreach(Book book in Model){
+  <tr>
+    <td><input type="checkbox" name="checkbox2" 
+         value="@book.Id"
+         /></td>
+    <td>@book.Title</td>
+    <td>@book.Author</td>
+    <td>@book.Category.Name</td>
+  </tr>
+    }
+</table>
+<table>
+    <tr>
+        <td>
+            <a href="javascript:void(0)" onclick="goFirst();" >第一页</a>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goPrev();" >上一页</a>
+        </td>
+        <td>
+            <span>第@(pageindex)页,共@(pagecount)页
+                 记录总数:@(recordcount)条</span>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goNext();" >下一页</a>
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="goLast();" >最后一页</a>
+        </td>
+        <td>
+            跳转到第
+            <select>
+                <option value="1">1</option>
+                <option value="1">2</option>
+                <option value="1">3</option>
+                <option value="1">4</option>
+                <option value="1">5</option>
+            </select> <a href="javascript:void(0)" onclick="goPage();" >Go</a>
+        </td>
+
+    </tr>
+</table>
+
+
+ 
+ 

@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo13</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm()) { 
+            <table>
+                @for(int i=0;i<3;i++){
+                <tr>
+                    <td>
+                        类别编号
+                    </td>
+                    <td>
+                        @Html.TextBox("categories["+i+"].Id")      
+                    </td>
+                    <td>
+                        类别名称
+                    </td>
+                    <td>
+                        @Html.TextBox("categories["+i+"].Name")      
+                    </td>
+                    
+                </tr>
+                }
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

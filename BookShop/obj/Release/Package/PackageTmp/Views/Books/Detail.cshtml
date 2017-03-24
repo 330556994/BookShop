@@ -1,0 +1,280 @@
+﻿@using BookShop.Models.Entities
+@model Book
+@{
+   
+    //这个变量表示，评分是否有半星，true 有，false 无
+     bool flag=Model.BookRating.ToString().Length>1?true:false;
+     //这个变量，是用来得到评分的整数部分
+     int number =Convert.ToInt32( Math.Floor(Model.BookRating));
+}
+
+@section script{
+<link href="/CSS/channel.css" rel="stylesheet" type="text/css" />
+<link href="/CSS/answer.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script>
+        function buy(bookid) {
+            var url = "/car/buy2";
+            var data = { "bookid": bookid };
+            $("#carInfor").load(url, data, function () {
+                alert("购买成功");
+            });
+
+        }
+
+        function collection(bookid, bookname) {
+
+            $.get("/car/checkcollection", { "bookid": bookid }, function (json) {
+                if (json.success == 0) {
+                    var url = "/car/Collection";
+                    var data = { "bookid": bookid };
+                    $.get(url, data, function (json) {
+                        if (json.success == 0) {
+                            $.messager.alert('成功提示', '书名为《' + bookname + '》已经收藏到您的收藏夹中！', 'info');
+                        } else {
+                            $.messager.alert('错误提示', '收藏失败!', 'error');
+                        }
+                    }, "json");
+                } else {
+                    $.messager.alert('错误提示', '这本书你已经收藏过了 ！！!', 'error');
+                }
+
+            }, "json");
+
+        }
+    </script>
+
+    }
+<div id="container">
+	<!--left content-->
+	<div id="intro">
+    	<!--调用分部视图，显示购物车提示信息-->
+        <div id="carInfor">
+        @{
+            Html.RenderPartial("showcar");
+            }
+            </div>
+        <!--调用结束-->
+
+        <div id="search">
+        	<form action="" method="post" target="_blank">
+            	<input type="text" id="keyword" class="search_key" />
+                <input type="submit" id="s_submit" class="search_sub" value="" />
+            </form>
+        </div>
+        <div id="alltype">
+        	         <!--这里调用分部视图显示图书分类-->
+               @{
+                   //呈现 由action返回的分部视图
+                   Html.RenderAction("showcategory", "commonview");
+                   }
+
+               <!--调用结束-->
+        </div>
+        <!--link start-->
+        <div id="choice_pub">
+        	<select name="publishs" id="publishs" class="n_select">
+            	<option>>>根据出版社选择图书</option>
+                <option>北京师范大学出版社</option>
+                <option>电子工业出版社</option>
+            </select>
+
+        	<select name="publishs" id="special" class="n_select">
+            	<option>>>根据专题选择图书</option>
+                <option>国庆出游专题</option>
+                <option>新年计划专题</option>
+            </select>
+        </div>
+        
+        <div id="s_b_03"><a href="#">赖世雄美语从头学</a><br /><a href="#">沪江团购 ，价格更优惠</a></div>
+        <!--link start-->
+    </div>
+    
+    <div class="book_view">
+    	<h1 class="b_title">暮光之城-月食</h1>
+        <div class="b_exa">
+        	<span class="book_group">丛书名：暮光之城</span>
+            <span class="book_status">正在阅读（150 人），已经阅读（4521 人） <span><a href="#">放入书架</a></span> <a href="#">什么是书架？</a></span>
+        </div>
+        
+        <!--book basic start-->
+        <dl class="put_book">
+        	<dt>
+            	<img src="@string.Format("/images/BookCovers/{0}.jpg",Model.ISBN)" 
+                    alt="@Model.Title" />
+            	<div class="chakan">
+                    <img src="/Images/zoom.gif" />
+                     <a class="gray878787a"
+                          href="#" name="bigpicture">点击查看大图</a></div>
+            </dt>
+            <dd>
+            	<div id="book_editor">作　　者： @Model.Author  著
+                    <br />出 版 社： @Model.Publisher.Name</div>
+                <ul id="book_attribute">
+                    <li>出版时间： @string.Format("{0:d}",Model.PublishDate)</li>
+                    <li>字　　数： </li>
+                    <li>版　　次： 1</li>
+
+                    <li>页　　数： 540</li>
+                    <li>印刷时间： 2009-5-1</li>
+                    <li>开　　本： 16开</li>
+                    <li>印　　次： 1</li>
+                    <li>纸　　张： 胶版纸</li>
+                    <li>I S B N    ： @Model.ISBN</li>
+
+                    <li>包　　装： 平装</li>
+                </ul>
+                
+                <div id="book_categroy">
+                    所属分类： 
+
+                    <a 
+             href="@string.Format("/books/index?id={0}",Model.CategoryId)"
+                         target="_blank" class="blue12a">
+                        @Model.Category.Name</a>
+                    </div>
+                
+                <div id="book_price">
+                    <span class="gray87">定价：
+                        <span class="del">
+                            @string.Format("{0:c}",Model.MarketPrice)</span></span>
+                    <span class="red">当当价：
+                        @string.Format("{0:c}",Model.UnitPrice)</span>
+                       折扣：<span class="redc30">
+                           @(Math.Round(
+                     Model.UnitPrice/Model.MarketPrice*100,0))
+                           折</span>   节省：@string.Format("{0:c}",
+                           Model.MarketPrice-Model.UnitPrice)
+                </div> 
+                
+                <div id="book_point">
+                	<span >送积分：<span id="pointsTag" >354</span></span>　<a target="_blank" href="#2">积分说明</a> <br />
+                	
+
+                     <a href="javascript:void(0)" onclick="buy(@Model.Id)">
+                     <img src="/Images/btn_goumai.gif" 
+                        onmouseover="this.src='/Images/btn_goumai_click.gif'"
+                        
+                        onmouseout="this.src='/Images/btn_goumai.gif'"
+                         />
+                        </a>
+                    <a href="javascript:void(0)" onclick="collection(@Model.Id,'@Model.Title')">
+                    <img src="/Images/btn_zancun.gif" 
+                        onmouseout="this.src='/Images/btn_zancun.gif'"
+                        onmouseover="this.src='/Images/btn_zancun_click.gif'" />
+                        </a>
+
+
+                </div> 
+                
+                <div id="book_count">
+                	顾客评分：<span id="book_id_15">5</span>
+                    共有商品评论0条  <a href="#">查看评论摘要</a>
+                </div>
+			
+
+            </dd>
+        </dl>
+        <!--book basic end-->
+        <!--book intro start-->
+        <dl class="book_intro">
+        	<dt>编辑推荐</dt>
+            <dd>中国健康类图书第一品牌“国医健康绝学系列”2009年重磅新品
+《求医不如求己家庭医学全书》是一本保佑全家老小平平安安的健康红宝书。里面汇集了将近200种家庭常见疾病的自助调治方案，它们特别简单、特别安全、特别适合家庭使用。严格按照书中的方法去做，每个人身体的绝大多数问题都能得到解决。
+　　中里巴人先生健康养生绝学使用说明书，一看就懂，最安全、最有效、最省钱。
+本书几大特色：</dd>
+        </dl>
+        
+        <dl class="book_intro">
+        	<dt>内容简介</dt>
+            <dd>
+                @Html.Raw(Model.ContentDescription)
+            </dd>
+        </dl>
+        
+        <dl class="book_intro">
+        	<dt>目录</dt>
+            <dd>
+                @Html.Raw(Model.TOC)
+            </dd>
+        </dl>
+        
+    
+        <!--book intro end-->
+        
+        <!--recommed start-->
+        <div class="comm_answer">
+			<!--review head start-->
+            <div id="div_product_reviews">
+                <div class="total_comm">
+                    <div class="comm_title">
+                        <h2>商品评论 共<em>814</em>条
+                        <span class="look_comm"> (<a href="#" name='reviewList'  target='_blank'>查看所有评论</a>)</span></h2>
+                    </div>
+        
+                    <div class="total_body">
+                        <div class="people_average">
+                            <div class="average_left"><p>购买过的顾客平均评分</p>
+                            
+                                   <span class="a_red28b pd">@number</span>
+                                @if(flag==true){
+                                <span class="red_bold">星半</span>
+                                }
+                                else{
+                                <span class="red_bold">星</span>
+                                }
+                                @for(int i=0;i<number;i++){
+                                <img src='/Images/star_red.gif' />
+                                }
+                                @if(flag==true){
+                                <img src='/Images/star_redgray_big.gif' />
+                                }
+                            </div>
+                            <span class="span_jt" id="div_window_star"><input class="button_down1" value=""  type="button" /></span>
+                        </div>
+                        
+                        <div id="div_product_summary" >
+        
+                            <div class="people_heart">心情指数:<em>249</em>人 开心
+                                <span id="div_emotion_hover"  >
+                                    <input class="button_down1"   type="button" />
+                                </span>
+                            </div>
+                            <div id="Div1" class="people_read" >阅读场所:<em>180</em>人 床上
+                                <span id="div_location_hover"  >
+                                    <input class="button_down1"   type="button" />
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="write_comm">
+                            <a id="reviewTipa"  href="#"><img src="/Images/button_write_comm.gif" border="0" title="写评论" /></a>
+                        </div>
+        
+        
+                    </div>
+                </div>
+            </div>
+            <!--review head end-->
+            
+            <!--the one reviews start-->
+            <div class="comm_list">
+                <h3>
+                    <img src="/Images/label_1.gif"  title="精彩评论" /><a href="#" target="_blank" name="reviewDetail">非常不错的一本书</a>
+                    <span>发表于 2009-04-29 22:46</span>
+                </h3>
+               
+                哦耶，终于拿到书了。&nbsp;<br/>实物比照片显示的要漂亮，颜色是看上去很舒服的红色。&nbsp;<br/>书很厚，是塑封的，里面有两张挂图，一张标准穴位图，一张足部反射区图，还有一张配套的光盘，用DVD机试了一下，是中里老师讲的。嗯，
+            </div>
+            <!--the one reviews end-->
+            
+   		</div>
+        <!--recommed end-->
+    
+    
+    </div>
+    <!--right content end-->
+</div>

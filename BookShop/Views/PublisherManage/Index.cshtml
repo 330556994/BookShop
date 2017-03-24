@@ -1,0 +1,87 @@
+﻿@using BookShop.Models.Entities
+@{
+    
+    //获得页索引
+    int pageindex = 1;
+    if (string.IsNullOrEmpty(Request.QueryString["pageindex"]) == false)
+    {
+        pageindex = Convert.ToInt32(Request.QueryString["pageindex"]);
+    }
+
+    int recordcount =  ViewBag.RecordCount;//总记录数
+    int pagecount =  ViewBag.PageCount;//总页数
+
+    //下一页
+    int nextpage = (pageindex + 1 > pagecount) ? pagecount : pageindex + 1;
+    //上一页
+    int prevpage = (pageindex - 1 < 1) ? 1 : pageindex - 1;
+    
+   
+    
+    Layout = null;
+    //得到控制器传入的出版社集合
+    List<Publisher> list = ViewBag.Publishers;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>出版社编号</td><td>出版社名称</td><td>操作</td>
+            </tr>
+            @foreach(Publisher p in list){
+            <tr>
+                <td>
+                  <a href="@string.Format("/publishermanage/detail?id={0}",p.Id)">
+                      @p.Id
+                  </a>
+                </td>
+                <td>@p.Name</td>
+                <td>
+                    <a href="@string.Format("/publishermanage/edit?id={0}",p.Id)">
+                        更新
+                    </a>|
+                    <a href="@string.Format("/publishermanage/delete?id={0}",p.Id)"
+                         onclick="return confirm('真的要删除么?')"
+                        >
+                        删除</a>
+                </td>
+            </tr>
+            }
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <a href="/publishermanage?pageindex=1">第一页</a>
+                </td>
+                <td>
+                    <a href="@string.Format("/publishermanage?pageindex={0}"
+                    ,prevpage)">上一页</a>
+                </td>
+                <td>
+                    第@(pageindex)页，共@(pagecount)页，
+                    总@(recordcount)条记录
+                </td>
+                <td>
+                    <a href="@string.Format("/publishermanage?pageindex={0}"
+                    ,nextpage)"
+                    >下一页</a>
+                </td>
+                <td>
+                    <a href="@string.Format("/publishermanage?pageindex={0}"
+                    ,pagecount)">最后一页</a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

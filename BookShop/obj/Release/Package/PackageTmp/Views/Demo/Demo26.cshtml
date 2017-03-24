@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo26</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    
+    <link href="~/nice/nicetable.css" rel="stylesheet" />
+    <script src="~/nice/nicetable.js"></script>
+    <script>
+        $(function () {
+            //处理全选功能
+            $("#chkall").click(function () {
+                $(this).parent().parent()
+                    .parent()
+                    .find(":checkbox:gt(0)")
+                    .prop("checked", this.checked);
+            });
+            $("#btnOk").click(function () {
+                var html = "";
+                //打印下，size()是元素的个数
+                alert($("#tab1 tr:gt(0) :checked").size());
+                $("#tab1  tr:gt(0) :checked").each(function (index, obj) {
+                    html = html + $(obj).parent().next().next().html() + ",";
+                });
+                html = html.substring(0, html.length - 1);
+                $("#tip").html(html);
+            });
+
+
+
+        })
+    </script>
+</head>
+<body>
+    <div>
+      <div>
+          jquery是js的脚本库，web项目前端非常重要，学精通Jquery是基础
+          1.理解 选择器
+           基本选择器: 标签，类，id
+          2. 了解所有选择器
+          3. 选择器选出来的是什么？叫包装集，包装集是jquery的对象，jquery提供了一组对包装集的操作方法
+
+
+      </div>    
+        <table class="nicetable" id="tab1">
+            <tr>
+               <td><input type="checkbox"  id="chkall" /></td> <td>学号</td><td>姓名</td><td>成绩</td>
+            </tr>
+            <tr>
+               <td><input type="checkbox" value="1" /></td>    <td>1</td><td>张三</td><td>89</td>
+            </tr>
+            <tr>
+                  <td><input type="checkbox" value="2" /></td> <td>2</td><td>李四</td><td>89</td>
+            </tr>
+            <tr>
+                  <td><input type="checkbox" value="3" /></td> <td>3</td><td>王五</td><td>89</td>
+            </tr>
+            <tr>
+                 <td><input type="checkbox" value="4" /></td>  <td>4</td><td>赵六</td><td>89</td>
+            </tr>
+            <tr>
+                 <td><input type="checkbox" value="5" /></td>  <td>5</td><td>爻七</td><td>89</td>
+            </tr>
+        </table>
+        <input type="button" id="btnOk" value="确定" /><span id="tip"></span>
+        
+       <hr />
+           <table class="nicetable">
+            <tr>
+                <td>学号</td><td>姓名</td><td>成绩</td>
+            </tr>
+            <tr>
+                <td>1</td><td>张三</td><td>89</td>
+            </tr>
+            <tr>
+                <td>2</td><td>李四</td><td>89</td>
+            </tr>
+            <tr>
+                <td>3</td><td>王五</td><td>89</td>
+            </tr>
+            <tr>
+                <td>4</td><td>赵六</td><td>89</td>
+            </tr>
+            <tr>
+                <td>5</td><td>爻七</td><td>89</td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+</html>

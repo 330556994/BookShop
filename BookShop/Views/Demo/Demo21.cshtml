@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo21</title>
+    <script src="~/kindeditor-4.1.10/lang/zh_CN.js"></script>
+    <script src="~/kindeditor-4.1.10/kindeditor-min.js"></script>
+    <link href="~/kindeditor-4.1.10/themes/default/default.css" rel="stylesheet" />
+    <script>
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#content', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+		</script>
+</head>
+<body>
+    <div>
+      @using (Html.BeginForm()) { 
+          <h1>今天的心情</h1>
+      	<textarea name="content" id="content"
+               style="width:600px;height:200px;visibility:hidden;">文本编辑器</textarea>
+          <br />
+          <input type="submit" value="提交" />
+      }
+		
+	
+    </div>
+</body>
+</html>

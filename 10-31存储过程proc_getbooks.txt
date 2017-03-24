@@ -1,0 +1,49 @@
+======================
+合并订单存储过程
+  只能合并订单状态为1
+   id , orderid,bookid,qty,unitprice
+   1    1001    4944   1    20
+   1    1001    4945   1    40
+   1    1001    4946   1    30
+   
+id , orderid,bookid,qty,unitprice
+   1    1002    4944   2    20
+   1    1002    4945   1    40
+   1    1002    4948   1    30
+===
+id , orderid,bookid,qty,unitprice
+   1    1002    4944   3    20
+   1    1002    4945   2    40
+   1    1002    4948   1    30
+   1    1001    4946   1    30
+=================================
+ALTER proc  [dbo].[proc_getbooks](
+    @start int ,--从第几条取
+    @end int ,--取到第几条
+    @sort varchar(50) ,--排序条件如 a.id desc 
+     @categoryid  varchar(50) --图书类别编号  
+  )
+  as
+  declare @sql varchar(1000)
+
+  set @sql='
+  select * from (
+select ROW_NUMBER() over(order by ' +@sort+' 
+) as rowid,
+ a.*,b.Name as  Cname,b.SortNum,
+c.Name as Pname
+ from books a 
+  inner join Categories b
+  on a.CategoryId=b.Id
+  inner join Publishers c
+  on a.PublisherId=c.Id
+  where CategoryId='+cast(@categoryid as varchar(50) )
+  +') tablea
+    where rowid between '+ cast(@start as varchar(50))
+   +'  and  '+cast( @end as varchar(50))
+  -- print @sql
+  exec (@sql) 
+  go
+
+
+

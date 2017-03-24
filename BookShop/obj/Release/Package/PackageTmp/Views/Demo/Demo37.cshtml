@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo37</title>
+</head>
+<body>
+    <div>
+        现在时间  @DateTime.Now.ToString()
+    </div>
+    <div>如果想，整个页面不缓存，页面中局部缓存，那么使用分部视图，
+        让调用分部视图的action缓存。
+    </div>
+    <div>
+        缓存数据，案例如 categoryservice里的getlist方法
+        缓存数据，会存在不实时的问题。一般的做法是，给后台增加一个功能
+        如：一键更新缓存。在这个功能里，把所有系统用到的缓存对象都更新
+        一遍。
+        缓存依赖：缓存绝对超时，相对超时，和一个文件进行依赖等。
+    </div>
+    <div>
+        想要彻底解决性能问题，最好的做法，纯静态化。
+        思路：
+          创建一个模板:
+             《body》
+                      <h1>[filed:title/]</h1>
+                      <h1>[filed:author/]</h1>
+                      <div>[field:body/]</div>
+              《/body》
+
+
+    </div>
+</body>
+</html>

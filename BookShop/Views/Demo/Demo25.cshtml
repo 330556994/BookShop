@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Books>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo25</title>
+</head>
+<body>
+ 
+    <table>
+        <tr>
+            <th>
+                书名
+            </th>
+            <th>
+                类别名称
+            </th>
+          
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+             @item.Title
+            </td>
+            <td>
+               @item.Categories.Name
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

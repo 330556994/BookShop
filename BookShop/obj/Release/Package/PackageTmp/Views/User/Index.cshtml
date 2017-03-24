@@ -1,0 +1,266 @@
+﻿@using BookShop.Areas.Admin.Models    
+@{
+        ViewBag.Title = "Index";
+        List<Seckill> list=ViewBag.SecKill;
+    }
+    @section script{
+        <link href="/CSS/Index.css" rel="stylesheet" type="text/css" />
+        <link href="/Css/qiandao.css" rel="stylesheet" />
+        <link href="~/Js/dd/global.css" rel="stylesheet" />
+        <link href="~/easyui1.5/demo/demo.css" rel="stylesheet" />
+        <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+        <link href="~/easyui1.5/themes/default/easyui.css" rel="stylesheet" />
+        <script src="~/Js/dd/jquery-1.8.3.js"></script>
+        <link href="~/Css/layout.css" rel="stylesheet" />
+        <script src="~/easyui1.5/jquery.min.js"></script>
+        <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+        <!--   为了让 js脚本 与页面分离   本页面中 涉及到的大部分 js 函数 和一些脚本 都引用了  这个 myjavascript.js 文件                                   -->
+        <script src="~/Js/dd/myjavascript.js"></script>
+        <script src="~/Js/dd/datagrid-detailview.js"></script>
+        <link href="~/Css/mycss.css" rel="stylesheet" />
+        }
+
+    <div id="container">
+	    <!--left content-->
+	    <div id="intro">
+    	   <div id="carInfor">
+        @{
+            Html.RenderPartial("showcar");
+            }
+            </div>
+            <img src='~/Images/a_b_01.gif' />
+            <div id="alltype">
+                   <h1 class="all_type black"><a href="#">全部功能>></a></h1>
+                <div id="subnav">
+                    <ul class="black">
+                    <li>查看订单</li>
+                    <li>查看我的评论</li>
+                    <li>查看积分</li>
+                    <li>我的收藏夹</li>
+                    <li>我的积分历史</li>
+                    <li>我的签到</li>
+                    <li>修改个人信息</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <!--middle content-->
+        
+        <div id="content1">
+           
+            <div id="contentforimage" style="width:420px;">
+                    <!--轮换显示的横幅广告图片-->
+                    <div class="scroll_mid">
+                        <ul id="scroll_img">
+                            <li> <img src="~/Images/QQ截图20161206000644.png" width="504" height="180" alt="aa" /></li>
+                            <li> <img src="~/Images/jifenhuoqu.jpg" width="504" height="180" alt="aa" /></li>
+                            <li> <img src="~/Images/QQ截图20161206142917.png" width="504" height="180" alt="aa" /></li>
+                            <li> <img src="~/Images/QQ截图20161206143104.png" width="504" height="180" alt="aa" /></li>
+                            <li> <img src="~/Images/QQ截图20161206143157.png" width="504" height="180" alt="aa" /></li>
+                            <li> <img src="~/Images/QQ截图20161206143240.png" width="504" height="180" alt="aa" /></li>
+                        </ul>
+                        <ul id="scroll_number">
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                        </ul>
+                    </div>
+            </div>
+            <div id="tt" style="width:512px;height:500px">
+		       <div title="我的订单" style="padding:10px;">          
+			      <table id="dgforuserorder"></table>
+		        </div>
+		        <div title="我的评论" style="padding:10px;">
+                    <div id="tbforcomment">
+                        <a href="javascript:void(0)" onmouseover:"this."
+                             id="btnDeleteComment"
+                             class="easyui-linkbutton"
+                             data-options="iconCls:'icon-cancel',plain:true" >删除评论</a>
+                    </div>
+                    <div id="mycomment"></div> 
+			    </div>
+		        
+		        <div title="我的积分" style="padding:10px">
+                     <div id="myscore">
+                         <br />
+                         <span id="currentScore" style="font-size:30px;"></span><br /><br /><br /><br /><br />
+                         <span id="totalScore" style="font-size:30px;"></span>
+                     </div> 
+		        </div>
+                <div title="我的收藏" style="padding:10px">
+                    <div id="tbforcollections">
+                        <a href="javascript:void(0)"
+                             id="btnDeleteCollections"
+                             class="easyui-linkbutton"
+                             data-options="iconCls:'icon-cancel',plain:true" >取消收藏</a>
+                    </div>
+		             <div id="mycollection"></div>
+                </div>
+
+                <div title="我的签到" style="padding:10px">
+                    <div id="myregistration"></div> 
+                </div>
+                <div title="积分历史" style="padding:10px">
+                    <div id="myscorehistory"></div> 
+                </div>
+	    </div>
+        <div id="mmforscore">
+		    <div>历史积分</div>
+		    <div>当前积分</div>
+		    <div>签到积分</div>
+		    <div>总积分</div>
+	    </div>
+         
+        </div>
+        <div id="sidebar" style="margin-top:-690px;">
+            <div style="position:relative;">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')"><span id="time"></span>
+                    <img src="~/Images/qiandao.png" style="width:185px;height:60px; "/>
+　　                <div style="position:absolute; z-index:2; left:-45px; top:60px">
+　　　　               <span  id="week" style="font-size:20px;"></span>
+                      <span id="qiandaocount" style="font-size:18px;font-weight:bolder;margin-left:75px;">0</span>
+　　                </div>
+                </a>
+            </div>
+            <div id="order_find">
+        	    <form action="" method="post" target="_blank">
+           	      <label>订单号：</label><input type="text" id="keyword" class="order_key" />
+                    <input type="submit" id="s_submit" class="order_sub" value="查询状态" />
+                </form>
+            </div>
+            <!--下面进入秒杀专场-->
+            <div class="sidedt hots">
+        	    <h1>秒杀专场</h1>
+                <div class="book_sort">
+                    <div class="book_class">
+                        <div id="dome">
+                            <div id="dome1">
+                                <ul id="express">
+                                    @foreach(var seckill in list){
+                                    <li><a href="#">@if(seckill.Books.Title.Length>=10){@seckill.Books.Title.Substring(0,10)}else{@seckill.Books.Title}</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+    </div>
+    </div>
+         
+    <div id="w" class="easyui-window" title="发表动态" data-options="iconCls:'icon-save'" style="width:490px;height:200px;padding:10px;">
+		<div class="check_poster" id="idEditorPosterContainer" style="margin-top:60px;margin-left:20px;">	
+			<div class="qz_inputer" id="idEditorTextarea">
+                <div id="hehe"  class="textinput textarea c_tx3" contenteditable="true" tabindex="0" accesskey="q" >说点什么吧，每日签到可获得积分哦~~~</div>
+				<div class="qz_poster_ft">
+					<div class="qz_poster_pub">
+						<a class="btn btn_cancel" id="idEditorCancel" href="javascript:;">取消</a>
+						<a class="btn btn_post" id="idEditorPublishBtn" href="javascript:;"><span class="txt">发表</span></a>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+
+  <!--这里开始管理员处理未处理订单的模态窗口-->
+    <div id="windowforOrderManager" class="easyui-window"  title="添加图书到积分商品中"  data-options="iconCls:'icon-save',closed:true,cls:'c6'" style="width:1200px;height:400px;padding:5px;">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'east',split:true" style="width:850px">
+                <table class="easyui-datagrid" 
+                            id="dgfororder"
+                            style="width:800px;"   
+                        data-options="url:'/admin/Home/ListForOrderBooksByOrderId',
+                            fitColumns:true,
+                            singleSelect:true,
+                            autoRowHeight:true,
+                            pagination:true,
+                            pageNumber:1,
+                            pageSize:5,
+                            pageList:[5,10,15,20]
+                            ">   
+                    <thead>   
+                        <tr>   
+                            <th data-options="field:'Id'">订单明细</th>   
+                            <th data-options="field:'OrderID'">订单编号</th>
+                            <th data-options="field:'BookID'">图书编号</th>
+                            <th data-options="field:'bookImg'">图书图片</th>
+                            <th data-options="field:'title'">图书名字</th>
+                            <th data-options="field:'Quantity'">数量</th>
+                            <th data-options="field:'marketPrice'">市场价</th>
+                            <th data-options="field:'UnitPrice'">会员价</th>
+                            <th data-options="field:'flag'">订单状态</th>
+                        </tr>   
+                    </thead>   
+                </table>
+			</div>
+			<div data-options="region:'center'" style="padding:10px;">
+                <form id="orderForm">
+				<table>
+                        <!--积分商品 id  隐藏域  -->
+                        <tr>
+                            <th>订单编号:</th>
+				            <td><input class="easyui-textbox" id="OrderId" style="width:100%" name="Id" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单日期:</th>
+                            <td><input  type= "text" id="OrderDate" name="OrderDate" class= "easyui-datebox" disabled="disabled" ></input> 
+                        </tr>
+                        <tr>
+                            <th>用户登录名:</th>
+                            <td>
+                                <input class="easyui-textbox" id="loginId" style="width:100%" name="loginId" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>订单总金额:</th>
+                            <td>
+                                <input class="easyui-textbox" id="TotalPrice" style="width:100%" name="TotalPrice" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>收件人姓名:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderPersonName" style="width:100%" name="OrderPersonName" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>联系电话:</th>
+                             <td><input  type= "text" id="UserPhone" name="UserPhone" class= "easyui-textbox" disabled="disabled" ></input></td>
+                        </tr>
+                        <tr>
+                            <th>收货地址:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderAddress" name="OrderAddress" style="width:100%" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单备注:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderRemark" name="OrderRemark" style="width:100%" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单状态:</th>
+                            <td> 
+                                <input class="easyui-textbox" id="OrderFlag" name="OrderFlag" style="width:100%" disabled="disabled" >
+                            </td>
+                        </tr>
+				    </table>
+                </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" onclick="doOrderByAjax()" id="orderButton"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">处理完成</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforOrderManager').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,44 @@
+﻿@using BookShop.Models.Entities
+@model List<OrderBook>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<div>
+            <table>
+                <tr>
+                    <td>订单详情编号</td>
+                    <td>所属订单编号</td>
+                    <td>购买图书编号</td>
+                    <td>购买数量</td>
+                    <td>单价</td>
+                  
+                  
+                </tr>
+                @foreach(OrderBook order in Model)
+                {
+                <tr>
+                    <td>
+                        @order.Id
+                    </td>
+                    <td>
+                        @order.OrderID
+                    </td>
+                    <td>
+                       @order.BookID
+                    </td>
+                    <td>
+                       @order.Quantity
+                    </td>
+                    <td>
+                      @order.UnitPrice
+                    </td>
+                  
+                   
+                </tr>
+                }
+            </table>
+
+    </div>

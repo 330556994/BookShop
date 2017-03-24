@@ -1,0 +1,466 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>活动商城</title>
+<link type="text/css" href="~/Css/zhuyemianCss/pad_heng.css" rel="stylesheet" media="screen and (min-width:861px) and (max-width:960px)"/>
+<link type="text/css" href="~/Css/zhuyemianCss/pad.css" rel="stylesheet"  media="screen and (min-width:601px) and (max-width:860px)"/>
+<link type="text/css" href="~/Css/zhuyemianCss/1024_768.css" rel="stylesheet" />
+<link type="text/css" href="~/Css/zhuyemianCss/reset.css" rel="stylesheet" />
+<link type="text/css" href="~/Css/zhuyemianCss/tel.css" rel="stylesheet" media="screen and (max-width:480px)"/>
+<link type="text/css" href="~/Css/zhuyemianCss/tel_heng.css" rel="stylesheet" media="screen and (min-width:481px) and (max-width:600px)"/>
+    <style type="text/css">
+        li {
+            float:left; 
+                   
+        }
+            li .time {
+                font-size:30px;
+            }
+        p {
+             font-size:17px;
+        }
+        .scroll {
+            margin-left:150px;
+        }
+        .times {
+            margin-left:250px;
+             font-size:30px;
+             color:#f00;
+        }
+
+        #mix_miaoshaMenu {
+            
+            text-indent:50px;
+        }
+        .timepict img{          
+            margin-left: 40px;
+        }
+         .timepict1 img{          
+            margin-left: 40px;
+        }
+        #end {
+            color:#ff00dc;
+
+        }
+        #end1 {
+           
+            color:#ff00dc;
+        }
+    </style>
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        
+  var limit_time;  
+        if(window.name==""){//查看是否已有记录的时间  
+            limit_time=7000;//设置结束时间，单位秒  
+        }else{  
+            limit_time=window.name;  
+        }  
+        function timeDown(){  
+            if(limit_time>=0){  
+                var day=Math.floor(limit_time/60/60/24); /*划分出时分秒*/  
+                var hour=Math.floor(limit_time/60/60%24);  
+                var minutes=Math.floor(limit_time/60%60);  
+                var  seconds=Math.floor(limit_time%60);  
+                $("#t_day").html(day+"天"); /*写到页面中*/  
+                $("#t_hour").html(hour+"时");  
+                $("#t_minute").html(minutes+"分");  
+                $("#t_second").html(seconds+"秒");  
+  
+                $("#t_day1").html(day + "天"); /*写到页面中*/
+                $("#t_hour1").html(hour + "时");
+                $("#t_minute1").html(minutes + "分");
+                $("#t_second1").html(seconds + "秒");
+  
+                if(limit_time==10){  
+                    alert("提醒，还有10秒结束");  
+                }  
+                --limit_time;  
+                window.name=limit_time;//记录当前时间。  
+            }  
+            else{clearInterval(timer);  
+                alert("时间到！活动结束");  
+            }  
+        }  
+        timer=setInterval("timeDown()",1000);//设置定时器，1秒钟执行一次timeDown()函数；         
+      
+        function addSecKill() {
+            $.get('/demo/AddSecKill', function (json) {
+                if (json.success == 0) {
+                    alert("成功");
+                } else {
+                    alert("失败");
+                }
+            }, 'json');
+        }
+
+  </script>     
+</head>
+<body>
+   <a href="#" onclick="addSecKill()">添加秒杀信息</a>
+    <!--秒杀-->
+<div class="w_100_l">
+	<div class="main">
+        <img src="~/Images/zhuyemianImages/xianshi.jpg" width="950px"/>
+      <div class="timepict" style="width:860px;margin-left:auto;margin-right:auto;">
+          <a href="#" > 
+              <div  style="background-color:yellow;width:300px;height:50px;margin-left:250px;">
+                  <span style="font-size:30px;color:red;font-weight:bolder">本场时间12:00~15:00</span>                 
+              </div></a>                
+      </div>
+        
+        <!--本场倒计时-->
+        <div id="timecon" style="clear:both"></div>  
+   <div class="times">  
+   <span id="end">距离本场结束 </span>  
+        <span id="t_day">00天</span>  
+        <span id="t_hour">00时</span>  
+        <span id="t_minute">00分</span>  
+        <span id="t_second">00秒</span>  
+    </div>  
+
+        <p class="index_hr"></p>
+      <div class="content">
+            
+        	<ul>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_01.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">原价：￥60</p>                           
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>                           
+                            <a class="book_buy" id="addcar" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_02.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_03.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_04.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_05.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_06.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_07.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_08.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_09.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_10.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">原价：￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_11.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_12.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">秒杀</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            </ul>
+      </div>
+
+
+        <!--促销-->
+        <p class="index_hr"></p>
+
+        <img src="~/Images/zhuyemianImages/促销活动.jpg" width="950px"/>
+        
+        <div id="timecon"></div>  
+   <div class="times">  
+   <span id="end1">距离本场结束 </span>  
+        <span id="t_day1">00天</span>  
+        <span id="t_hour1">00时</span>  
+        <span id="t_minute1">00分</span>  
+        <span id="t_second1">00秒</span>  
+    </div>  
+        <p class="index_hr"></p>
+      <div class="content">
+            
+        	<ul>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_01.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">原价：￥60</p>                           
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_02.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_03.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_04.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_05.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_06.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_07.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_08.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_09.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_10.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">原价：￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_11.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            	<li>
+                	<dl>
+                    	<dd><a href="#"><img src="~/Images/zhuyemianImages/book_12.jpg" alt="book" /></a></dd>
+                        <dt>
+                        	<p class="book_title"><a href="#" target="_blank">邓小平传</a></p>
+                            <p class="book_inline">￥60</p>
+                            <p class="book_inline">作者：谁谁谁</p>
+                            <p class="book_inline">商品简介：</p>
+                            <a class="book_buy" href="#" target="_blank">购买</a>
+                            <a class="book_buy" href="#" target="_blank">加入购物车</a>
+                        </dt>
+                    </dl>
+                </li>
+            </ul>
+      </div>
+        </div>
+    </div>
+</body>
+</html>

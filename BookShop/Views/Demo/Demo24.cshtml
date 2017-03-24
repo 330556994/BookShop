@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Books>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo24</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table>
+        <tr>
+         <td>书名</td>
+            <td>图书类别</td>
+         <td>单价</td>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo20</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm()) { 
+            <table>
+                <tr>
+                    <td>请选择爱好</td>
+                    <td>
+                        <input type="checkbox" value="1" name="hobby" /> <span>看电影</span>
+                        <input type="checkbox" value="2" name="hobby" /><span>唱歌</span>
+                        <input type="checkbox" value="3" name="hobby" /><span>逛街</span>
+                    </td>
+                </tr>
+                  <tr>
+                    <td>请选择班级</td>
+                    <td>
+                        @Html.RadioButton("cname","T101" )<span>T101</span>
+                        @Html.RadioButton("cname", "T102" )<span>T102</span>
+                        @Html.RadioButton("cname", "T103")<span>T103</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="提交" />
+                    </td>
+                </tr>
+            </table>
+        
+        }
+    </div>
+</body>
+</html>

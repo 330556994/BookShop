@@ -1,0 +1,566 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_adminLayout2.cshtml";
+}
+    <!--这里使用Javascript方式去创建DataGrid控件-->
+    <div>
+        <table id="dg"></table>
+        <div id="IsHaveMessage" style="display:none"><h1 style="text-align:center">当前没有数据</h1></div>
+    </div>
+    
+    <!--这里开始对图书进行操作的模态窗口-->
+    <div id="windowforeditbook" class="easyui-window" 
+        title="添加/编辑图书" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:520px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+                <form id="bookForm">
+				    <table>
+                        <tr>
+                            <!--
+                                这里设置一个隐藏域 name="Id" 属性的值映射的是方法 AddNewBookMessageOrUpdateBookMessageByAjax(Books books) 中  books 对象的 Id 属性
+                                1.在用户点击添加图书时  表单中的值均为空：映射到方法中的 books 对象 id 属性为 null
+                                2.在用户点击修改图书时，表单中隐藏域Id的值 通过 .val() 方法赋值 此时 books 对象 id 属性为 隐藏域中的值 即为管理员选中行的图书 id
+                                可以通过 后台方法中有没有接收到 这个隐藏域的值 判断是添加还是操作
+                                因为 这里添加和修改图书信息共用一个模态窗口 所以需要判断， 若是写两个模态窗口 则无须作上述判断
+
+                                这里也可以通过发送表单的额外参数实现，但是那样的话 js 函数成本太高 所以还是使用隐藏域的方式
+
+                                后面的 图书分类 图书出版社 等都是与这个一个套路
+                            -->
+				            <td><input type="hidden" name="Id" id="BookId"></td>
+                        </tr>
+                        <tr>
+                            <th>书名:</th>
+				            <td>
+                                <input class="easyui-textbox" id="Title"
+                                     style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'图书标题必须输入'" name="Title"></td>
+                        </tr>
+                        <tr>
+                            <th>作者:</th>
+                            <td>
+                                <input class="easyui-textbox" id="Author"
+                                     style="width:100%" 
+                                    name="Author"
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'作者必须输入' 
+                                    "></td>
+                        </tr>
+                        <tr>
+                            <th>出版社名称:</th>
+                            <td>
+                                <!--  为图书出版社下拉框提供数据   需要写一个这个方法 GetPublisherForComboBox  -->
+                                <input id="Pname" name="PublisherId" class="easyui-combobox" value="--请选择--"  
+                                data-options="valueField:'Id',textField:'Name',required:true,  missingMessage:'必须选择图书出版社',url:'/admin/home/getpublisherforcombobox'" />  
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>类别名称:</th>
+                            <td>
+                                <!--  为图书分类下拉框提供数据   使用 demo28_3提供的 json 数据获得  -->
+                                <input id="Cname" name="CategoryId" class="easyui-combobox" value="--请选择--"
+                                data-options="valueField:'Id',textField:'Name',required:true,  missingMessage:'必须选择图书分类',url:'/demo/demo28_3'" />  
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>出版日期:</th>
+                             <td><input  type= "text" id="PublishDate" name="PublishDate" class= "easyui-datebox" required ="required" missingMessage:'出版日期必须输入'></input></td>
+                        </tr>
+                        <tr>
+                            <th>ISBN编号:</th>
+                            <td>
+                                <input class="easyui-textbox" id="ISBN" name="ISBN" style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'ISBN编号必须输入'
+                                    "></td>
+                        </tr>
+                        <tr>
+                            <th>市场价:</th>
+                            <td>
+                                <input class="easyui-textbox" id="MarketPrice" name="MarketPrice"
+                                     style="width:100%" 
+                                    ></td>
+                        </tr>
+                        <tr>
+                            <th>会员价:</th>
+                            <td><input class="easyui-textbox" id="UnitPrice" name="UnitPrice"
+                                     style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'会员价必须输入'
+                                    "></td>
+                        </tr>
+                        <tr>
+                            <th>点击率:</th>
+                            <td><input class="easyui-textbox" id="Clicks" name="Clicks"
+                                     style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'点击率必须输入'
+                                    "></td>
+                        </tr>
+                        <tr>
+                            <th>TOC:</th>
+                            <td><input class="easyui-textbox" id="TOC" name="TOC"
+                                     style="width:100%" 
+                                    ></td>
+                        </tr>
+                        <tr>
+                            <th>状态:</th>
+                            <td><input class="easyui-textbox" id="Flag" name="Flag"
+                                     style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'状态必须输入'
+                                    "></td>
+                        </tr>
+                        <tr>
+                            <th>秒杀价:</th>
+                            <td><input class="easyui-textbox" id="ClearPrice" style="width:100%" /></td>
+                        </tr>
+                        <tr>
+                            <th>图书描述:</th>
+                            <td><textarea id="ContentDescription" class="easyui-textbox" style="width:280px;height:80px;" name="ContentDescription"></textarea></td>
+                        </tr>
+				    </table>
+                </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdatebook" onclick="addNewBookMessageOrUpdateBookMessageByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforeditbook').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始图书分类的模态窗口-->
+    <div id="windowforeditcategory" class="easyui-window" 
+        title="添加/编辑图书分类" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:200px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+                <form id="categoryForm">
+				    <table>
+                        <tr id="trforcategoryid">
+                            <td><input type="hidden" id="CategoryId" name="Id" /></td>
+                        </tr>
+                        <tr>
+                            <th>分类名称:</th>
+                            <td><input type="text" class="easyui-textbox" style="width:100%"  missingMessage:'图书分类名称必须输入'  id="CategoryName" name="Name"/></td>
+                        </tr>
+				    </table>
+                </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdatecategory" onclick="addNewCategoryMessageOrUpdateCategoryMessageByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforeditcategory').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始图书出版社的模态窗口-->
+    <div id="windowforeditpublisher" class="easyui-window" 
+        title="添加/编辑图书出版社" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:200px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+				    <form id="publishForm">
+                        <table>
+                        <tr id="trforpublisherid">
+                            <td><input type="hidden" name="Id" id="publisherId"  /></td>
+                        </tr>
+                        <tr>
+                            <th>出版社名称:</th>
+                            <td><input type="text" class="easyui-textbox" style="width:100%"  missingMessage:'图书出版社名称必须输入' name="Name" id="publisherName"/></td>
+                        </tr>
+				    </table>
+				    </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdatepublisher" onclick="addNewPublisherMessageOrUpdatePublisherMessageByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforeditpublisher').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始修改会员评论星级的模态窗口-->
+    <div id="windowforeditusercommentstar" class="easyui-window" 
+        title="修改会员评论星级" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:200px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+				    <table>
+                        <tr id="trforusercomment">
+                            <th>评论编号:</th>
+                            <td><input type="text" id="commentId" disabled="disabled" /></td>
+                        </tr>
+                        <tr>
+                            <th>会员姓名</th>
+                            <td><input type="text" id="UnameforComment" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <th>星级:</th>
+                            <td>
+                                <select id="commentFlag"  class="easyui-combobox">
+                                    <option value="0">普通评论</option>
+                                    <option value="1">一星</option>
+                                    <option value="2">二星</option>
+                                    <option value="3">三星</option>
+                                </select>
+                            </td>
+                        </tr>
+				    </table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" onclick="updateCommentStarByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforeditusercommentstar').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始管理员添加商品到清仓活动中的模态窗口-->
+    <div id="windowforaddgoodstocleargoods" class="easyui-window" 
+        title="添加图书到清仓活动中" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:200px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+				    <table>
+                        <tr id="trforBooksIdforclear">
+                            <th>图书编号:</th>
+                            <td><input type="text" id="bookId" disabled="disabled" /></td>
+                            <td><input type="hidden" id="bookcleargoodsflag" /></td>
+                        </tr>
+                        <tr>
+                            <th>图书名字</th>
+                            <td><input type="text" id="bookTitle" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <th>清仓价格:</th>
+                            <td><input id="searchBook" class="easyui-textbox" data-options="iconCls:'icon-search' ,prompt:'请输入图书清仓价格'" style="width:140px"></td> 
+                        </tr>
+				    </table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" onclick="addGoodsToClearGoodsByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforaddgoodstocleargoods').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始管理员添加商品到秒杀活动中的模态窗口   这个窗口后面也用作修改秒杀图书信息部分 即添加和修改操作共用一个模态窗口 在执行保存或修改操作时由 js 函数判断是新增还是修改-->
+    <div id="windowforaddgoodstoceckillgoods" class="easyui-window" 
+        title="添加图书到清仓活动中/修改秒杀商品信息" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:300px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+				    <table>
+                        <tr id="trforBooksIdforseckill">
+                            <th>图书编号:</th>
+                            <td><input type="text" id="bookIdforseckill" disabled="disabled" /></td>
+                            <!---隐藏域 值为 秒杀活动的 id js函数中可以由他判断操作类型-->
+                            <td><input type="hidden" id="seckillId" /></td> 
+                        </tr>
+                        <tr>
+                            <th>图书名字:</th>
+                            <td><input type="text" id="bookTitleforseckill" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <th>活动开始时间:</th>
+                            <td><input  type= "text" id="begintimeofseckill" class= "easyui-datebox" required ="required"></input></td>
+                        </tr>
+                        <tr>
+                            <th>活动结束时间:</th>
+                            <td><input  type= "text" id="endtimeofseckill" class= "easyui-datebox" required ="required"></input></td>
+                        </tr>
+                        <tr>
+                            <th>活动状态:</th>
+                            <td>
+                                <select id="seckillofflag">
+                                    <option value="-1">--请选择--</option>
+                                    <option value="0">未开始</option>
+                                    <option value="1">已开始</option>
+                                    <option value="2">已结束</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>秒杀价格:</th>
+                            <td><input type="text" id="seckillofprice" /></td>
+                        </tr>
+                        <tr>
+                            <th>库存:</th>
+                            <td><input type="text" id="seckillofqty" /></td>
+                        </tr>
+				    </table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdateseckillgoods" onclick="addBooksToSeckillGoodsOrUpdateSeckillMessageByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">保存</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforaddgoodstoceckillgoods').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始管理员修改清仓价格的模态窗口-->
+    <div id="windowforeditclearprice" class="easyui-window" 
+        title="添加图书到清仓活动中" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:300px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+				    <table>
+                        <tr id="trforBooksIdforeditclearprice">
+                            <th>图书编号:</th>
+                            <td><input type="text" id="bookIdforeditclearprice" disabled="disabled" /></td>
+                        </tr>
+                        <tr>
+                            <th>图书名字:</th>
+                            <td><input type="text" id="bookTitleforeditclearprice" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <th>原清仓价:</th>
+                            <td><input type="text" id="beforeclearprice" disabled="disabled" /></td>
+                        </tr>
+                        <tr>
+                            <th>清仓价修改为:</th>
+                            <td><input type="text" id="afterclearprice" /></td>
+                        </tr>
+				    </table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdatecleargoods" onclick="editclearpricebyajax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">修改</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforeditclearprice').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--这里开始管理员添加积分商品的模态窗口-->
+    <div id="windowforaddintegralgoods" class="easyui-window" 
+        title="添加图书到积分商品中" 
+        data-options="modal:true,closed:true,iconCls:'icon-save',cls:'c6'" 
+        style="width:500px;height:300px;padding:5px;" >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'" style="padding:10px;">
+                <form id="integralForm">
+				    <table>
+                        <!--积分商品 id  隐藏域  -->
+                        <tr id="trforBooksIdforaddintegralgoods">
+                            <td><input type="hidden" name="Id" id="IntegralGoodsId" /></td>
+                        </tr>
+                        <tr>
+                            <th>图书编号:</th>
+                            <td><input type="text" id="bookidforintegralgoods" name="BookId" /></td>
+                        </tr>
+                        <tr>
+                            <th>图书书名:</th>
+                            <td><input type="text" id="booktitleforintegralgoods" disabled="disabled" /></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>积分区段:</th>
+                            <td><input id="IntegralSectionId" name="IntegralSectionId" class="easyui-combobox"  
+                                data-options="valueField:'Id',textField:'Name',required:true,  missingMessage:'必须选择积分区段',url:'/admin/home/GetIntegralSectionForComboBox'" />  </td>
+                        </tr>
+                        <tr>
+                            <th>兑换所需积分:</th>
+                            <td><input class="easyui-textbox" id="PaymentIntegral" name="PaymentIntegral"
+                                     style="width:100%" 
+                                    data-options=" 
+                                    required:true,
+                                    missingMessage:'兑换所需积分必须输入'
+                                    "></td>
+                        </tr>
+				    </table>
+                </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" id="saveorupdatescoregoods" onclick="addNewIntegralGoodsMessaegeOrUpdateIntegralGoodsMessaegeByAjax()"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:80px">添加</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforaddintegralgoods').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+
+    <!--订单详情模态窗口   此处 fit="true"  的作用是当前模态窗口初始化时适应浏览器窗口即最大化-->
+    <div id="windowforOrderManager" class="easyui-window"  title="处理订单中" fit="true"  data-options="iconCls:'icon-save',border:false,resizable:false,collapsible:false,minimizable:false,maximizable:false,closable:false,closed:true">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'east',split:true">
+                <table class="easyui-datagrid" 
+                            id="dgfororder"
+                            style="width:1000px;"   
+                            data-options="url:'/admin/Home/ListForOrderBooksByOrderId',
+                            fitColumns:true,
+                            singleSelect:true,
+                            autoRowHeight:true,
+                            loadMsg: '正在玩命加载中,请稍候...',
+                            pagination:true,
+                            pageNumber:1,
+                            pageSize:5,
+                            pageList:[5,10,15,20]
+                            ">   
+                    <thead>   
+                        <tr>   
+                            <th data-options="field:'Id'">订单明细</th>   
+                            <th data-options="field:'OrderID'">订单编号</th>
+                            <th data-options="field:'BookID'">图书编号</th>
+                            <th data-options="field:'bookImg',formatter:formatPicture" >图书图片</th>
+                            <th data-options="field:'title'">图书名字</th>
+                            <th data-options="field:'Quantity'">数量</th>
+                            <th data-options="field:'marketPrice'">市场价</th>
+                            <th data-options="field:'UnitPrice'">会员价</th>
+                            <th data-options="field:'flag',formatter:formatFlagForBuyWay">购买方式</th>
+                            <th data-options="field:'flagfororders',formatter:formatFlag">订单状态</th>
+                        </tr>   
+                    </thead>   
+                </table>
+			</div>
+			<div data-options="region:'center'" style="padding:10px;">
+                <form id="orderForm">
+				<table>
+                        <!--积分商品 id  隐藏域  -->
+                        <tr>
+                            <th>订单编号:</th>
+				            <td><input class="easyui-textbox" id="OrderId" style="width:100%" name="Id" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单日期:</th>
+                            <td><input  type= "text" id="OrderDate" name="OrderDate" class= "easyui-datebox" disabled="disabled" ></input> 
+                        </tr>
+                        <tr>
+                            <th>用户登录名:</th>
+                            <td>
+                                <input class="easyui-textbox" id="loginId" style="width:100%" name="loginId" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>订单总金额:</th>
+                            <td>
+                                <input class="easyui-textbox" id="TotalPrice" style="width:100%" name="TotalPrice" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>收件人姓名:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderPersonName" style="width:100%" name="OrderPersonName" disabled="disabled">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>联系电话:</th>
+                             <td><input  type= "text" id="UserPhone" name="UserPhone" class= "easyui-textbox" disabled="disabled" ></input></td>
+                        </tr>
+                        <tr>
+                            <th>收货地址:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderAddress" name="OrderAddress" style="width:100%" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单备注:</th>
+                            <td>
+                                <input class="easyui-textbox" id="OrderRemark" name="OrderRemark" style="width:100%" disabled="disabled"></td>
+                        </tr>
+                        <tr>
+                            <th>订单状态:</th>
+                            <td> 
+                                <input class="easyui-textbox" id="OrderFlag" name="OrderFlag" style="width:100%" disabled="disabled" >
+                            </td>
+                        </tr>
+				    </table>
+                </form>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:center;padding:5px 0 0;height:70px;">
+				<a class="easyui-linkbutton" onclick="doOrderByAjax()" id="orderButton"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                     style="width:100px;height:50px;font-size:20px;"></a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforOrderManager').window('close')" 
+                    style="width:100px;height:50px;font-size:20px;">取  消</a>
+			</div>
+		</div>
+	</div>    <!--这里开始管理员处理系统设置的模态窗口-->
+    <div id="windowforbtnSystemSettingManager" class="easyui-window" title="第三波书店后台" style="width:800px;height:600px"   
+        data-options="modal:true,closed:true">   
+        <!--布局只包含左侧分类及中央显示-->
+        <div id="cc" class="easyui-layout" style="width:800px;height:600px" >      
+            <!--左侧-->       
+            <div data-options="region:'west',title:'系统设置',collapsible:false" style="width:250px;">
+                <!--选项卡-->
+                <div id="leftTab" class="easyui-accordion" style="width:250px;">   
+                    @Html.Partial("/Areas/Admin/Views/HomeSystemSetting/leftTab.cshtml")                   
+                </div>
+            </div>
+            <!--中央-->
+            <div data-options="region:'center',title:'参数设置'" id="SystemSettingManagerCenter">
+            </div>
+        </div>
+    </div>
+
+     
+
+
+    

@@ -1,0 +1,80 @@
+﻿@using BookShop.Models.Entities
+@{
+    Layout = null;
+    //定义一个下拉列表用到的数据源
+    List<Publisher> list = new List<Publisher>
+    {
+        new Publisher{ Id=-1,Name="--请选择--"},
+        new Publisher{ Id=1,Name="aaaaa"},
+        new Publisher{ Id=2,Name="bbbbb"},
+        new Publisher{ Id=3,Name="ccccc"}
+    };
+    //最后一个参数是默认让哪个对象选中
+    SelectList selectList = new SelectList(list, "Id", "Name", list[2]);
+   
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo11</title>
+</head>
+<body>
+    <div>
+        <p>
+            视图助手方法常用参数解释
+            name: 会生成表单元素html的id和name属性
+            value:是html的values属性
+            htmlAttributes:是用来生产html的额外属性, 类型是 object。new{ a=5,b=6}
+            actionName:动作名称
+            controllerName:控制器名称
+            routeValues:是路由参数表动态对象，new{a=5,b="aaa"}
+        </p>
+        @using (Html.BeginForm()) { 
+            <table>
+                <tr>
+                    <td>文本框:
+                        @Html.TextBox("name1")
+                        @Html.TextBox("name2","张三")
+                        @Html.TextBox("name3","张三",
+                        new{@class="c1",title="这是文本框"})
+                    </td>
+                    <td>
+                        隐藏域:
+                        @Html.Hidden("hidden")
+                    </td>
+                    <td>
+                        密码框:
+                        @Html.Password("password")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        选项按钮: @Html.RadioButton("radiobutton","男")
+                    </td>
+                    <td>
+                        复选框: @Html.CheckBox("checkbox")
+                    </td>
+                    <td>
+                        多行文本: @Html.TextArea("textarea")
+                    </td>
+                </tr>
+                <tr>
+                    <td>下拉列表 : @Html.DropDownList("dropdownlist",
+                    selectList,new{@class="abc"}) </td>
+                    <td>
+                        列表: @Html.ListBox("listbox",selectList)
+                    </td>
+                    <td>
+                        超链接 : @Html.ActionLink("actionlink","index","home"
+                        ,new{a=5,b="abc"})
+                    </td>
+                </tr>
+            </table>
+        
+        }
+    </div>
+</body>
+</html>

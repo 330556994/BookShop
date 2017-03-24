@@ -1,0 +1,27 @@
+﻿@{
+    int flag = ViewBag.Flag;
+    string defaultValue = ViewBag.DefaultValue;
+    int value = Convert.ToInt32(defaultValue.Split(':')[1]);
+}
+
+
+<div>
+
+    <!--隐藏域，将当前状态传递-->
+    <input type="hidden"  value="@flag" id="flag" />
+    <p>当前设置的是，
+        @if (flag == 0)
+        {
+            <span>钱直接兑换积分比例设置</span>
+        }
+        else
+        {
+            <span>订单价值折算积分比例设置</span>
+        }
+    </p>
+    <p>
+        ¥1元可折算为<input type="number" value="@value" id="value" />积分
+        <input type="button" onclick="btnInteValue()" value="确认修改" />
+    </p>
+
+</div>

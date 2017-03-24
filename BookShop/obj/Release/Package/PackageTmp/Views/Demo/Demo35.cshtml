@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo35</title>
+         <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+   <script>
+       $(function () {
+           //先禁用浏览器缓存
+           $.ajaxSetup({
+               cache: false
+           });
+       })
+
+       $(function () {
+           $('#dg').datagrid({
+               toolbar: [{
+                   iconCls: 'icon-edit',
+                   handler: function () { alert('编辑按钮') }
+               }, '-', {
+                   iconCls: 'icon-help',
+                   handler: function () { alert('帮助按钮') }
+               }]
+           });
+
+
+           $("#btnSearch").click(function () {
+               loadBook();
+           })
+       })
+       function loadBook() {
+           //easyui的所有插件，调用方法，都是这样写
+           var cid = $("#categoryid").combobox("getValue");
+           var title = $("#title").val();
+           var url = "/demo/demo35_1";
+           var data = { "cid": cid, "title": title };
+           $('#dg').datagrid({
+               url: url,//请求服务端url
+               loadMsg:'正在拼命加载中，请稍等...',//默认加载时提示信息
+               fitColumns: true,//列宽自适应
+               singleSelect: true,//行单选
+               autoRowHeight: true,//高度自适应
+               pagination:true,//允许分页，默认不允许
+               pageNumber:1,//默认页索引
+               pageSize:10,//默认每页记录数
+               pageList:[10,20,50,100],//设置每页尺寸，显示在下拉列表中
+               queryParams: data,//传递到服务端的参数
+               sortName: "Id", //默认排序列
+               sortOrder:"asc", //排序顺序，asc 或者desc
+               columns: [[
+                   {
+                       field: 'Id', title: '编号',
+                       //列格式化函数
+                       formatter: function (value, row, index) {
+                           //value代表当前列的值 row代表当前行json对象
+                           //index代表当前索引
+                           return "<a href='/books/detail?id=" +
+                               value + "'>" + value + "</a>";
+                       },
+                       sortable: true //允许本列排序
+                   },
+                   { field: 'Title', title: '书名' ,sortable:true},
+                   {
+                       field: 'UnitPrice', title: '价格',sortable:true, align: 'right',
+                       formatter: function (value, row, index) {
+                           if (value > 50) {
+                               return "<span style='font-weight:bold;color:red'>￥" +
+                                   value + "元</span>";
+                           }
+                           else {
+                               return "<span>￥" +
+                                   value + "元</span>";
+                           }
+                       }
+                   },
+                   { field: 'Cname', title: '类别名称', align: 'right' }
+               ]]
+           });
+       }
+   </script>
+</head>
+<body>
+    <div>
+            <fieldset>
+            <legend>查询区</legend>
+            <table>
+                <tr>
+                    <td>请选择图书类别</td>
+                    <td>
+           <input class="easyui-combobox"
+                id="categoryid"
+                name="language"
+                style="width:100%;" data-options="
+					url:'/demo/demo31_1',
+					method:'get',
+					valueField:'Id',
+					textField:'Name',
+                    multiple:false,
+					panelHeight:'auto'
+					
+					">
+                    </td>
+                    <td>请输入图书名称</td>
+                    <td><input type="text" id="title" name="title" /></td>
+                    <td>
+                          <a href="javascript:void(0)" class="easyui-linkbutton" id="btnSearch"             >查询</a>
+                        <span id="tipSearch"></span>
+
+                    </td>
+                </tr>
+            </table>
+       
+        </fieldset>
+        <table id="dg">
+            
+        </table>
+    </div>
+</body>
+</html>

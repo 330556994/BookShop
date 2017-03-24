@@ -1,0 +1,20 @@
+﻿
+@{
+    int several=ViewBag.Several;
+    
+    int defaultValue= ViewBag.DefaultValue;
+}
+
+    
+    
+
+<div>
+
+    <!--隐藏域，将当前几星传递-->
+    <input type="hidden"  value="@several" id="several" />
+    <p>当前设置的是，当用户评论被设置为 @several 星时，所对应增加的积分</p>
+    <p>
+        <input type="number" value="@defaultValue" id="statNum" /><input type="button" value="确认修改" onclick="btnStarValue()" />
+    </p>
+   
+</div>

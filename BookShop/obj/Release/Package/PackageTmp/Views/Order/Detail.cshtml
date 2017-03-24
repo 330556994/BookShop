@@ -1,0 +1,91 @@
+﻿@model BookShop.Areas.Admin.Models.OrderBook
+
+@{
+   
+   
+    
+    
+    
+    }
+<div id="container">
+    <div class="order_p_main">
+    	<dl>
+        	<dt>收货人信息   </dt>
+            
+            <dd>收货人姓名：
+                <input type="text" disabled="disabled"
+                    value="@Model.Orders.personName"
+                    name="name"
+                     /> <br />
+            	地址：<input type="text" disabled="disabled"
+                    value="@Model.Orders.address" 
+                    name="address"
+                    /> <br />
+               
+                手机：<input type="text" disabled="disabled"
+                    name="phone"
+                     value="@Model.Orders.phone" /> <br />
+               
+            </dd>
+        </dl>
+        
+    
+        <dl>
+        	<dt>订单备注  </dt>
+            <dd>
+               <textarea name="remark" rows="5" cols="100" disabled="disabled">
+                  
+               </textarea> 
+            </dd>
+        </dl>
+        
+        <dl class="nopadding">
+            <h1>商品详情</h1>
+            <dd>
+            <table width="96%" align="center" border="0" cellspacing="0" cellpadding="0" class="order_table">
+            <thead>
+              <tr>
+                <th scope="col">商品名称</th>
+                <th scope="col" width="10%">原价</th>
+            <th scope="col" width="10%">优惠价</th>
+            <th scope="col" width="10%">打折</th>
+            <th scope="col" width="10%">数量</th>
+              </tr>
+            </thead>
+            <tbody>
+
+             @foreach(var item in Model.Orders.OrderBook){
+      
+                  <tr>
+                    <td class="name">
+                      <a href="@string.Format("/books/detail?id={0}",item.Id)">
+                          @item.Books.Title
+                      </a>
+                    </td>
+                    <td>@string.Format("{0:c}",item.Books.MarketPrice)</td>
+                    <td>@string.Format("{0:c}",item.Books.UnitPrice)</td>
+                    
+                    <td>
+               
+                        @item.Quantity
+
+                    </td>
+         
+                  </tr>
+ 
+            }
+        
+                     
+             </tbody>
+            </table>
+
+            </dd>
+        </dl>
+        
+     
+        
+        <div class="order_p_btn">
+            <input type="submit" class="order_p_sub" value="" /></div>
+    </div>
+    
+</div>

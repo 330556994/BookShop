@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo14</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm()) { 
+            <table>
+                <tr>
+                    <td>订单收件人</td>
+                    <td>
+                        @Html.TextBox("personName")
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>图书编号</td><td>图书数量</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.TextBox("OrderBooks[0].Id") </td>
+                                <td>@Html.TextBox("OrderBooks[0].Quantity") </td>
+                            </tr>
+                            <tr>
+                                <td>@Html.TextBox("OrderBooks[1].Id") </td>
+                                <td>@Html.TextBox("OrderBooks[1].Quantity") </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="提交" /> </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

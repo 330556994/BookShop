@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="masterModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="masterModelStoreContainer">
+    <EntitySet Name="Area" EntityType="masterModel.Store.Area" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Collections" EntityType="masterModel.Store.Collections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="House" EntityType="masterModel.Store.House" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HouseType" EntityType="masterModel.Store.HouseType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MSreplication_options" EntityType="masterModel.Store.MSreplication_options" store:Type="Tables" store:Schema="dbo" store:Name="MSreplication_options">
+      <DefiningQuery>SELECT 
+      [MSreplication_options].[optname] AS [optname], 
+      [MSreplication_options].[value] AS [value], 
+      [MSreplication_options].[major_version] AS [major_version], 
+      [MSreplication_options].[minor_version] AS [minor_version], 
+      [MSreplication_options].[revision] AS [revision], 
+      [MSreplication_options].[install_failures] AS [install_failures]
+      FROM [dbo].[MSreplication_options] AS [MSreplication_options]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Registration" EntityType="masterModel.Store.Registration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScoreHistory" EntityType="masterModel.Store.ScoreHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Seckill" EntityType="masterModel.Store.Seckill" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="spt_fallback_db" EntityType="masterModel.Store.spt_fallback_db" store:Type="Tables" store:Schema="dbo" store:Name="spt_fallback_db">
+      <DefiningQuery>SELECT 
+      [spt_fallback_db].[xserver_name] AS [xserver_name], 
+      [spt_fallback_db].[xdttm_ins] AS [xdttm_ins], 
+      [spt_fallback_db].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+      [spt_fallback_db].[xfallback_dbid] AS [xfallback_dbid], 
+      [spt_fallback_db].[name] AS [name], 
+      [spt_fallback_db].[dbid] AS [dbid], 
+      [spt_fallback_db].[status] AS [status], 
+      [spt_fallback_db].[version] AS [version]
+      FROM [dbo].[spt_fallback_db] AS [spt_fallback_db]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_fallback_dev" EntityType="masterModel.Store.spt_fallback_dev" store:Type="Tables" store:Schema="dbo" store:Name="spt_fallback_dev">
+      <DefiningQuery>SELECT 
+      [spt_fallback_dev].[xserver_name] AS [xserver_name], 
+      [spt_fallback_dev].[xdttm_ins] AS [xdttm_ins], 
+      [spt_fallback_dev].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+      [spt_fallback_dev].[xfallback_low] AS [xfallback_low], 
+      [spt_fallback_dev].[xfallback_drive] AS [xfallback_drive], 
+      [spt_fallback_dev].[low] AS [low], 
+      [spt_fallback_dev].[high] AS [high], 
+      [spt_fallback_dev].[status] AS [status], 
+      [spt_fallback_dev].[name] AS [name], 
+      [spt_fallback_dev].[phyname] AS [phyname]
+      FROM [dbo].[spt_fallback_dev] AS [spt_fallback_dev]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_fallback_usg" EntityType="masterModel.Store.spt_fallback_usg" store:Type="Tables" store:Schema="dbo" store:Name="spt_fallback_usg">
+      <DefiningQuery>SELECT 
+      [spt_fallback_usg].[xserver_name] AS [xserver_name], 
+      [spt_fallback_usg].[xdttm_ins] AS [xdttm_ins], 
+      [spt_fallback_usg].[xdttm_last_ins_upd] AS [xdttm_last_ins_upd], 
+      [spt_fallback_usg].[xfallback_vstart] AS [xfallback_vstart], 
+      [spt_fallback_usg].[dbid] AS [dbid], 
+      [spt_fallback_usg].[segmap] AS [segmap], 
+      [spt_fallback_usg].[lstart] AS [lstart], 
+      [spt_fallback_usg].[sizepg] AS [sizepg], 
+      [spt_fallback_usg].[vstart] AS [vstart]
+      FROM [dbo].[spt_fallback_usg] AS [spt_fallback_usg]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_monitor" EntityType="masterModel.Store.spt_monitor" store:Type="Tables" store:Schema="dbo" store:Name="spt_monitor">
+      <DefiningQuery>SELECT 
+      [spt_monitor].[lastrun] AS [lastrun], 
+      [spt_monitor].[cpu_busy] AS [cpu_busy], 
+      [spt_monitor].[io_busy] AS [io_busy], 
+      [spt_monitor].[idle] AS [idle], 
+      [spt_monitor].[pack_received] AS [pack_received], 
+      [spt_monitor].[pack_sent] AS [pack_sent], 
+      [spt_monitor].[connections] AS [connections], 
+      [spt_monitor].[pack_errors] AS [pack_errors], 
+      [spt_monitor].[total_read] AS [total_read], 
+      [spt_monitor].[total_write] AS [total_write], 
+      [spt_monitor].[total_errors] AS [total_errors]
+      FROM [dbo].[spt_monitor] AS [spt_monitor]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="spt_values" EntityType="masterModel.Store.spt_values" store:Type="Tables" store:Schema="dbo" store:Name="spt_values">
+      <DefiningQuery>SELECT 
+      [spt_values].[name] AS [name], 
+      [spt_values].[number] AS [number], 
+      [spt_values].[type] AS [type], 
+      [spt_values].[low] AS [low], 
+      [spt_values].[high] AS [high], 
+      [spt_values].[status] AS [status]
+      FROM [dbo].[spt_values] AS [spt_values]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Street" EntityType="masterModel.Store.Street" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="masterModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AreaId" Association="masterModel.Store.FK_AreaId">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Street" EntitySet="Street" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AreaIdForHouse" Association="masterModel.Store.FK_AreaIdForHouse">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="House" EntitySet="House" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HouseTypeId" Association="masterModel.Store.FK_HouseTypeId">
+      <End Role="HouseType" EntitySet="HouseType" />
+      <End Role="House" EntitySet="House" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StreetId" Association="masterModel.Store.FK_StreetId">
+      <End Role="Street" EntitySet="Street" />
+      <End Role="House" EntitySet="House" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserId" Association="masterModel.Store.FK_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="House" EntitySet="House" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserIdCollect" Association="masterModel.Store.FK_UserIdCollect">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Collections" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserIdRegist" Association="masterModel.Store.FK_UserIdRegist">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Registration" EntitySet="Registration" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Collections">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CollectTime" Type="date" Nullable="false" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="House">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Area" Type="int" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="StreetId" Type="int" Nullable="false" />
+    <Property Name="AreaId" Type="int" Nullable="false" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="HouseTypeId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HouseType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.MSreplication_options”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="MSreplication_options">
+    <Key>
+      <PropertyRef Name="optname" />
+      <PropertyRef Name="value" />
+      <PropertyRef Name="major_version" />
+      <PropertyRef Name="minor_version" />
+      <PropertyRef Name="revision" />
+      <PropertyRef Name="install_failures" />
+    </Key>
+    <Property Name="optname" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="value" Type="bit" Nullable="false" />
+    <Property Name="major_version" Type="int" Nullable="false" />
+    <Property Name="minor_version" Type="int" Nullable="false" />
+    <Property Name="revision" Type="int" Nullable="false" />
+    <Property Name="install_failures" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegistrationTime" Type="date" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="flag" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScoreHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CreateTime" Type="date" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Flag" Type="int" Nullable="false" />
+    <Property Name="SingleScore" Type="int" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seckill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="BeginTime" Type="date" Nullable="false" />
+    <Property Name="EndTime" Type="date" Nullable="false" />
+    <Property Name="SeckillPrice" Type="money" Nullable="false" />
+    <Property Name="SysmanId" Type="int" Nullable="false" />
+    <Property Name="Flag" Type="int" Nullable="false" />
+    <Property Name="GoodsQty" Type="int" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.spt_fallback_db”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="spt_fallback_db">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="version" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_dbid" Type="smallint" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="version" Type="smallint" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.spt_fallback_dev”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="spt_fallback_dev">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="low" />
+      <PropertyRef Name="high" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="phyname" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_low" Type="int" />
+    <Property Name="xfallback_drive" Type="char" MaxLength="2" />
+    <Property Name="low" Type="int" Nullable="false" />
+    <Property Name="high" Type="int" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="phyname" Type="varchar" Nullable="false" MaxLength="127" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.spt_fallback_usg”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="spt_fallback_usg">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="segmap" />
+      <PropertyRef Name="lstart" />
+      <PropertyRef Name="sizepg" />
+      <PropertyRef Name="vstart" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_vstart" Type="int" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="segmap" Type="int" Nullable="false" />
+    <Property Name="lstart" Type="int" Nullable="false" />
+    <Property Name="sizepg" Type="int" Nullable="false" />
+    <Property Name="vstart" Type="int" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.spt_monitor”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="spt_monitor">
+    <Key>
+      <PropertyRef Name="lastrun" />
+      <PropertyRef Name="cpu_busy" />
+      <PropertyRef Name="io_busy" />
+      <PropertyRef Name="idle" />
+      <PropertyRef Name="pack_received" />
+      <PropertyRef Name="pack_sent" />
+      <PropertyRef Name="connections" />
+      <PropertyRef Name="pack_errors" />
+      <PropertyRef Name="total_read" />
+      <PropertyRef Name="total_write" />
+      <PropertyRef Name="total_errors" />
+    </Key>
+    <Property Name="lastrun" Type="datetime" Nullable="false" />
+    <Property Name="cpu_busy" Type="int" Nullable="false" />
+    <Property Name="io_busy" Type="int" Nullable="false" />
+    <Property Name="idle" Type="int" Nullable="false" />
+    <Property Name="pack_received" Type="int" Nullable="false" />
+    <Property Name="pack_sent" Type="int" Nullable="false" />
+    <Property Name="connections" Type="int" Nullable="false" />
+    <Property Name="pack_errors" Type="int" Nullable="false" />
+    <Property Name="total_read" Type="int" Nullable="false" />
+    <Property Name="total_write" Type="int" Nullable="false" />
+    <Property Name="total_errors" Type="int" Nullable="false" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“master.dbo.spt_values”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="spt_values">
+    <Key>
+      <PropertyRef Name="number" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="35" />
+    <Property Name="number" Type="int" Nullable="false" />
+    <Property Name="type" Type="nchar" Nullable="false" MaxLength="3" />
+    <Property Name="low" Type="int" />
+    <Property Name="high" Type="int" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="AreaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LoginId" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Pwd" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AreaId">
+    <End Role="Area" Type="masterModel.Store.Area" Multiplicity="1" />
+    <End Role="Street" Type="masterModel.Store.Street" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Street">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AreaIdForHouse">
+    <End Role="Area" Type="masterModel.Store.Area" Multiplicity="1" />
+    <End Role="House" Type="masterModel.Store.House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HouseTypeId">
+    <End Role="HouseType" Type="masterModel.Store.HouseType" Multiplicity="1" />
+    <End Role="House" Type="masterModel.Store.House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="HouseTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StreetId">
+    <End Role="Street" Type="masterModel.Store.Street" Multiplicity="1" />
+    <End Role="House" Type="masterModel.Store.House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Street">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="StreetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserId">
+    <End Role="Users" Type="masterModel.Store.Users" Multiplicity="1" />
+    <End Role="House" Type="masterModel.Store.House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserIdCollect">
+    <End Role="Users" Type="masterModel.Store.Users" Multiplicity="1" />
+    <End Role="Collections" Type="masterModel.Store.Collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Collections">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserIdRegist">
+    <End Role="Users" Type="masterModel.Store.Users" Multiplicity="1" />
+    <End Role="Registration" Type="masterModel.Store.Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Registration">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

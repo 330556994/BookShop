@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Books>
+@{
+    AjaxOptions ajax = new AjaxOptions();//实例化ajax对象
+    ajax.Confirm = "真的要删除么?";
+    ajax.HttpMethod = "get";//设置get请求
+    ajax.OnBegin = "onbegin2";//设置请求之前触发时的回调js函数
+    ajax.OnComplete = "oncomplete2";//设置请求完成后的回调函数
+    ajax.OnSuccess = "onsuccess2";//设置请求成功后的回调函数
+    ajax.OnFailure = "onfailure2";//设置ajax请求失败后回调函数
+    }
+
+
+<script>
+    function stringToJSON(str) {
+        var a;
+        eval('a=' + str + ';');
+        return a;
+    }
+
+    var obj;
+    function deleterow(obj2) {
+        obj = $(obj2);
+    }
+
+    function onbegin2() {
+        var html = "<span>正在拼命删除中...</span>";
+        obj.after(html);
+        obj.next().css("color", "green");
+    }
+    function oncomplete2() {
+       obj.next().fadeOut(2000, function () {
+           obj.next().remove();
+        });
+    }
+    function onsuccess2(text) {
+        //{"success":0} 0成功，-1失败
+        var json = stringToJSON(text);
+        if (json.success==0) {
+            alert("删除成功");
+            obj.parent().parent().remove();
+        }
+        else {
+            alert("该条记录无法删除")
+        }
+    }
+    function onfailure2(err) {
+        alert("删除发生了错误！请联系管理员");
+    }
+</script>
+<table>
+    <tr>
+        <th>图书编号</th>
+        <th>
+           书名
+        </th>
+        <th>
+            图书类别
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categories.Name)
+        </td>
+        <td>
+            @Ajax.ActionLink("删除", "demo32_2", new { id = item.Id }, ajax, new {onclick="deleterow(this)" })
+        </td>
+    </tr>
+}
+
+</table>

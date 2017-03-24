@@ -1,0 +1,20 @@
+﻿@using BookShop.Models.Entities
+@{
+    Layout = null;
+    Publisher p = ViewBag.Publisher;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+</head>
+<body>
+    <div>
+        <span>出版社编号:</span><span>@p.Id</span><br />
+        <span>出版社名称:</span><span>@p.Name</span>
+    </div>
+</body>
+</html>

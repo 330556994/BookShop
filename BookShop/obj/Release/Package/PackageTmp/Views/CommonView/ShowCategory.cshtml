@@ -1,0 +1,13 @@
+﻿@using BookShop.Models.Entities
+@model List<Category> 
+
+ 	<h1 class="all_type black"><a href="#">查看所有分类>></a></h1>
+            <div id="subnav">
+                <ul class="black">
+                    @foreach(Category c in Model){
+                    <li><a href="@string.Format("/books/index?id={0}",c.Id)">
+                        @c.Name
+                        </a></li>
+                    }
+                </ul>
+            </div>

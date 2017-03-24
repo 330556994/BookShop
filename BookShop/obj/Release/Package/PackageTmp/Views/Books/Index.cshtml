@@ -1,0 +1,271 @@
+﻿@using BookShop.Models.Entities
+@*申明强类型*@
+@model List<Book>  
+
+@{
+    //获得页索引
+    int pageindex = 1;
+    if(string.IsNullOrEmpty(Request.QueryString["pageindex"])==false){
+        pageindex = Convert.ToInt32(Request.QueryString["pageindex"]);     
+    }
+    //得到url传参中的排序表达式
+    string sort = "a.id asc";//排序的默认值
+    if (string.IsNullOrEmpty(Request.QueryString["sort"]) == false)
+    {
+        sort = Request.QueryString["sort"];
+    }
+    
+    int recordcount = ViewBag.RecordCount;//总记录数
+    int pagecount = ViewBag.PageCount;//总页数
+    
+    
+    //下一页
+    int nextpage = (pageindex + 1 > pagecount )? pagecount : pageindex + 1;
+    //上一页
+    int prevpage = (pageindex - 1 < 1) ? 1 : pageindex - 1;
+    
+   
+    List<Category> categories = ViewBag.Categories;
+    //获得get请求url里id的值  ?id=1
+    int id = Convert.ToInt32(Request.QueryString["id"]);
+    //在类别集合里查找id的类别对象
+    Category category=null;
+    foreach(Category cate in categories){
+        if(cate.Id==id){
+            category = cate;
+            break;//跳出循序
+        }
+    }
+}
+@section script{
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <script>
+        //obj代表的是一个下拉列表 ，注意是select元素的包装集对象
+        //value代表的是值
+        //这个函数的功能是，把obj这个select元素里的option的value值
+        //为value的项选中
+        function findByValue(obj, value) {
+            //find方法是在包装集内部进行查询，参数为选择器
+            //prop操作元素的属性,这里表示设置selected属性值为selected
+            //即实现的效果是该项选中
+            obj.find("option[value='" + value + "']").prop("selected", "selected");
+        }
+        //启动事件
+        $(function () {
+            //先把排序的下拉列表恢复之前选择的
+
+            findByValue($("#ddlSort"), '@sort');
+            //排序的下拉列表被改变后激发
+
+            $("#ddlSort").change(function () {
+                var sort = $("#ddlSort").val();//获得select的选中值
+                var url = '/books/index?id=@id&pageindex=1&sort=' + sort;
+                location.href = url;
+
+            });
+         
+            
+        });
+
+        function buy(bookid) {
+            var url = "/car/buy2";
+            var data = { "bookid": bookid };
+            $("#carInfor").load(url, data, function () {
+                alert("购买成功");
+            });
+
+        }
+        
+        function collection(bookid,bookname) {
+           
+            $.get("/car/checkcollection", { "bookid": bookid }, function (json) {
+                if (json.success == 0) {
+                    var url = "/car/Collection";
+                    var data = { "bookid": bookid };
+                    $.get(url, data, function (json) {
+                        if (json.success == 0) {
+                            $.messager.alert('成功提示', '书名为《' + bookname + '》已经收藏到您的收藏夹中！', 'info');
+                        } else {
+                            $.messager.alert('错误提示', '收藏失败!', 'error');
+                        }
+                    }, "json");
+                } else {
+                    $.messager.alert('错误提示', '这本书你已经收藏过了 ！！!', 'error');
+                }
+
+            }, "json");
+
+        }
+
+    </script>
+
+
+    <link href="~/Css/channel.css" rel="stylesheet" />
+ <style type="text/css">
+     .current
+     {
+         background-color:green;
+     }
+ </style>
+   }
+
+
+<div id="a_b_04"><img src="/Images/a_b_04.jpg" alt="" /></div>
+
+<div id="breadcrumb">您现在的位置： <a href="/">首页</a>  > 
+     <a href="@string.Format("/books/index?id={0}",category.Id)" 
+         class="red">
+         @category.Name（@category.BookCount）
+
+     </a></div>
+
+<div id="container">
+	<!--left content-->
+  
+	<div id="intro">
+       <!--调用分部视图，显示购物车提示信息-->
+        <div id="carInfor">
+        @{
+            Html.RenderPartial("showcar");
+            }
+            </div>
+        <!--调用结束-->
+    	 <div class="child_menu">
+         	<h2 class="white">图书分类</h2>
+            <ul>
+                @foreach(Category c in categories){
+                    if(c.Id!=id){
+                <li><a href="@string.Format("/books/index?id={0}",c.Id)">
+                    @c.Name（@c.BookCount）</a></li>
+                }
+                else{
+                <li style="background-color:#c0c0c0;"><a href="@string.Format("/books/index?id={0}",c.Id)">
+                    @c.Name（@c.BookCount）</a></li>    
+                    }
+                }
+            </ul>
+         </div>  
+         
+         <div class="history">
+         	<h2>最近的浏览记录</h2>
+            <ul>
+                <li><span>&middot;</span><a href="#">暮光之城-月食</a></li>
+                <li><span>&middot;</span><a href="#">家小团圆（张爱玲...</a></li>
+                <li><span>&middot;</span><a href="#">完全图解哇野外求...</a></li>
+                <li><span>&middot;</span><a href="#">近代女性服饰演变...</a></li>
+                <li><span>&middot;</span><a href="#">【6折】碧血剑</a></li>
+            </ul>
+         </div>     
+    </div>
+    
+    <div class="main">
+    	<div class="list_asc">
+        	<!--choice order type-->
+            <div class="type_choice f_left">
+            	排序方式
+                <select name="sort" id="ddlSort">
+                    <option  value="a.id asc">默认升序</option>
+                    <option value="a.id desc">默认降序</option>
+                    <option value="unitprice asc">价格升序</option>
+                    <option value="unitprice desc">价格降序</option>
+                    <option value="PublishDate asc">出版日期升序</option>
+                    <option value="PublishDate desc">出版日期降序</option>                   
+                </select>
+            </div>
+            <!--page no-->
+            <div class="turn_area f_right">
+                <a href="@string.Format("/books/index?id={0}&pageindex=1&sort={1}"
+                ,id,sort
+                )">!< </a>
+            	<a href="@string.Format("/books/index?id={0}&pageindex={1}&sort={2}"
+                ,id,prevpage,sort
+                )"><< </a>
+                <span id="turn_page">第@(pageindex)页 
+                    共@(pagecount)页 记录总数：@recordcount
+
+                </span>
+                <a href="@string.Format("/books/index?id={0}&pageindex={1}&sort={2}"
+                ,id,nextpage,sort
+                )">
+                    >> </a>
+                <a href="@string.Format("/books/index?id={0}&pageindex={1}&sort={2}"
+                ,id,pagecount,sort
+                )">>! </a>
+            </div>
+            
+        </div>
+    @foreach(Book book in Model){    
+        <dl class="list_area">
+        	<dt>
+                <a href="@string.Format("/books/detail?id={0}",book.Id)">
+                    <img src="@string.Format("/images/BookCovers/{0}.jpg",book.ISBN)"
+                     width="100" height="100"                     
+                     alt="@book.Title" /></a>
+        	</dt>
+            <dd>
+            	<h2 class="b_title">
+                    <a href="@string.Format("/books/detail?id={0}",book.Id)">
+                       @book.Title
+                    </a></h2>
+                <!--将书籍的id 写入span-->
+                <div class="b_score">顾客评分：
+                    <span id="book_id_15">@book.BookRating</span></div>
+                <div class="b_property">作者：@book.Author 编著<br />
+                    出版社：@book.Publisher.Name<br />
+                    出版时间：@string.Format("{0:D}",book.PublishDate)</div>
+                <h4 class="b_intro">
+                    ★
+                    @(book.ContentDescription.Length>100?
+                    book.ContentDescription.Substring(0,100)+
+                    "...":book.ContentDescription)
+                </h4>
+                <div class="b_buy" >
+                	<span class="gray del">
+                        @string.Format("{0:c}",book.MarketPrice)</span>
+                    　<span class="red">
+                         @string.Format("{0:c}",book.UnitPrice)</span>
+                    　折扣： @(Math.Round(
+                     book.UnitPrice/book.MarketPrice*100,0))
+                    
+                     折　节省：
+                    @string.Format("{0:c}",book.MarketPrice-book.UnitPrice)
+                    <a href="javascript:void(0)" onclick="buy(@book.Id)">
+                    <img src="/Images/btn_goumai.gif" 
+                        onmouseover="this.src='/Images/btn_goumai_click.gif'"
+                        
+                        onmouseout="this.src='/Images/btn_goumai.gif'"
+                         />
+                        </a>
+                    <a href="javascript:void(0)" onclick="collection(@book.Id,'@book.Title')">
+                    <img src="/Images/btn_zancun.gif" 
+                        onmouseout="this.src='/Images/btn_zancun.gif'"
+                        onmouseover="this.src='/Images/btn_zancun_click.gif'" />
+                        </a>
+                </div>
+            </dd>
+        </dl>
+    }
+     
+        <div class="pages">
+        	<a href="#" title="前一页" class="first"><<</a>
+            <a href="#" title="" class="current">1</a>
+            <a href="#" title="">2</a>
+            <a href="#" title="">3</a>
+            <a href="#" title="">4</a>
+            <a href="#" title="">5</a>
+            <a href="javascript:void(0)" class="more">...</a>
+            <a href="#" title="">106</a>
+            <a href="#" title="">107</a>
+            <a href="#" title="">108</a>
+            <a href="#" title="">109</a>
+            <a href="#" title="">110</a>
+            <a href="#" title="后一页" class="end">>></a>
+        </div>
+        	
+ 	</div>
+    
+</div>
+

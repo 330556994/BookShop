@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+    SelectList books = ViewBag.Books;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo17</title>
+</head>
+<body>
+    <div>
+        @Html.DropDownList("books",books)
+    </div>
+</body>
+</html>

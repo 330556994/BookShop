@@ -1,0 +1,29 @@
+﻿
+@{
+    int flag = ViewBag.Flag;
+
+    int defaultValue = ViewBag.DefaultValue;
+}
+
+    
+    
+
+<div>
+
+    <!--隐藏域，将当前状态传递-->
+    <input type="hidden"  value="@flag" id="flag" />
+    <p>当前设置的是，
+        @if (flag == 0)
+        {
+            <span>自动确认收货时间设置</span>
+        }
+        else
+        {
+            <span>自动确认订单时间设置</span>
+        }
+    </p>
+    <p>
+        <input type="number" value="@defaultValue" id="statNum" /><input type="button" value="确认修改" onclick="btnAutoValue()" />
+    </p>
+
+</div>

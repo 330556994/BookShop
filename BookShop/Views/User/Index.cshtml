@@ -1,0 +1,253 @@
+﻿@using BookShop.Areas.Admin.Models    
+@{
+        ViewBag.Title = "Index";
+        List<Seckill> list=ViewBag.SecKill;
+    }
+    @section script{
+        <link href="/CSS/Index.css" rel="stylesheet" type="text/css" />
+        <link href="/Css/qiandao.css" rel="stylesheet" />
+        <link href="~/Js/dd/global.css" rel="stylesheet" />
+        <link href="~/easyui1.5/demo/demo.css" rel="stylesheet" />
+        <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+        <link href="~/easyui1.5/themes/color.css" rel="stylesheet" />
+        <link href="~/easyui1.5/themes/default/easyui.css" rel="stylesheet" />
+        <script src="~/Js/dd/jquery-1.8.3.js"></script>
+        <link href="~/Css/layout.css" rel="stylesheet" />
+        <script src="~/easyui1.5/jquery.min.js"></script>
+        <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+        <!--   为了让 js脚本 与页面分离   本页面中 涉及到的大部分 js 函数 和一些脚本 都引用了  这个 myjavascript.js 文件                                   -->
+        <script src="~/Js/dd/myjavascript.js"></script>
+        <script src="~/Js/dd/datagrid-detailview.js"></script>
+        <link href="~/Css/mycss.css" rel="stylesheet" />
+        }
+
+    <div id="container">
+	    <!--left content-->
+	    <div id="intro">
+    	   <div id="carInfor">
+        @{
+            Html.RenderPartial("showcar");
+            }
+            </div>
+            <img src='~/Images/a_b_01.gif' />
+            <div id="alltype">
+                   <h1 class="all_type black"><a href="#">全部功能>></a></h1>
+                <div id="subnav">
+                    <ul class="black">
+                    <li>查看订单</li>
+                    <li>查看我的评论</li>
+                    <li>查看积分</li>
+                    <li>我的收藏夹</li>
+                    <li>我的签到</li>
+                    <li>我的积分历史</li>
+                    <li><a href="/user/edit">修改个人信息</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <!--middle content-->
+        <div id="content1">
+            <div id="contentforimage" style="width:420px;">
+                    <!--轮换显示的横幅广告图片-->
+                    <div class="scroll_mid">
+                        <ul id="scroll_img">
+                            <li><a href="/Seckill/GetSecKill"> <img src="~/Images/adverse.png" width="504" height="180" alt="aa" /></a></li>
+                            <li><a href="/Seckill/GetSecKill"> <img src="~/Images/adverse2.png" width="504" height="180" alt="aa" /></a></li>
+                            <li><a href="/ExchangeIntegral/Index"> <img src="~/Images/QQ截图20161206000644.png" width="504" height="180" alt="aa" /></a></li>
+                            <li> <img src="~/Images/jifenhuoqu.jpg" width="504" height="180" alt="aa" /></li>
+                            @*<li><a href="/ExchangeIntegral/Index"> <img src="~/Images/QQ截图20161206142917.png" width="504" height="180" alt="aa" /></a></li>*@
+                            <li><a href="/ExchangeIntegral/Index"> <img src="~/Images/QQ截图20161206143104.png" width="504" height="180" alt="aa" /></a></li>
+                            @*<li> <img src="~/Images/QQ截图20161206143157.png" width="504" height="180" alt="aa" /></li>*@
+                            @*<li> <img src="~/Images/QQ截图20161206143240.png" width="504" height="180" alt="aa" /></li>*@
+                        </ul>
+                        <ul id="scroll_number">
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                        </ul>
+                    </div>
+            </div>
+            <div id="tt" style="width:512px;height:500px">
+		        <div title="我的订单" style="padding:10px">
+			      <table id="dgforuserorder"></table>
+		        </div>
+		        <div title="我的评论" style="padding:10px;">
+                    <div id="mycomment"></div> 
+			    </div>
+		        
+		        <div title="我的积分" style="padding:10px">
+                     <div id="myscore">
+                         <br />
+                         <span id="currentScore" style="font-size:30px;"></span><br /><br /><br /><br /><br />
+                         <span id="totalScore" style="font-size:30px;"></span>
+                     </div> 
+		        </div>
+                <div title="我的收藏" style="padding:10px">
+		             <div id="mycollection"></div>
+                </div>
+
+                <div title="我的签到" style="padding:10px">
+                    <div id="myregistration"></div> 
+                </div>
+                <div title="积分历史" style="padding:10px">
+                    <div id="myscorehistory"></div> 
+                </div>
+	    </div>
+        <div id="mmfororder">
+            <div id="allOrder">所有订单</div>
+		    <div id="cancelOrder">申请取消的订单</div>
+            <div id="cancelOkOrder">取消完成的订单</div>
+		    <div id="outGoodsOrder">发货中的订单</div>
+            <div id="getGoodsOrder">已收货的订单</div>
+		    <div id="okOrder">已完成的订单</div>
+		    <div id="returnmoneyOrder">已退款的订单</div>
+            <div id="returnGoodsOrder">申请退货的订单</div>
+            <div id="agreeReturnGoodsOrder">商家同意退货的订单</div>
+            <div id="successReturnGoodsOrder">退货已完成订单</div>
+	    </div>
+        </div>
+        <div id="sidebar" style="margin-top:-690px;">
+            <div style="position:relative;">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="btnUserRegistration()"><span id="time"></span>
+                    <img src="~/Images/qiandao.png" style="width:185px;height:60px; "/>
+　　                <div style="position:absolute; z-index:2; left:-45px; top:60px">
+　　　　               <span  id="week" style="font-size:20px;"></span>
+                      <span id="qiandaocount" style="font-size:18px;font-weight:bolder;margin-left:75px;">0</span>
+　　                </div>
+                </a>
+            </div>
+            <div id="order_find">
+        	    <form action="/" method="post" target="_blank">
+           	      <label>订单号：</label><input type="text" id="keyword" class="order_key" />
+                    <input type="submit" id="s_submit" class="order_sub" value="查询状态" />
+                </form>
+            </div>
+            <!--下面进入秒杀专场-->
+            <div class="sidedt hots">
+        	    <h1>秒杀专场</h1>
+                <div class="book_sort">
+                    <div class="book_class">
+                        <div id="dome">
+                            <div id="dome1">
+                                <ul id="express">
+                                    @foreach(var seckill in list){
+                                    <li><a href="#">@if(seckill.Books.Title.Length>=15){@seckill.Books.Title.Substring(0,15)}else{@seckill.Books.Title}</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+    </div>
+    </div>
+         
+    <div id="w" class="easyui-window" title="发表动态" data-options="iconCls:'icon-save',closed:true" style="width:490px;height:200px;padding:10px;">
+		<div class="check_poster" id="idEditorPosterContainer" style="margin-top:60px;margin-left:20px;">	
+			@*<div id="commentsTitleArea">评论标题：<input type="text" id="commentsTitle"/></div>*@
+            <div class="qz_inputer" id="idEditorTextarea">
+                <div id="hehe"  class="textinput textarea c_tx3" contenteditable="true" tabindex="0" accesskey="q" ></div>
+				<div class="qz_poster_ft">
+					<div class="qz_poster_pub">
+						<a class="btn btn_cancel" onclick="$('#w').window('close');" href="javascript:;">取消</a>
+						<a class="btn btn_post" id="commentorregistration" onclick="btnUserOkRegistration()" href="javascript:;"><span class="txt">发表</span></a>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+
+  <div id="w2" class="easyui-window" 
+        title="编辑图书类别" 
+        data-options="modal:true,closed:true,iconCls:'icon-save'" 
+        style="width:500px;height:200px;padding:5px;">
+		<div class="easyui-layout" data-options="fit:true">
+		
+			<div data-options="region:'center'" style="padding:10px;">
+				<table>
+                    <tr>
+                        <td>图书编号:</td>
+                        <td>
+                           <span id="cid"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>类别名称:</td>
+                        <td>
+                            <input type="text" id="name" />
+                        </td>
+                    </tr>
+				</table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                    onclick="saveUpdate()" style="width:80px">修改</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#w2').window('close')" 
+                    style="width:80px">取消</a>
+			</div>
+		</div>
+	</div>
+<!--这里开始会员查看订单详情模态窗口-->
+    <div id="windowforOrderManager" class="easyui-window"  title="订单详情" fit="true"  data-options="iconCls:'icon-save',border:false,resizable:false,collapsible:false,minimizable:false,maximizable:false,closable:false,closed:true"  >
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'center'">
+                订单编号:<input class="easyui-textbox" id="OrderId" name="Id" disabled="disabled">
+                <table class="easyui-datagrid" 
+                            id="dgfororder"
+                            style="width:1200px;"   
+                            data-options="url:'/admin/Home/ListForOrderBooksByOrderId',
+                            fitColumns:true,
+                            singleSelect:true,
+                            autoRowHeight:true,
+                            pagination:true,
+                            loadMsg: '正在玩命加载中,请稍候...',
+                            pageNumber:1,
+                            pageSize:5,
+                            pageList:[5,10,15,20]
+                            ">   
+                    <thead>   
+                        <tr>   
+                            <th data-options="field:'Id',align:'center'">订单明细</th>  
+                            <th data-options="field:'OrderID'">订单编号</th>
+                            <th data-options="field:'BookID'">图书编号</th>
+                            <th data-options="field:'bookImg',formatter:formatPicture">图书图片</th>
+                            <th data-options="field:'title'">图书名字</th>
+                            <th data-options="field:'Quantity'">数量</th>
+                            <th data-options="field:'marketPrice'">市场价</th>
+                            <th data-options="field:'UnitPrice'">会员价</th>
+                            <th data-options="field:'flag',formatter:formatFlagForBuyWay">购买方式</th>
+                            <th data-options="field:'flagfororders',formatter:formatFlag">订单状态</th>
+                            
+                        </tr>   
+                    </thead>   
+                </table>
+			</div>
+			<div data-options="region:'south',border:false" style="text-align:center;padding:5px 0 0;height:70px;">
+				<a class="easyui-linkbutton" id="btnConfirmOrder" onclick="changeOrderFlagByAjax(4)"
+                    data-options="iconCls:'icon-ok'" 
+                    href="javascript:void(0)" 
+                    style="width:100px;height:50px;font-size:20px;">取消订单</a>
+				<a class="easyui-linkbutton" 
+                    data-options="iconCls:'icon-cancel'" 
+                    href="javascript:void(0)" 
+                    onclick="javascript:$('#windowforOrderManager').window('close')" 
+                    style="width:100px;height:50px;font-size:20px;">返回</a>
+			</div>
+		</div>
+	</div>
+
+
+    
+
+
+
+

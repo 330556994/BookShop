@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.Books>
+
+<table>
+    <tr>
+        <th>图书编号</th>
+        <th>
+           书名
+        </th>
+        <th>
+            图书类别
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categories.Name)
+        </td>
+        <td>
+             <a href="javascript:void(0)"                  class="easyui-linkbutton"                                 data-options="iconCls:'icon-remove'"                 onclick="deleterow(this)"             >删除</a>
+        </td>
+    </tr>
+}
+
+</table>

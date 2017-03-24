@@ -1,0 +1,98 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.ScoreHistory>
+@{
+    ViewBag.Title = "Index";
+}
+@section script{
+    <link href="/CSS/member.css" rel="stylesheet" type="text/css" />    <script src="~/easyui1.5/jquery.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/demo/demo.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/default/easyui.css" rel="stylesheet" />
+    <script src="~/Js/dd/myjavascript.js"></script>    <script>
+        //完成更新
+        function update(obj, id) {
+            var qty = $(obj).parent().prev().find("input").val();
+            var url = "/car/update?id=" + id + "&qty=" + qty;//封装请求url
+            location.href = url;//页面跳转
+        }
+    </script>
+    }
+<div id="container">
+	<!--left content-->
+	<div id="intro">
+    	 <div id="carInfor">
+            @{
+            Html.RenderPartial("showcar");
+            }
+    	 </div>
+        <div id="alltype">
+        	<h1 class="all_type black"><a href="#">查看所有分类>></a></h1>
+            <div id="subnav">
+                <ul class="black">
+                    <li><a href="/user" style="font-size:20px;">个人中心</a></li>
+                    <li><a href="/user/showorder" style="font-size:20px">查看订单</a></li>
+                    <li><a href="javascript:void(0)" style="font-size:20px">查看积分</a></li>
+                    <li><a href="/user/edit" style="font-size:20px">修改个人信息</a></li>
+                    <li><a href="/user/showcomment" style="font-size:20px;">查看我的评论</a></li>
+                    <li><a href="/user/showcollections" style="font-size:20px">我的收藏夹</a></li>
+                    <li><a href="/user/showscorehistory" style="font-size:20px;background-color:#0094ff">我的积分历史</a></li>
+                </ul>
+            </div>
+            <!--subnav end-->
+        </div>
+        <!--link start-->
+        <div id="choice_pub">
+        	<select name="publishs" id="publishs" class="n_select">
+            	<option>>>根据出版社选择图书</option>
+                <option>北京师范大学出版社</option>
+                <option>电子工业出版社</option>
+            </select>
+
+        	<select name="publishs" id="special" class="n_select">
+            	<option>>>根据专题选择图书</option>
+                <option>国庆出游专题</option>
+                <option>新年计划专题</option>
+            </select>
+        </div>
+        
+        <div id="s_b_03">
+            <a href="#">赖世雄美语从头学</a><br />
+            <a href="#">沪江团购 ，价格更优惠</a></div>
+        <!--link start-->
+    </div>
+    <div id="action_area">
+        <h1>我的积分历史</h1>
+        <hr /><hr />
+        <table width="96%" border="0" cellspacing="3" cellpadding="0" align="center" class="data_table">
+        <thead>
+        <tr>
+        	<th scope="col">积分详情</th>  
+            <th scope="col" >积分变更</th>
+            <th scope="col" >获得方式</th>
+            <th scope="col" >记录时间</th>
+            
+           </tr>
+        </thead>
+        <tbody id="basket_data" >
+            @foreach(BookShop.Areas.Admin.Models.ScoreHistory scorehistory in Model){
+          <tr>
+            <td class="name">
+                  @scorehistory.Descriptions
+            </td>
+            <td> @scorehistory.SingleScore </td>
+            <td>@if(scorehistory.Flag==1){
+                <p>签到获得</p>
+                }</td>
+            <td>@scorehistory.CreateTime</td>
+           
+          </tr>
+            }
+        </tbody>
+        </table>
+        
+		   
+         
+    </div>
+    
+</div>
+

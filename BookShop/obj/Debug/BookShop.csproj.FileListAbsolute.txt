@@ -1,0 +1,313 @@
+D:\ACCP7.0\T308\BookShop\BookShop\bin\BookShop.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\BookShop.pdb
+D:\ACCP7.0\T308\BookShop\BookShop\bin\Antlr3.Runtime.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\EntityFramework.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\Newtonsoft.Json.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Mvc.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Optimization.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Providers.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Razor.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\WebGrease.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\EntityFramework.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\Newtonsoft.Json.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Mvc.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.Razor.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+D:\ACCP7.0\T308\BookShop\BookShop\obj\Debug\BookShop.dll
+D:\ACCP7.0\T308\BookShop\BookShop\obj\Debug\BookShop.pdb
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\BookShop.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\BookShop.pdb
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\Antlr3.Runtime.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\EntityFramework.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\Newtonsoft.Json.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Http.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Mvc.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Optimization.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Providers.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Razor.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\WebGrease.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\EntityFramework.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\Newtonsoft.Json.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Http.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Mvc.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.Razor.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\obj\Debug\BookShop.dll
+C:\Users\Administrator\Documents\Tencent Files\330556994\FileRecv\BookShop12-5\BookShop\BookShop\obj\Debug\BookShop.pdb
+G:\上课必用\BookShop\BookShop\bin\BookShop.dll
+G:\上课必用\BookShop\BookShop\bin\BookShop.pdb
+G:\上课必用\BookShop\BookShop\bin\Antlr3.Runtime.dll
+G:\上课必用\BookShop\BookShop\bin\EntityFramework.dll
+G:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+G:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+G:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.Optimization.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.Providers.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.Razor.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.dll
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+G:\上课必用\BookShop\BookShop\bin\WebGrease.dll
+G:\上课必用\BookShop\BookShop\bin\EntityFramework.xml
+G:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.xml
+G:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.xml
+G:\上课必用\BookShop\BookShop\bin\System.Web.Razor.xml
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.xml
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+G:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+G:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+G:\上课必用\BookShop\BookShop\obj\Debug\BookShop.dll
+G:\上课必用\BookShop\BookShop\obj\Debug\BookShop.pdb
+E:\上课必用\BookShop\BookShop\bin\BookShop.dll
+E:\上课必用\BookShop\BookShop\bin\BookShop.pdb
+E:\上课必用\BookShop\BookShop\bin\Antlr3.Runtime.dll
+E:\上课必用\BookShop\BookShop\bin\EntityFramework.dll
+E:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+E:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.dll
+E:\上课必用\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Http.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Optimization.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Providers.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.Razor.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.dll
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+E:\上课必用\BookShop\BookShop\bin\WebGrease.dll
+E:\上课必用\BookShop\BookShop\bin\EntityFramework.xml
+E:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.xml
+E:\上课必用\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.Http.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.Razor.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+E:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+E:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+E:\上课必用\BookShop\BookShop\obj\Debug\BookShop.dll
+E:\上课必用\BookShop\BookShop\obj\Debug\BookShop.pdb
+F:\上课必用\BookShop\BookShop\bin\BookShop.dll
+F:\上课必用\BookShop\BookShop\bin\BookShop.pdb
+F:\上课必用\BookShop\BookShop\bin\Antlr3.Runtime.dll
+F:\上课必用\BookShop\BookShop\bin\EntityFramework.dll
+F:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+F:\上课必用\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+F:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.dll
+F:\上课必用\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Http.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Optimization.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Providers.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.Razor.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.dll
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+F:\上课必用\BookShop\BookShop\bin\WebGrease.dll
+F:\上课必用\BookShop\BookShop\bin\EntityFramework.xml
+F:\上课必用\BookShop\BookShop\bin\Newtonsoft.Json.xml
+F:\上课必用\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.Http.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.Mvc.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.Razor.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+F:\上课必用\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+F:\上课必用\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+F:\上课必用\BookShop\BookShop\obj\Debug\BookShop.csprojResolveAssemblyReference.cache
+F:\上课必用\BookShop\BookShop\obj\Debug\BookShop.dll
+F:\上课必用\BookShop\BookShop\obj\Debug\BookShop.pdb
+D:\BookShop\BookShop\bin\BookShop.dll
+D:\BookShop\BookShop\bin\BookShop.pdb
+D:\BookShop\BookShop\bin\Antlr3.Runtime.dll
+D:\BookShop\BookShop\bin\EntityFramework.dll
+D:\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+D:\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\BookShop\BookShop\bin\Newtonsoft.Json.dll
+D:\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+D:\BookShop\BookShop\bin\System.Web.Http.dll
+D:\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+D:\BookShop\BookShop\bin\System.Web.Mvc.dll
+D:\BookShop\BookShop\bin\System.Web.Optimization.dll
+D:\BookShop\BookShop\bin\System.Web.Providers.dll
+D:\BookShop\BookShop\bin\System.Web.Razor.dll
+D:\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+D:\BookShop\BookShop\bin\System.Web.WebPages.dll
+D:\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+D:\BookShop\BookShop\bin\WebGrease.dll
+D:\BookShop\BookShop\bin\EntityFramework.xml
+D:\BookShop\BookShop\bin\Newtonsoft.Json.xml
+D:\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+D:\BookShop\BookShop\bin\System.Web.Http.xml
+D:\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+D:\BookShop\BookShop\bin\System.Web.Mvc.xml
+D:\BookShop\BookShop\bin\System.Web.Razor.xml
+D:\BookShop\BookShop\bin\System.Web.WebPages.xml
+D:\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+D:\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+D:\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+D:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+D:\BookShop\BookShop\obj\Debug\BookShop.dll
+D:\BookShop\BookShop\obj\Debug\BookShop.pdb
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\BookShop.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\BookShop.pdb
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\Antlr3.Runtime.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\EntityFramework.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\Newtonsoft.Json.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Http.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Mvc.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Optimization.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Providers.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Razor.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\WebGrease.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\EntityFramework.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\Newtonsoft.Json.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Http.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Mvc.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.Razor.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\obj\Debug\BookShop.csprojResolveAssemblyReference.cache
+F:\BookShop1226\BookShop\BookShop\BookShop\obj\Debug\BookShop.dll
+F:\BookShop1226\BookShop\BookShop\BookShop\obj\Debug\BookShop.pdb
+G:\BookShop\BookShop\bin\BookShop.dll
+G:\BookShop\BookShop\bin\BookShop.pdb
+G:\BookShop\BookShop\bin\Antlr3.Runtime.dll
+G:\BookShop\BookShop\bin\EntityFramework.dll
+G:\BookShop\BookShop\bin\Microsoft.Web.Infrastructure.dll
+G:\BookShop\BookShop\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+G:\BookShop\BookShop\bin\Newtonsoft.Json.dll
+G:\BookShop\BookShop\bin\System.Net.Http.Formatting.dll
+G:\BookShop\BookShop\bin\System.Web.Http.dll
+G:\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
+G:\BookShop\BookShop\bin\System.Web.Mvc.dll
+G:\BookShop\BookShop\bin\System.Web.Optimization.dll
+G:\BookShop\BookShop\bin\System.Web.Providers.dll
+G:\BookShop\BookShop\bin\System.Web.Razor.dll
+G:\BookShop\BookShop\bin\System.Web.WebPages.Deployment.dll
+G:\BookShop\BookShop\bin\System.Web.WebPages.dll
+G:\BookShop\BookShop\bin\System.Web.WebPages.Razor.dll
+G:\BookShop\BookShop\bin\WebGrease.dll
+G:\BookShop\BookShop\bin\EntityFramework.xml
+G:\BookShop\BookShop\bin\Newtonsoft.Json.xml
+G:\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
+G:\BookShop\BookShop\bin\System.Web.Http.xml
+G:\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
+G:\BookShop\BookShop\bin\System.Web.Mvc.xml
+G:\BookShop\BookShop\bin\System.Web.Razor.xml
+G:\BookShop\BookShop\bin\System.Web.WebPages.xml
+G:\BookShop\BookShop\bin\System.Web.WebPages.Deployment.xml
+G:\BookShop\BookShop\bin\System.Web.WebPages.Razor.xml
+G:\BookShop\BookShop\bin\zh-Hans\EntityFramework.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Http.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Mvc.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Optimization.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Providers.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.Razor.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+G:\BookShop\BookShop\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+G:\BookShop\BookShop\obj\Debug\BookShop.csprojResolveAssemblyReference.cache
+G:\BookShop\BookShop\obj\Debug\BookShop.dll
+G:\BookShop\BookShop\obj\Debug\BookShop.pdb

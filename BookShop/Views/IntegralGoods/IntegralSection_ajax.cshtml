@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.IntegralGoods>
+
+
+
+
+<style type="text/css">
+    
+</style>
+
+
+<table>
+    <tr>
+        <th id="booktitle">
+            书名
+        </th>
+        <th id="needscore">
+            所需积分
+        </th>      
+        <th>操作</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Books.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentIntegral) 积分
+        </td>
+        <td>
+           <a href="javascript:void(0)" onclick="buy(@item.Id,@item.PaymentIntegral)">换购</a>  
+        </td>
+    </tr>
+}
+
+
+</table>

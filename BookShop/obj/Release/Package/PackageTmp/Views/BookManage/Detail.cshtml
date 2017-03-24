@@ -1,0 +1,60 @@
+﻿@using BookShop.Models.Entities
+@{
+    Layout = null;
+    Book book = ViewBag.Book;//接收
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>图书编号</td><td>@book.Id</td>
+            </tr>
+            <tr>
+                <td>书名</td><td>@book.Title</td>
+            </tr>
+               <tr>
+                <td>图书封面</td><td>
+                    <img src="@string.Format("/images/BookCovers/{0}.jpg",book.ISBN)" />
+                             </td>
+            </tr>
+            <tr>
+                <td>ISBN</td><td>@book.ISBN</td>
+            </tr>
+            <tr>
+                <td>市场价</td><td>@string.Format("{0:c}",book.MarketPrice)</td>
+            </tr>
+            <tr>
+                <td>会员价</td><td>@string.Format("{0:c}",book.UnitPrice)</td>
+            </tr>
+            <tr>
+                <td>出版社</td><td>@book.Publisher.Name</td>
+            </tr>
+            <tr>
+                <td>图书类别</td><td>@book.Category.Name</td>
+            </tr>
+             <tr>
+                <td>章节描述</td><td>@Html.Raw( book.TOC)</td>
+             </tr>
+                <tr>
+                <td>内容描述</td>
+                    <td>@Html.Raw( book.ContentDescription)</td>
+            </tr>
+             
+                <tr>
+                <td>作者</td><td>@book.Author</td>
+            </tr>
+               <tr>
+                <td>访问量</td><td>@book.Clicks</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

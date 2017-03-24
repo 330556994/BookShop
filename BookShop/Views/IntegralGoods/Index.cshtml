@@ -1,0 +1,49 @@
+﻿
+@using BookShop.Areas.Admin.Models;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<IntegralSection > list = ViewBag.IntegralSections;
+
+    var score = ViewBag.Score;
+    
+}
+
+@section script{
+
+    <script src="/help/jquery-1.8.2.min.js"></script>
+    <link href="/CSS/channel.css" rel="stylesheet" type="text/css" />    
+    <script src="/js/global.js"></script>   
+    <link rel="stylesheet" type="text/css" href="/jquery-easyui-1.5/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/jquery-easyui-1.5/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="/jquery-easyui-1.5/demo/demo.css"/>
+    <script src="/jquery-easyui-1.5/jquery.min.js"></script>
+    <script src="/jquery-easyui-1.5/jquery.easyui.min.js"></script> 
+    <script src="/js/dd/myJavaScriptForInteGoods.js"></script>    
+    <link href="~/Css/myself/myStyleSheetForInteGoods.css" rel="stylesheet" />
+  
+    }
+
+
+
+
+<div id="container">   
+    <!--可用积分，供js使用-->
+    <input type="hidden" value="@score" id="score" />
+    <div id="cc" class="easyui-layout" style="width:900px;height:400px;">     
+        <!--左侧-->
+        <div data-options="region:'west',title:'积分区段',split:true,collapsible:false" id="left">
+            <ul>
+                @foreach(IntegralSection integralSection in list ){
+                    <li><a href="javascript:void(0)" onclick="Integral(@integralSection.Id)">@integralSection.Name</a></li>
+                }               
+                <li><a href="javascript:void(0)" onclick="Integral(0)">全部</a></li>
+            </ul>
+        </div>   
+        <!--中央-->
+        <div data-options="region:'center',title:'积分商品(您的可用积分为 @score )'" id="center">
+        </div>          
+    </div>               
+    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="">不需要换购请点我</a>       
+</div>

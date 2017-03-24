@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>第三波书店后台管理系统</title>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/color.css" rel="stylesheet" />
+    <link href="~/Css/layout.css" rel="stylesheet" />
+	<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <script src="~/Js/dd/myjavascriptforbackend.js"></script>
+    <script src="~/Js/dd/myjavascript.js"></script>
+    @RenderSection("scripts",false)
+    <style>
+        li
+        {
+            list-style:none;
+            height:30px;
+            padding:0px;
+        }
+         
+        a
+        {
+            text-decoration:none;
+            font-size:20px;
+        }
+    </style>
+</head>
+    <body id="allPage" class="easyui-layout">
+	    <div data-options="region:'north',border:false" style="height:50px;background:#B3DFDA;">
+            <h1>欢迎登录第三波书店后台管理系统</h1>
+	    </div>
+	    <div data-options="region:'west',split:true,title:'系统菜单'" style="width:300px;padding:10px;">
+        <div class="easyui-accordion"  style="width:280px;height:320px;">
+		    <div title="基础数据管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;background:green">
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="btnBookManager()">图书管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnCategoryManager()">图书类别管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnPublisherManager()">出版社管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnUserManager()">会员详情管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnIntegralGoodsManager()">积分商品管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnRegistrationManager()">积分签到配置</a></li>
+	            </ul>
+                
+             </div>
+		     <div title="前台会员和评论" data-options="iconCls:'icon-help'" style="padding:10px;background:green">
+                <ul>
+                    <li onmouseover="$(function () {$(this).height(150).width(120);})"><a href="javascript:void(0)" onclick="">会员管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnReaderCommentManager()">图书评论管理</a></li>
+	            </ul>
+             </div>
+		     <div title="订单管理" data-options="iconCls:'icon-search'" style="padding:10px;background:green">
+		        <ul>
+                    <li><a href="javascript:void(0)" onclick="btnOrderManager(0,0)">订单处理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnProcessingOrderManager()">订单配货</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnUserCancelOrderManager()">退单处理</a></li>
+	           </ul>
+		    </div>
+            <div title="财务管理" data-options="iconCls:'icon-help'" style="padding:10px;background:green">
+                <ul>
+                   <li><a href="#">查询账户</a></li>
+                   <li><a href="#">退款处理</a></li>
+	            </ul>
+            </div>
+            <div title="销售活动" data-options="iconCls:'icon-help'" style="padding:10px;background:green">
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="btnSeckillActiveManager()">秒杀活动管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="btnClearBooksManager()">清仓处理</a></li>
+	            </ul>
+            </div>
+	        <div title="系统管理" data-options="iconCls:'icon-help'" style="padding:10px;background:green">
+                <ul>
+                   <li><a href="#">系统设置</a></li>
+                   <li><a href="/admin/manage/exit">安全退出</a></li>
+	            </ul>
+            </div>
+        </div>
+        </div>
+	    <div data-options="region:'east',split:false,collapsed:true,title:'查询区'" style="width:500px;padding:10px;background:green">
+            <!--这里开始 右边的查询区域-->
+            <div id="ttforseach" style="width:512px;height:500px">
+                <div title="图书查询" style="padding:10px">
+		             <input class="easyui-textbox" id="inputBookId" data-options="iconCls:'icon-search',prompt:'请输入图书编号'"  > 
+                     <input class="easyui-textbox" id="inputBookTitle" data-options="iconCls:'icon-search',prompt:'请输入图书名称'"  > 
+                     <input class="easyui-textbox" id="inputBookAuthor" data-options="iconCls:'icon-search',prompt:'请输入图书作者'"  > 
+                     <input id="chooseCategories" class="easyui-combobox" name="dept" value="--请选择--" data-options="valueField:'Id',textField:'Name',url:'/admin/home/getpublisherforcombobox'"   />  
+                     <input id="chossePublishers" class="easyui-combobox" name="dept" value="--请选择--" data-options="valueField:'Id',textField:'Name',url:'/demo/demo28_3'"   /> <br />
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="btnSerchBooks()">查询</a> 
+                </div>
+                <div title="订单查询" style="padding:10px">
+                    <input class="easyui-textbox" id="inputOrderId" data-options="iconCls:'icon-search',prompt:'请输入订单号'"  > 
+                    <select id="chooseorderflag"  class="easyui-combobox">
+                        <option value="0">--请选择订单状态--</option>
+                        <option value="1">未处理</option>
+                        <option value="2">处理中</option>
+                        <option value="3">已发货</option>
+                        <option value="4">会员取消订单</option>
+                        <option value="5">管理员取消订单</option>
+                        <option value="6">已收货</option>
+                        <option value="7">已完成</option>
+                        <option value="8">订单已取消</option>
+                        <option value="9">申请退货中</option>
+                        <option value="10">管理员确认退货</option>
+                        <option value="11">我方已收货</option>
+                        <option value="12">退货完成</option>
+                    </select>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="btnSerchOrder()">查询</a> 
+                </div>
+                <div title="图书查询" style="padding:10px">
+
+                </div>
+            </div>
+        </div>
+	    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;">
+            <h1>北大青鸟版权所有</h1>
+	    </div>
+	    <div data-options="region:'center',title:'操作区'">
+            @RenderBody()
+	    </div>
+    </body>
+</html>

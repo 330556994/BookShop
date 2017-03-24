@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo30</title>
+       <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/easyui1.5/jquery.easyui.min.js"></script>
+    <link href="~/easyui1.5/themes/icon.css" rel="stylesheet" />
+    <link href="~/easyui1.5/themes/bootstrap/easyui.css" rel="stylesheet" />
+
+    <script>
+        function getSeconds() {
+            var date = new Date();
+            return "" + date.getSeconds() + date.getMilliseconds();
+        }
+        function changeImg(img) {
+            //一般浏览器有缓存机制，默认情况下，当第二次访问的网址，之前
+            //已经访问过的话，则会从缓存里取，而不会真的去服务端
+            var url = "/tools/createimg?key=" + getSeconds();
+            img.src = url;
+        }
+        $(function () {
+            //先禁用浏览器缓存
+            $.ajaxSetup({
+                cache:false
+            });          
+        });
+        $(function () {
+            $("#txtName").blur(function () {
+                var name = $(this).val();//获得值
+                if (name != "") {
+                    //开始检测
+                    var url = "/demo/demo30_1";
+                    var data = { "name": name };//传递到后台的参数
+                    //这个方法是，请求url，传递data参数，最后有个回调函数
+                    //成功后触发，服务端应返回一段html脚本，这段脚本，给
+                    //包装集里的DOM元素的内容赋值
+                    $("#tip1").load(url, data);
+                }
+            });
+
+            $("#txtCode").blur(function () {
+                var code = $(this).val();//获得值
+                if (code != "") {
+                    //开始检测
+                    var url = "/demo/demo30_2";
+                    var data = { "code": name };//传递到后台的参数
+                    //这个方法是，请求url，传递data参数，最后有个回调函数
+                    //成功后触发，服务端应返回一段html脚本，这段脚本，给
+                    //包装集里的DOM元素的内容赋值
+                    $("#tip2").load(url, data);
+                }
+            });
+            $("#btnSearch").click(function () {
+                var url = "/demo/demo30_3";
+                var title = $("#title").val();
+                var data = { "title": title };
+                $("#tbShow").load(url, data);
+            })
+        })
+
+        function deleterow(obj) {
+            var bookid = $(obj).parent().parent().find("td:eq(0)").html();
+            $.messager.confirm('请注意！', '真的要删除么?', function (r) {
+                if (r) {
+                    //真的要删除
+                    var url = "/demo/demo30_4";
+                    var data = { "bookid": bookid };
+                    $.getJSON(url, data, function (json) {
+                        //json {"success":0 } 0代表成功，1代表失败
+                        if (json.success == 0) {
+                            $(obj).parent().parent().remove();
+                            $.messager.alert('成功提示', '该条记录已删除!', 'info');
+                        }
+                        else {
+                            $.messager.alert('错误提示', '该条记录无法删除!', 'error');
+                        }
+                    });
+                }
+            });
+
+          
+        }
+   </script>
+</head>
+<body>
+    <div>
+         <table>
+            <tr>
+                <td>请输入用户名</td>
+                <td><input type="text" id="txtName" name="txtName" /></td>
+                <td><span id="tip1"></span></td>
+            </tr>
+             <tr>
+                <td>请输入验证码</td>
+                <td><input type="text" id="txtCode" name="txtCode" />
+                     <img id="imgCode"
+                      onclick="changeImg(this)"
+                      src="/tools/createimg" />
+
+                </td>
+                <td><span id="tip2"></span></td>
+            </tr>
+        </table>
+<hr />
+        <fieldset>
+            <legend>查询区</legend>
+            <table>
+                <tr>
+                    <td>请输入图书名称</td>
+                    <td><input type="text" id="title" name="title" /></td>
+                    <td>
+                          <a href="#" class="easyui-linkbutton" id="btnSearch"             >查询</a>
+                    </td>
+                </tr>
+            </table>
+            <div id="tbShow"></div>
+        </fieldset>
+           <a href="javascript:void(0)"                  class="easyui-linkbutton"                                   data-options="iconCls:'icon-remove'"                 onclick="deleterow(this)"             >删除</a>
+    </div>
+</body>
+</html>

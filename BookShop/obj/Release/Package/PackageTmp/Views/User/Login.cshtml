@@ -1,0 +1,119 @@
+﻿@section script{
+    <link href="/CSS/member.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script>
+        function getSeconds() {
+            var date = new Date();
+            return "" + date.getSeconds() + date.getMilliseconds();
+        }
+        function changeImg(img) {
+            //一般浏览器有缓存机制，默认情况下，当第二次访问的网址，之前
+            //已经访问过的话，则会从缓存里取，而不会真的去服务端
+            var url = "/tools/createimg?key="+getSeconds();
+            img.src = url;
+        }
+        $(function () {
+            $("#imgCode").mouseover(function () {
+                $(this).addClass("focus");
+            }).mouseout(function () {
+                $(this).removeClass("focus");
+            });
+        });
+        
+        </script>
+
+    <style type="text/css">
+        .focus
+        {
+            cursor:pointer;
+        }
+    </style>
+    }
+<div id="container">
+	<!--left content-->
+	<div id="intro">
+    	<div id="basket"><a href="#">目前您的购物篮是空的</a></div>
+        <div id="search">
+        	<form action="" method="post" target="_blank">
+            	<input type="text" id="keyword" class="search_key" />
+                <input type="submit" id="s_submit" class="search_sub" value="" />
+            </form>
+        </div>
+        <div id="alltype">
+        	<h1 class="all_type black"><a href="#">查看所有分类>></a></h1>
+            <div id="subnav">
+                <ul class="black">
+                    <li><a href="#">VIP中心</a></li>
+                    <li><a href="#">新品上架</a></li>
+                    <li><a href="#">新书热卖</a></li>
+                    <li><a href="#">畅销排行</a></li>
+                    <li><a href="#">商务英语</a></li>
+                    <li><a href="#">英语口译</a></li>
+                    <li><a href="#">日语考试</a></li>
+                    <li><a href="#">实用日语</a></li>
+                    <li><a href="#">英语考试</a></li>
+                    <li><a href="#">实用英语</a></li>
+                    <li><a href="#">出国留学</a></li>
+                    <li><a href="#">英文原版</a></li>
+                    <li><a href="#">考研图书</a></li>
+                    <li><a href="#">所有图书</a></li>
+                    <li><a href="#">在线读书</a></li>
+                    <li><a href="#">电子词典</a></li>
+                    <li><a href="#">计算机类</a></li>
+                    <li><a href="#">科普读物</a></li>
+                    <li><a href="#">建筑门类</a></li>
+                </ul>
+            </div>
+            <!--subnav end-->
+        </div>
+        <!--link start-->
+        <div id="choice_pub">
+        	<select name="publishs" id="publishs" class="n_select">
+            	<option>>>根据出版社选择图书</option>
+                <option>北京师范大学出版社</option>
+                <option>电子工业出版社</option>
+            </select>
+
+        	<select name="publishs" id="special" class="n_select">
+            	<option>>>根据专题选择图书</option>
+                <option>国庆出游专题</option>
+                <option>新年计划专题</option>
+            </select>
+        </div>
+        
+        <div id="s_b_03"><a href="#">赖世雄美语从头学</a><br /><a href="#">沪江团购 ，价格更优惠</a></div>
+        <!--link start-->
+    </div>
+    
+    <div id="action_area">
+    	<h2 class="action_type">
+            <img src="/Images/login_in.gif" alt="会员登录" /></h2>
+        <p class="state">欢迎光临第三波书店网站，本站为淘宝网旗下专业在线书店！<br />您可以使用第三波书店的用户名，直接登录。</p>
+      @using(Html.BeginForm("login",
+          "user",
+          new{returnurl=Request.ServerVariables["returnurl"]},
+          FormMethod.Post,
+          new {@class="member_form"})
+          ){
+            <p><label>用户名</label>
+                <input name="name" type="text" class="opt_input" /></p>
+            <p><label>密&#160;&#160;&#160;&#160;码</label>
+                <input name="pwd" type="password" class="opt_input" /></p>
+            <p><label>验证码</label>
+                <input name="code" type="text" class="opt_input" />
+                 <img id="imgCode"
+                      onclick="changeImg(this)"
+                      src="/tools/createimg" /></p>
+            <p class="form_sub">
+                <input type="checkbox" name="rememberMe"  
+                    checked="checked" value="true" />
+                  在此计算机上保留我的密码</p>
+            <p class="form_sub"><input type="submit" value="登入" class="opt_sub" /><a href="#">忘记密码？</a></p>
+        }
+    </div>
+    
+</div>
+
+
+          
+   
